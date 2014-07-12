@@ -1,9 +1,31 @@
 ﻿// FFXIVAPP.Plugin.Radar
 // Settings.cs
 // 
-// Created by Ryan Wilson.
+// Copyright © 2007 - 2014 Ryan Wilson - All Rights Reserved
 // 
-// Copyright © 2014 - 2014 Ryan Wilson - All Rights Reserved
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions are met: 
+// 
+//  * Redistributions of source code must retain the above copyright notice, 
+//    this list of conditions and the following disclaimer. 
+//  * Redistributions in binary form must reproduce the above copyright 
+//    notice, this list of conditions and the following disclaimer in the 
+//    documentation and/or other materials provided with the distribution. 
+//  * Neither the name of SyndicatedLife nor the names of its contributors may 
+//    be used to endorse or promote products derived from this software 
+//    without specific prior written permission. 
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+// POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
 using System.Collections.Generic;
@@ -41,8 +63,10 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             // this call to default settings only ensures we keep the settings we want and delete the ones we don't (old)
             DefaultSettings();
             SaveSettingsNode();
+            SaveFilters();
             // I would make a function for each node itself; other examples such as log/event would showcase this
             Constants.XSettings.Save(Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Radar.xml"));
+            Constants.XFilters.Save(Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Radar.Filters.xml"));
         }
 
         private void DefaultSettings()
@@ -58,6 +82,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("ShowTitleOnWidgets");
             Constants.Settings.Add("WidgetOpacity");
             Constants.Settings.Add("RadarCompassMode");
+            Constants.Settings.Add("FilterRadarItems");
 
             #region PC Options
 
@@ -231,6 +256,19 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             set
             {
                 this["RadarCompassMode"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("False")]
+        public bool FilterRadarItems
+        {
+            get { return ((bool) (this["FilterRadarItems"])); }
+            set
+            {
+                this["FilterRadarItems"] = value;
                 RaisePropertyChanged();
             }
         }
@@ -677,6 +715,42 @@ namespace FFXIVAPP.Plugin.Radar.Properties
                     {
                         xElement.Value = Default[setting].ToString();
                     }
+                }
+            }
+        }
+
+        private void SaveFilters()
+        {
+            if (Constants.XFilters == null)
+            {
+                return;
+            }
+            var xElements = Constants.XFilters.Descendants()
+                                     .Elements("Filter");
+            var enumerable = xElements as XElement[] ?? xElements.ToArray();
+            foreach (var filter in Constants.Filters)
+            {
+                var element = enumerable.FirstOrDefault(e => e.Attribute("Key")
+                                                              .Value == filter.Key);
+                if (element == null)
+                {
+                    var xKey = filter.Key;
+                    var xLevel = filter.Level.ToString();
+                    var xType = filter.Type.ToString();
+                    var keyPairList = new List<XValuePair>
+                    {
+                        new XValuePair
+                        {
+                            Key = "Level",
+                            Value = xLevel
+                        },
+                        new XValuePair
+                        {
+                            Key = "Type",
+                            Value = xType
+                        }
+                    };
+                    XmlHelper.SaveXmlNode(Constants.XFilters, "Filters", "Filter", xKey, keyPairList);
                 }
             }
         }

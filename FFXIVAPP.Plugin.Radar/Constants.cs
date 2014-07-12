@@ -1,9 +1,31 @@
 ﻿// FFXIVAPP.Plugin.Radar
 // Constants.cs
 // 
-// Created by Ryan Wilson.
+// Copyright © 2007 - 2014 Ryan Wilson - All Rights Reserved
 // 
-// Copyright © 2014 - 2014 Ryan Wilson - All Rights Reserved
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions are met: 
+// 
+//  * Redistributions of source code must retain the above copyright notice, 
+//    this list of conditions and the following disclaimer. 
+//  * Redistributions in binary form must reproduce the above copyright 
+//    notice, this list of conditions and the following disclaimer in the 
+//    documentation and/or other materials provided with the distribution. 
+//  * Neither the name of SyndicatedLife nor the names of its contributors may 
+//    be used to endorse or promote products derived from this software 
+//    without specific prior written permission. 
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+// POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +34,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 
 namespace FFXIVAPP.Plugin.Radar
 {
@@ -42,6 +65,8 @@ namespace FFXIVAPP.Plugin.Radar
 
         private static XDocument _xSettings;
         private static List<string> _settings;
+        private static XDocument _xFilters;
+        private static List<RadarFilterItem> _filters;
 
         public static XDocument XSettings
         {
@@ -79,6 +104,35 @@ namespace FFXIVAPP.Plugin.Radar
         {
             get { return _settings ?? (_settings = new List<string>()); }
             set { _settings = value; }
+        }
+
+        public static XDocument XFilters
+        {
+            get
+            {
+                var file = Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Radar.Filters.xml");
+                if (_xFilters != null)
+                {
+                    return _xFilters;
+                }
+                try
+                {
+                    var found = File.Exists(file);
+                    _xFilters = found ? XDocument.Load(file) : ResourceHelper.XDocResource(LibraryPack + "/Defaults/Filters.xml");
+                }
+                catch (Exception ex)
+                {
+                    _xFilters = ResourceHelper.XDocResource(LibraryPack + "/Defaults/Filters.xml");
+                }
+                return _xFilters;
+            }
+            set { _xFilters = value; }
+        }
+
+        public static List<RadarFilterItem> Filters
+        {
+            get { return _filters ?? (_filters = new List<RadarFilterItem>()); }
+            set { _filters = value; }
         }
 
         #endregion
