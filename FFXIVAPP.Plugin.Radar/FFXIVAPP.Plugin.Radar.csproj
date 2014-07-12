@@ -173,6 +173,7 @@
     <Resource Include="Media\RadarIcons\wood.png" />
     <Resource Include="Media\RadarIcons\zone.png" />
     <Resource Include="Defaults\Filters.xml" />
+    <Resource Include="Media\RadarIcons\chocobo_personal.png" />
     <Content Include="PluginInfo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -366,7 +366,14 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 actorIcon = RadarIconHelper.Fate;
                                 break;
                             case false:
-                                actorIcon = actorEntity.IsClaimed ? RadarIconHelper.MonsterClaimed : RadarIconHelper.Monster;
+                                if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
+                                {
+                                    actorIcon = RadarIconHelper.ChocoboPersonal;
+                                }
+                                else
+                                {
+                                    actorIcon = actorEntity.IsClaimed ? RadarIconHelper.MonsterClaimed : RadarIconHelper.Monster;
+                                }
                                 break;
                         }
                         if (actorEntity.HPCurrent > 0)
