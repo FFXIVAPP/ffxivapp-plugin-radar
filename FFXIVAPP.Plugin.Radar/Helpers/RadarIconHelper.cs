@@ -48,6 +48,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
         public static ImageSource BronzeChest = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/bronze_chest.png"));
         public static ImageSource Carpenter = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/carpenter.png"));
         public static ImageSource Chocobo = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/chocobo.png"));
+        public static ImageSource ChocoboPersonal = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/chocobo_personal.png"));
         public static ImageSource Conjurer = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/conjurer.png"));
         public static ImageSource Crystal = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/crystal.png"));
         public static ImageSource Culinarian = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/culinarian.png"));
