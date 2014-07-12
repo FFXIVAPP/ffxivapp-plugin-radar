@@ -7,6 +7,7 @@
              xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Radar.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:utilities="clr-namespace:FFXIVAPP.Common.Utilities;assembly=FFXIVAPP.Common"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
@@ -24,27 +25,110 @@
 
     <Grid x:Name="LayoutRoot"
           DataContext="{StaticResource MainViewModel}">
-        <ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ElementName=OpenRadarWidgetGroupBox,
+                                            Path=Height}" />
+            <RowDefinition Height="{Binding ElementName=FilterOptionsGroupBox,
+                                            Path=Height}" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="33" />
+        </Grid.RowDefinitions>
+        <GroupBox x:Name="OpenRadarWidgetGroupBox"
+                  Grid.Row="0"
+                  Header="{Binding Locale[radar_RadarWidgetHeader],
+                                   Source={StaticResource PluginViewModel}}">
             <StackPanel>
-                <GroupBox Header="{Binding Locale[radar_RadarWidgetHeader],
-                                           Source={StaticResource PluginViewModel}}">
-                    <StackPanel>
-                        <DockPanel LastChildFill="True">
-                            <Button Margin="3"
-                                    Command="{Binding ResetRadarWidgetCommand,
-                                                      Source={StaticResource MainViewModel}}"
-                                    Content="{Binding Locale[radar_ResetPositionButtonText],
-                                                      Source={StaticResource PluginViewModel}}"
-                                    DockPanel.Dock="Right" />
-                            <Button Margin="3"
-                                    Command="{Binding OpenRadarWidgetCommand,
-                                                      Source={StaticResource MainViewModel}}"
-                                    Content="{Binding Locale[radar_OpenNowButtonText],
-                                                      Source={StaticResource PluginViewModel}}" />
-                        </DockPanel>
-                    </StackPanel>
-                </GroupBox>
+                <DockPanel LastChildFill="True">
+                    <Button Margin="3"
+                            Command="{Binding ResetRadarWidgetCommand,
+                                              Source={StaticResource MainViewModel}}"
+                            Content="{Binding Locale[radar_ResetPositionButtonText],
+                                              Source={StaticResource PluginViewModel}}"
+                            DockPanel.Dock="Right" />
+                    <Button Margin="3"
+                            Command="{Binding OpenRadarWidgetCommand,
+                                              Source={StaticResource MainViewModel}}"
+                            Content="{Binding Locale[radar_OpenNowButtonText],
+                                              Source={StaticResource PluginViewModel}}" />
+                </DockPanel>
             </StackPanel>
-        </ScrollViewer>
+        </GroupBox>
+        <GroupBox x:Name="FilterOptionsGroupBox"
+                  Grid.Row="1"
+                  Margin="3"
+                  Header="Filter Options">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33" />
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0"
+                               Margin="3"
+                               LastChildFill="True">
+                        <TextBlock Padding="5"
+                                   Text="Key:" />
+                        <TextBox x:Name="TKey"
+                                 Width="150"
+                                 Text="Mandragora" />
+                        <TextBlock Padding="5"
+                                   Text="Level:" />
+                        <TextBox x:Name="TLevel"
+                                 Width="40"
+                                 HorizontalContentAlignment="Center"
+                                 Text="0" />
+                        <TextBlock Padding="5"
+                                   Text="Type:" />
+                        <ComboBox x:Name="TType">
+                            <ComboBoxItem>Unknown</ComboBoxItem>
+                            <ComboBoxItem>PC</ComboBoxItem>
+                            <ComboBoxItem IsSelected="True">
+                                Monster
+                            </ComboBoxItem>
+                            <ComboBoxItem>NPC</ComboBoxItem>
+                            <ComboBoxItem>Aetheryte</ComboBoxItem>
+                            <ComboBoxItem>Gathering</ComboBoxItem>
+                            <ComboBoxItem>Minion</ComboBoxItem>
+                        </ComboBox>
+                    </DockPanel>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+        <DataGrid x:Name="Filters"
+                  Grid.Row="2"
+                  Margin="3"
+                  AutoGenerateColumns="False"
+                  BorderBrush="{DynamicResource AccentColorBrush}"
+                  BorderThickness="1"
+                  CanUserAddRows="False"
+                  ItemsSource="{Binding Filters,
+                                        Source={StaticResource PluginViewModel}}"
+                  SelectionMode="Single"
+                  utilities:SelectionBehavior.SelectionChanged="{Binding FilterSelectionCommand}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Key}"
+                                    Header="Key"
+                                    IsReadOnly="True"
+                                    utilities:GridViewSort.PropertyName="Key" />
+                <DataGridTextColumn Binding="{Binding Type}"
+                                    Header="Type"
+                                    IsReadOnly="True"
+                                    utilities:GridViewSort.PropertyName="Type" />
+                <DataGridTextColumn Binding="{Binding Level}"
+                                    Header="Level"
+                                    IsReadOnly="True"
+                                    utilities:GridViewSort.PropertyName="Level" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DockPanel Grid.Row="3"
+                   Margin="3"
+                   LastChildFill="True">
+            <Button Width="27"
+                    Margin="3 0 0 0"
+                    Command="{Binding DeleteFilterCommand}"
+                    Content="-" />
+            <Button Margin="3 0 0 0"
+                    Command="{Binding AddOrUpdateFilterCommand}"
+                    Content="Add Or Update Filter" />
+        </DockPanel>
     </Grid>
 </UserControl>

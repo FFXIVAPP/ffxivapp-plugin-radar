@@ -29,10 +29,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using FFXIVAPP.Common.Events;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 
 namespace FFXIVAPP.Plugin.Radar
 {
@@ -52,6 +54,7 @@ namespace FFXIVAPP.Plugin.Radar
         private static PluginViewModel _instance;
         private bool _enableHelpLabels;
         private Dictionary<string, string> _locale;
+        private ObservableCollection<RadarFilterItem> _filters;
 
         public static PluginViewModel Instance
         {
@@ -64,6 +67,20 @@ namespace FFXIVAPP.Plugin.Radar
             set
             {
                 _locale = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<RadarFilterItem> Filters
+        {
+            get { return _filters ?? (_filters = new ObservableCollection<RadarFilterItem>()); }
+            set
+            {
+                if (_filters == null)
+                {
+                    _filters = new ObservableCollection<RadarFilterItem>();
+                }
+                _filters = value;
                 RaisePropertyChanged();
             }
         }
