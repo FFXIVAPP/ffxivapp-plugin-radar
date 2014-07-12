@@ -66,7 +66,6 @@ namespace FFXIVAPP.Plugin.Radar
         private static XDocument _xSettings;
         private static List<string> _settings;
         private static XDocument _xFilters;
-        private static List<RadarFilterItem> _filters;
 
         public static XDocument XSettings
         {
@@ -127,12 +126,6 @@ namespace FFXIVAPP.Plugin.Radar
                 return _xFilters;
             }
             set { _xFilters = value; }
-        }
-
-        public static List<RadarFilterItem> Filters
-        {
-            get { return _filters ?? (_filters = new List<RadarFilterItem>()); }
-            set { _filters = value; }
         }
 
         #endregion

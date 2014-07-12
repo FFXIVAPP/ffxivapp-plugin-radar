@@ -77,6 +77,7 @@ namespace FFXIVAPP.Plugin.Radar
         {
             if (Constants.XFilters != null)
             {
+                PluginViewModel.Instance.Filters.Clear();
                 foreach (var xElement in Constants.XFilters.Descendants()
                                                   .Elements("Filter"))
                 {
@@ -115,7 +116,7 @@ namespace FFXIVAPP.Plugin.Radar
                             radarFilterItem.Type = Actor.Type.Minion;
                             break;
                     }
-                    Constants.Filters.Add(radarFilterItem);
+                    PluginViewModel.Instance.Filters.Add(radarFilterItem);
                 }
             }
         }

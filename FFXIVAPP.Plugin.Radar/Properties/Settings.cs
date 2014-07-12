@@ -66,7 +66,6 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             SaveFilters();
             // I would make a function for each node itself; other examples such as log/event would showcase this
             Constants.XSettings.Save(Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Radar.xml"));
-            Constants.XFilters.Save(Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Radar.Filters.xml"));
         }
 
         private void DefaultSettings()
@@ -725,34 +724,57 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             {
                 return;
             }
+            Constants.XFilters.Descendants("Filter")
+                     .Where(node => PluginViewModel.Instance.Filters.All(e => e.Key.ToString() != node.Attribute("Key")
+                                                                                                      .Value))
+                     .Remove();
             var xElements = Constants.XFilters.Descendants()
                                      .Elements("Filter");
             var enumerable = xElements as XElement[] ?? xElements.ToArray();
-            foreach (var filter in Constants.Filters)
+            foreach (var filter in PluginViewModel.Instance.Filters)
             {
+                var xKey = filter.Key;
+                var xLevel = filter.Level.ToString();
+                var xType = filter.Type.ToString();
+                var keyPairList = new List<XValuePair>
+                {
+                    new XValuePair
+                    {
+                        Key = "Level",
+                        Value = xLevel
+                    },
+                    new XValuePair
+                    {
+                        Key = "Type",
+                        Value = xType
+                    }
+                };
                 var element = enumerable.FirstOrDefault(e => e.Attribute("Key")
                                                               .Value == filter.Key);
                 if (element == null)
                 {
-                    var xKey = filter.Key;
-                    var xLevel = filter.Level.ToString();
-                    var xType = filter.Type.ToString();
-                    var keyPairList = new List<XValuePair>
-                    {
-                        new XValuePair
-                        {
-                            Key = "Level",
-                            Value = xLevel
-                        },
-                        new XValuePair
-                        {
-                            Key = "Type",
-                            Value = xType
-                        }
-                    };
                     XmlHelper.SaveXmlNode(Constants.XFilters, "Filters", "Filter", xKey, keyPairList);
                 }
+                else
+                {
+                    var xKeyElement = element.Element("Key");
+                    if (xKeyElement != null)
+                    {
+                        xKeyElement.Value = xKey;
+                    }
+                    var xLevelElement = element.Element("Level");
+                    if (xLevelElement != null)
+                    {
+                        xLevelElement.Value = xLevel;
+                    }
+                    var xTypeElement = element.Element("Type");
+                    if (xTypeElement != null)
+                    {
+                        xTypeElement.Value = xType;
+                    }
+                }
             }
+            Constants.XFilters.Save(Path.Combine(Common.Constants.PluginsSettingsPath, "FFXIVAPP.Plugin.Radar.Filters.xml"));
         }
 
         #endregion

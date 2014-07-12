@@ -58,21 +58,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         #region Radar Declarations
 
-        public List<RadarFilterItem> PCFilters
-        {
-            get { return (List<RadarFilterItem>) Constants.Filters.Where(item => item.Type == Actor.Type.PC); }
-        }
-
-        public List<RadarFilterItem> MonsterFilters
-        {
-            get { return (List<RadarFilterItem>) Constants.Filters.Where(item => item.Type == Actor.Type.Monster); }
-        }
-
-        public List<RadarFilterItem> NPCFilters
-        {
-            get { return (List<RadarFilterItem>) Constants.Filters.Where(item => item.Type == Actor.Type.NPC); }
-        }
-
         public bool IsRendered { get; set; }
 
         #endregion
@@ -145,23 +130,28 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             if (Settings.Default.FilterRadarItems)
             {
-                if (NPCFilters.Any())
+                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster);
+                var npcFilterItems = npcFilters as IList<RadarFilterItem> ?? npcFilters.ToList();
+                if (npcFilterItems.Any())
                 {
-                    var filtered = npcEntites.Where(entity => NPCFilters.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
-                                             .ToList();
-                    npcEntites = filtered;
+                    npcEntites = npcEntites.Where(entity => npcFilterItems.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
+                                           .ToList();
                 }
-                if (MonsterFilters.Any())
+
+                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster);
+                var monsterFilterItems = monsterFilters as IList<RadarFilterItem> ?? monsterFilters.ToList();
+                if (monsterFilterItems.Any())
                 {
-                    var filtered = monsterEntites.Where(entity => MonsterFilters.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
-                                                 .ToList();
-                    monsterEntites = filtered;
+                    monsterEntites = monsterEntites.Where(entity => monsterFilterItems.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
+                                                   .ToList();
                 }
-                if (PCFilters.Any())
+
+                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC);
+                var pcFilterItems = pcFilters as IList<RadarFilterItem> ?? pcFilters.ToList();
+                if (pcFilterItems.Any())
                 {
-                    var filtered = pcEntites.Where(entity => PCFilters.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
-                                            .ToList();
-                    pcEntites = filtered;
+                    pcEntites = pcEntites.Where(entity => pcFilterItems.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
+                                         .ToList();
                 }
             }
 
