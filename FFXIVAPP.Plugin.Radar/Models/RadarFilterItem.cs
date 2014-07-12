@@ -1,5 +1,5 @@
 ﻿// FFXIVAPP.Plugin.Radar
-// SettingsViewModel.cs
+// RadarFilterItem.cs
 // 
 // Copyright © 2007 - 2014 Ryan Wilson - All Rights Reserved
 // 
@@ -27,53 +27,21 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using FFXIVAPP.Common.Core.Memory.Enums;
 
-namespace FFXIVAPP.Plugin.Radar.ViewModels
+namespace FFXIVAPP.Plugin.Radar.Models
 {
-    internal sealed class SettingsViewModel : INotifyPropertyChanged
+    public class RadarFilterItem
     {
-        #region Property Bindings
-
-        private static SettingsViewModel _instance;
-
-        public static SettingsViewModel Instance
+        public RadarFilterItem()
         {
-            get { return _instance ?? (_instance = new SettingsViewModel()); }
+            Key = "INVALID";
+            Level = 0;
+            Type = Actor.Type.Unknown;
         }
 
-        #endregion
-
-        #region Declarations
-
-        #endregion
-
-        public SettingsViewModel()
-        {
-        }
-
-        #region Loading Functions
-
-        #endregion
-
-        #region Utility Functions
-
-        #endregion
-
-        #region Command Bindings
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
+        public string Key { get; set; }
+        public int Level { get; set; }
+        public Actor.Type Type { get; set; }
     }
 }

@@ -68,6 +68,12 @@
                                                                                    Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
+                                <GroupBox Header="Filter Radar Items">
+                                    <StackPanel>
+                                        <controls:ToggleSwitch IsChecked="{Binding FilterRadarItems,
+                                                                                   Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
                                 <GroupBox Header="UI Scale">
                                     <StackPanel>
                                         <ComboBox Margin="5"
