@@ -32,10 +32,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Helpers;
 using FFXIVAPP.Plugin.Radar.Models;
@@ -130,28 +132,22 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             if (Settings.Default.FilterRadarItems)
             {
-                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster);
-                var npcFilterItems = npcFilters as IList<RadarFilterItem> ?? npcFilters.ToList();
-                if (npcFilterItems.Any())
+                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster).ToList();
+                if (npcFilters.Any())
                 {
-                    npcEntites = npcEntites.Where(entity => npcFilterItems.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
-                                           .ToList();
+                    npcEntites = RadarFilterHelper.ResolveFilteredEntities(npcFilters, npcEntites);
                 }
 
-                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster);
-                var monsterFilterItems = monsterFilters as IList<RadarFilterItem> ?? monsterFilters.ToList();
-                if (monsterFilterItems.Any())
+                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster).ToList();
+                if (monsterFilters.Any())
                 {
-                    monsterEntites = monsterEntites.Where(entity => monsterFilterItems.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
-                                                   .ToList();
+                    monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
                 }
 
-                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC);
-                var pcFilterItems = pcFilters as IList<RadarFilterItem> ?? pcFilters.ToList();
-                if (pcFilterItems.Any())
+                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC).ToList();
+                if (pcFilters.Any())
                 {
-                    pcEntites = pcEntites.Where(entity => pcFilterItems.Any(filter => filter.Key == entity.Name && entity.Level >= filter.Level))
-                                         .ToList();
+                    pcEntites = RadarFilterHelper.ResolveFilteredEntities(pcFilters, pcEntites);
                 }
             }
 

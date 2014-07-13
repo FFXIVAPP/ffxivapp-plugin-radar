@@ -81,6 +81,7 @@
       <DependentUpon>Radar.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventSubscriber.cs" />
+    <Compile Include="Helpers\RadarFilterHelper.cs" />
     <Compile Include="Helpers\RadarIconHelper.cs" />
     <Compile Include="Helpers\WidgetTopMostHelper.cs" />
     <Compile Include="Initializer.cs" />
