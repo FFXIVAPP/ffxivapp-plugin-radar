@@ -28,34 +28,23 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Linq;
 using FFXIVAPP.Common.Core.Memory;
-using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Plugin.Radar.Models;
 
 namespace FFXIVAPP.Plugin.Radar.Helpers
 {
     public static class RadarFilterHelper
     {
-        public static List<ActorEntity> ResolveFilteredEntities(List<RadarFilterItem> filters, IEnumerable<ActorEntity> entities)
+        public static List<ActorEntity> ResolveFilteredEntities(IEnumerable<RadarFilterItem> filters, IEnumerable<ActorEntity> entities)
         {
-            var filtered = new List<ActorEntity>();
-            foreach (var actorEntity in entities)
+            return (entities.SelectMany(actorEntity => filters, (actorEntity, radarFilterItem) => new
             {
-                foreach (var radarFilterItem in filters)
-                {
-                    if (!SharedRegEx.IsValidRegex(radarFilterItem.Key))
-                    {
-                        continue;
-                    }
-                    var regex = new Regex(radarFilterItem.Key, SharedRegEx.DefaultOptions);
-                    if (regex.IsMatch(actorEntity.Name) && actorEntity.Level >= radarFilterItem.Level)
-                    {
-                        filtered.Add(actorEntity);
-                    }
-                }
-            }
-            return filtered;
+                actorEntity,
+                radarFilterItem
+            })
+                            .Where(e => e.radarFilterItem.RegEx.IsMatch(e.actorEntity.Name) && e.actorEntity.Level >= e.radarFilterItem.Level)
+                            .Select(e => e.actorEntity)).ToList();
         }
     }
 }

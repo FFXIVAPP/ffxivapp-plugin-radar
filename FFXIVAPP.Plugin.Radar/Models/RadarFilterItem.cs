@@ -27,7 +27,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
 
+using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Common.RegularExpressions;
 
 namespace FFXIVAPP.Plugin.Radar.Models
 {
@@ -38,10 +40,12 @@ namespace FFXIVAPP.Plugin.Radar.Models
             Key = "INVALID";
             Level = 0;
             Type = Actor.Type.Unknown;
+            RegEx = new Regex(".+", SharedRegEx.DefaultOptions);
         }
 
         public string Key { get; set; }
         public int Level { get; set; }
         public Actor.Type Type { get; set; }
+        public Regex RegEx { get; set; }
     }
 }
