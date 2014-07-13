@@ -28,7 +28,6 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System.Collections.Generic;
-using System.Linq;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Plugin.Radar.Models;
 
@@ -36,15 +35,20 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
 {
     public static class RadarFilterHelper
     {
-        public static List<ActorEntity> ResolveFilteredEntities(IEnumerable<RadarFilterItem> filters, IEnumerable<ActorEntity> entities)
+        public static List<ActorEntity> ResolveFilteredEntities(List<RadarFilterItem> filters, IEnumerable<ActorEntity> entities)
         {
-            return (entities.SelectMany(actorEntity => filters, (actorEntity, radarFilterItem) => new
+            var filtered = new List<ActorEntity>();
+            foreach (var actorEntity in entities)
             {
-                actorEntity,
-                radarFilterItem
-            })
-                            .Where(e => e.radarFilterItem.RegEx.IsMatch(e.actorEntity.Name) && e.actorEntity.Level >= e.radarFilterItem.Level)
-                            .Select(e => e.actorEntity)).ToList();
+                foreach (var radarFilterItem in filters)
+                {
+                    if (radarFilterItem.RegEx.IsMatch(actorEntity.Name) && actorEntity.Level >= radarFilterItem.Level)
+                    {
+                        filtered.Add(actorEntity);
+                    }
+                }
+            }
+            return filtered;
         }
     }
 }
