@@ -31,9 +31,11 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Common.ViewModelBase;
 using FFXIVAPP.Plugin.Radar.Models;
@@ -146,6 +148,10 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
                 case "Minion":
                     radarFilterItem.Type = Actor.Type.Minion;
                     break;
+            }
+            if (SharedRegEx.IsValidRegex(radarFilterItem.Key))
+            {
+                radarFilterItem.RegEx = new Regex(radarFilterItem.Key, SharedRegEx.DefaultOptions);
             }
             if (String.IsNullOrWhiteSpace(selectedKey))
             {
