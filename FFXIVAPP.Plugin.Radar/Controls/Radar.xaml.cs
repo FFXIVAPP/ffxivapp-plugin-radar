@@ -1,46 +1,21 @@
 ﻿// FFXIVAPP.Plugin.Radar
 // Radar.xaml.cs
 // 
-// Copyright © 2007 - 2014 Ryan Wilson - All Rights Reserved
+// Created by Ryan Wilson.
 // 
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions are met: 
-// 
-//  * Redistributions of source code must retain the above copyright notice, 
-//    this list of conditions and the following disclaimer. 
-//  * Redistributions in binary form must reproduce the above copyright 
-//    notice, this list of conditions and the following disclaimer in the 
-//    documentation and/or other materials provided with the distribution. 
-//  * Neither the name of SyndicatedLife nor the names of its contributors may 
-//    be used to endorse or promote products derived from this software 
-//    without specific prior written permission. 
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
-// POSSIBILITY OF SUCH DAMAGE. 
+// Copyright © 2014 - 2014 Ryan Wilson - All Rights Reserved
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Core.Memory.Enums;
-using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Helpers;
-using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.ViewModels;
 using NLog;
@@ -132,19 +107,22 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             if (Settings.Default.FilterRadarItems)
             {
-                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster).ToList();
+                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster)
+                                                .ToList();
                 if (npcFilters.Any())
                 {
                     npcEntites = RadarFilterHelper.ResolveFilteredEntities(npcFilters, npcEntites);
                 }
 
-                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster).ToList();
+                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster)
+                                                    .ToList();
                 if (monsterFilters.Any())
                 {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
                 }
 
-                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC).ToList();
+                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC)
+                                               .ToList();
                 if (pcFilters.Any())
                 {
                     pcEntites = RadarFilterHelper.ResolveFilteredEntities(pcFilters, pcEntites);
@@ -239,9 +217,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 case Actor.Job.CUL:
                                     drawingContext.DrawImage(RadarIconHelper.Culinarian, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.Chocobo:
-                                    drawingContext.DrawImage(RadarIconHelper.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
                                 case Actor.Job.DRG:
                                     drawingContext.DrawImage(RadarIconHelper.Dragoon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
@@ -269,19 +244,26 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 case Actor.Job.MRD:
                                     drawingContext.DrawImage(RadarIconHelper.Marauder, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
+                                case Actor.Job.NIN:
+                                    drawingContext.DrawImage(RadarIconHelper.Ninja, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    break;
                                 case Actor.Job.PGL:
                                     drawingContext.DrawImage(RadarIconHelper.Pugilist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                                 case Actor.Job.PLD:
                                     drawingContext.DrawImage(RadarIconHelper.Paladin, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.Pet:
-                                    drawingContext.DrawImage(RadarIconHelper.Sheep, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                case Actor.Job.ROG:
+                                    drawingContext.DrawImage(RadarIconHelper.Rogue, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                                 case Actor.Job.SCH:
                                     drawingContext.DrawImage(RadarIconHelper.Scholar, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                                 case Actor.Job.Unknown:
+                                    if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
+                                    {
+                                        drawingContext.DrawImage(RadarIconHelper.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    }
                                     useJob = false;
                                     break;
                                 case Actor.Job.WAR:
