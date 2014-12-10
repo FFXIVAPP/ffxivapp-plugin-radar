@@ -40,7 +40,7 @@ namespace FFXIVAPP.Plugin.Radar.Models
             Key = "INVALID";
             Level = 0;
             Type = Actor.Type.Unknown;
-            RegEx = new Regex("\\*INVALID\\*", SharedRegEx.DefaultOptions);
+            RegEx = new Regex("\\*INVALID\\*", SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase);
         }
 
         public string Key { get; set; }
