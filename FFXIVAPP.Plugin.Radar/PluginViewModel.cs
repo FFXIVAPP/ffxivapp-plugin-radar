@@ -53,8 +53,8 @@ namespace FFXIVAPP.Plugin.Radar
 
         private static PluginViewModel _instance;
         private bool _enableHelpLabels;
-        private Dictionary<string, string> _locale;
         private ObservableCollection<RadarFilterItem> _filters;
+        private Dictionary<string, string> _locale;
 
         public static PluginViewModel Instance
         {

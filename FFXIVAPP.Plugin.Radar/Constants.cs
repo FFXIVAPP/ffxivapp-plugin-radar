@@ -34,7 +34,6 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using FFXIVAPP.Common.Helpers;
-using FFXIVAPP.Plugin.Radar.Models;
 
 namespace FFXIVAPP.Plugin.Radar
 {
