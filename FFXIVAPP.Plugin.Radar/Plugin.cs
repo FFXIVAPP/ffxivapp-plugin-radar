@@ -28,19 +28,19 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using FFXIVAPP.Common.Events;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.IPluginInterface;
-using FFXIVAPP.Localization;
+using FFXIVAPP.Plugin.Radar.Helpers;
 using FFXIVAPP.Plugin.Radar.Properties;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Radar
 {
@@ -85,17 +85,23 @@ namespace FFXIVAPP.Plugin.Radar
             set
             {
                 _locale = value;
-                var locale = LocaleHelper.ResolveOne(Constants.CultureInfo, "radar")
-                                         .Cast<DictionaryEntry>()
-                                         .ToDictionary(item => (string) item.Key, item => (string) item.Value);
+                var locale = LocaleHelper.Update(Constants.CultureInfo);
                 foreach (var resource in locale)
                 {
                     try
                     {
-                        _locale.Add(resource.Key, resource.Value);
+                        if (_locale.ContainsKey(resource.Key))
+                        {
+                            _locale[resource.Key] = resource.Value;
+                        }
+                        else
+                        {
+                            _locale.Add(resource.Key, resource.Value);
+                        }
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
                     }
                 }
                 PluginViewModel.Instance.Locale = _locale;
