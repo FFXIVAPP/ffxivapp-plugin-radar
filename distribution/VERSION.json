@@ -1,7 +1,7 @@
 ﻿{
     "PluginInfo": {
         "Name": "FFXIVAPP.Plugin.Radar",
-        "Version": "3.0.5541.16529",
+        "Version": "3.0.5542.16802",
         "Files": [
             {
                 "Name": "FFXIVAPP.Plugin.Radar.dll",

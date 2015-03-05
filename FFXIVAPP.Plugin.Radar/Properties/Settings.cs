@@ -90,6 +90,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("PCShowHPPercent");
             Constants.Settings.Add("PCShowJob");
             Constants.Settings.Add("PCShowDistance");
+            Constants.Settings.Add("PCFontSize");
+            Constants.Settings.Add("PCFontColor");
 
             #endregion
 
@@ -99,6 +101,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("NPCShowName");
             Constants.Settings.Add("NPCShowHPPercent");
             Constants.Settings.Add("NPCShowDistance");
+            Constants.Settings.Add("NPCFontSize");
+            Constants.Settings.Add("NPCFontColor");
 
             #endregion
 
@@ -108,6 +112,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("MonsterShowName");
             Constants.Settings.Add("MonsterShowHPPercent");
             Constants.Settings.Add("MonsterShowDistance");
+            Constants.Settings.Add("MonsterFontSize");
+            Constants.Settings.Add("MonsterFontColor");
 
             #endregion
 
@@ -117,6 +123,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("GatheringShowName");
             Constants.Settings.Add("GatheringShowHPPercent");
             Constants.Settings.Add("GatheringShowDistance");
+            Constants.Settings.Add("GatheringFontSize");
+            Constants.Settings.Add("GatheringFontColor");
 
             #endregion
 
@@ -126,6 +134,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("OtherShowName");
             Constants.Settings.Add("OtherShowHPPercent");
             Constants.Settings.Add("OtherShowDistance");
+            Constants.Settings.Add("OtherFontSize");
+            Constants.Settings.Add("OtherFontColor");
 
             #endregion
         }
@@ -268,6 +278,38 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             set
             {
                 this["FilterRadarItems"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [ApplicationScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>8</string>
+  <string>9</string>
+  <string>10</string>
+  <string>11</string>
+  <string>12</string>
+  <string>13</string>
+  <string>14</string>
+  <string>15</string>
+  <string>16</string>
+  <string>17</string>
+  <string>18</string>
+  <string>19</string>
+  <string>20</string>
+  <string>21</string>
+  <string>22</string>
+  <string>23</string>
+  <string>24</string>
+</ArrayOfString>")]
+        public StringCollection FontSizeList
+        {
+            get { return ((StringCollection) (this["FontSizeList"])); }
+            set
+            {
+                this["FontSizeList"] = value;
                 RaisePropertyChanged();
             }
         }
@@ -439,6 +481,32 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             }
         }
 
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("12")]
+        public string PCFontSize
+        {
+            get { return ((string) (this["PCFontSize"])); }
+            set
+            {
+                this["PCFontSize"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("White")]
+        public string PCFontColor
+        {
+            get { return ((string) (this["PCFontColor"])); }
+            set
+            {
+                this["PCFontColor"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region NPC Options
@@ -491,6 +559,32 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             set
             {
                 this["NPCShowDistance"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("12")]
+        public string NPCFontSize
+        {
+            get { return ((string) (this["NPCFontSize"])); }
+            set
+            {
+                this["NPCFontSize"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("LimeGreen")]
+        public string NPCFontColor
+        {
+            get { return ((string) (this["NPCFontColor"])); }
+            set
+            {
+                this["NPCFontColor"] = value;
                 RaisePropertyChanged();
             }
         }
@@ -551,6 +645,32 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             }
         }
 
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("12")]
+        public string MonsterFontSize
+        {
+            get { return ((string) (this["MonsterFontSize"])); }
+            set
+            {
+                this["MonsterFontSize"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("Red")]
+        public string MonsterFontColor
+        {
+            get { return ((string) (this["MonsterFontColor"])); }
+            set
+            {
+                this["MonsterFontColor"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Gathering Options
@@ -607,6 +727,32 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             }
         }
 
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("12")]
+        public string GatheringFontSize
+        {
+            get { return ((string) (this["GatheringFontSize"])); }
+            set
+            {
+                this["GatheringFontSize"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("Orange")]
+        public string GatheringFontColor
+        {
+            get { return ((string) (this["GatheringFontColor"])); }
+            set
+            {
+                this["GatheringFontColor"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Other Options
@@ -659,6 +805,32 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             set
             {
                 this["OtherShowDistance"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("12")]
+        public string OtherFontSize
+        {
+            get { return ((string) (this["OtherFontSize"])); }
+            set
+            {
+                this["OtherFontSize"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("Yellow")]
+        public string OtherFontColor
+        {
+            get { return ((string) (this["OtherFontColor"])); }
+            set
+            {
+                this["OtherFontColor"] = value;
                 RaisePropertyChanged();
             }
         }

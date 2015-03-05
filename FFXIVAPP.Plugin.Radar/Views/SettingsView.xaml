@@ -123,6 +123,43 @@
                                                                                    Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_PCFontSizeHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding FontSizeList,
+                                                                        Source={StaticResource Settings}}"
+                                                  SelectedValue="{Binding PCFontSize,
+                                                                          Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_PCFontColorHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding PCFontColor,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </GroupBox>
                             </StackPanel>
                         </Expander>
                         <Expander Header="Settings:Radar:NPC">
@@ -153,6 +190,43 @@
                                     <StackPanel>
                                         <controls:ToggleSwitch IsChecked="{Binding NPCShowDistance,
                                                                                    Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_NPCFontSizeHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding FontSizeList,
+                                                                        Source={StaticResource Settings}}"
+                                                  SelectedValue="{Binding NPCFontSize,
+                                                                          Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_NPCFontColorHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding NPCFontColor,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
                                     </StackPanel>
                                 </GroupBox>
                             </StackPanel>
@@ -187,6 +261,43 @@
                                                                                    Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_MonsterFontSizeHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding FontSizeList,
+                                                                        Source={StaticResource Settings}}"
+                                                  SelectedValue="{Binding MonsterFontSize,
+                                                                          Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding MonsterFontColor,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </GroupBox>
                             </StackPanel>
                         </Expander>
                         <Expander Header="Settings:Radar:Gathering">
@@ -219,6 +330,43 @@
                                                                                    Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_GatheringFontSizeHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding FontSizeList,
+                                                                        Source={StaticResource Settings}}"
+                                                  SelectedValue="{Binding GatheringFontSize,
+                                                                          Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_GatheringFontColorHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding GatheringFontColor,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </GroupBox>
                             </StackPanel>
                         </Expander>
                         <Expander Header="Settings:Radar:Other">
@@ -249,6 +397,43 @@
                                     <StackPanel>
                                         <controls:ToggleSwitch IsChecked="{Binding OtherShowDistance,
                                                                                    Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_OtherFontSizeHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding FontSizeList,
+                                                                        Source={StaticResource Settings}}"
+                                                  SelectedValue="{Binding OtherFontSize,
+                                                                          Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_OtherFontColorHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding OtherFontColor,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
                                     </StackPanel>
                                 </GroupBox>
                             </StackPanel>

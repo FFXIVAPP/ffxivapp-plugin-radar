@@ -91,6 +91,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
         {
             base.OnRender(drawingContext);
 
+            var bc = new BrushConverter();
+
             var user = XIVInfoViewModel.Instance.CurrentUser;
 
             var origin = new Coordinate
@@ -308,7 +310,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         if (Settings.Default.PCShowName || Settings.Default.PCShowHPPercent)
                         {
-                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, 12 + fsModifier, Brushes.White);
+                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.PCFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.PCFontColor));
                             drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                         }
                     }
@@ -359,7 +361,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         screen = screen.Add(-8, -8, 0);
                         ImageSource actorIcon = null;
-                        var brush = Brushes.Red;
                         switch (actorEntity.IsFate)
                         {
                             case true:
@@ -401,7 +402,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         if (Settings.Default.MonsterShowName || Settings.Default.MonsterShowHPPercent)
                         {
-                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, 12 + fsModifier, brush);
+                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.MonsterFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.MonsterFontColor));
                             drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                         }
                     }
@@ -457,7 +458,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                                  .Add(origin);
                                 }
                                 screen = screen.Add(-8, -8, 0);
-                                var brush = Brushes.LimeGreen;
                                 if (Settings.Default.NPCShowName)
                                 {
                                     sb.Append(actorEntity.Name);
@@ -481,7 +481,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 if (Settings.Default.NPCShowName || Settings.Default.NPCShowHPPercent)
                                 {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, 12 + fsModifier, brush);
+                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.NPCFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.NPCFontColor));
                                     drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                                 }
                             }
@@ -531,7 +531,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                                  .Add(origin);
                                 }
                                 screen = screen.Add(-8, -8, 0);
-                                var brush = Brushes.Orange;
                                 if (Settings.Default.GatheringShowName)
                                 {
                                     sb.Append(actorEntity.Name);
@@ -555,7 +554,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 if (Settings.Default.GatheringShowName || Settings.Default.GatheringShowHPPercent)
                                 {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, 12 + fsModifier, brush);
+                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.GatheringFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.GatheringFontColor));
                                     drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                                 }
                             }
@@ -605,7 +604,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 screen = screen.Add(-8, -8, 0);
                                 ImageSource actorIcon;
-                                var brush = Brushes.Yellow;
                                 switch (actorEntity.Type)
                                 {
                                     case Actor.Type.Aetheryte:
@@ -643,7 +641,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 if (Settings.Default.OtherShowName || Settings.Default.OtherShowHPPercent)
                                 {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, 12 + fsModifier, brush);
+                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.OtherFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.OtherFontColor));
                                     drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                                 }
                             }

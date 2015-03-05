@@ -27,8 +27,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
 
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
 
 namespace FFXIVAPP.Plugin.Radar.ViewModels
 {
@@ -37,6 +41,17 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
         #region Property Bindings
 
         private static SettingsViewModel _instance;
+
+        public IEnumerable<string> ColorsList
+        {
+            get
+            {
+                return (typeof (Brushes).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                                        .Where(propInfo => propInfo.PropertyType == typeof (SolidColorBrush))
+                                        .Select(propInfo => propInfo.Name)
+                                        .ToList());
+            }
+        }
 
         public static SettingsViewModel Instance
         {

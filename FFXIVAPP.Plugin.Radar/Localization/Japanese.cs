@@ -72,6 +72,16 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_OtherShowHPPercentHeader", "Other Show HP Percent");
             Dictionary.Add("radar_OtherShowDistanceHeader", "Other Show Distance");
             Dictionary.Add("radar_GitHubButtonText", "プロジェクトソースを開く(GitHub)");
+            Dictionary.Add("radar_PCFontSizeHeader", "PC Font Size");
+            Dictionary.Add("radar_PCFontColorHeader", "PC Font Color");
+            Dictionary.Add("radar_NPCFontSizeHeader", "NPC Font Size");
+            Dictionary.Add("radar_NPCFontColorHeader", "NPC Font Color");
+            Dictionary.Add("radar_MonsterFontSizeHeader", "Monster Font Size");
+            Dictionary.Add("radar_MonsterFontColorHeader", "Monster Font Color");
+            Dictionary.Add("radar_GatheringFontSizeHeader", "Gathering Font Size");
+            Dictionary.Add("radar_GatheringFontColorHeader", "Gathering Font Color");
+            Dictionary.Add("radar_OtherFontSizeHeader", "Other Font Size");
+            Dictionary.Add("radar_OtherFontColorHeader", "Other Font Color");
             return Dictionary;
         }
     }
