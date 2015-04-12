@@ -161,6 +161,7 @@ namespace FFXIVAPP.Plugin.Radar
 
         public TabItem CreateTab()
         {
+            Locale = LocaleHelper.Update(Constants.CultureInfo);
             var content = new ShellView();
             content.Loaded += ShellViewModel.Loaded;
             var tabItem = new TabItem
