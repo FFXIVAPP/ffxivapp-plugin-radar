@@ -679,9 +679,11 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [UserScopedSetting]
         [DebuggerNonUserCode]
         [DefaultSettingValue("True")]
-        public bool MonsterShowRankOnly {
-            get { return ((bool)(this["MonsterShowRankOnly"])); }
-            set {
+        public bool MonsterShowRankOnly
+        {
+            get { return ((bool) (this["MonsterShowRankOnly"])); }
+            set
+            {
                 this["MonsterShowRankOnly"] = value;
                 RaisePropertyChanged();
             }
@@ -690,9 +692,11 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [UserScopedSetting]
         [DebuggerNonUserCode]
         [DefaultSettingValue("Red")]
-        public string MonsterFontColorBRank {
-            get { return ((string)(this["MonsterFontColorBRank"])); }
-            set {
+        public string MonsterFontColorBRank
+        {
+            get { return ((string) (this["MonsterFontColorBRank"])); }
+            set
+            {
                 this["MonsterFontColorBRank"] = value;
                 RaisePropertyChanged();
             }
@@ -701,9 +705,11 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [UserScopedSetting]
         [DebuggerNonUserCode]
         [DefaultSettingValue("Red")]
-        public string MonsterFontColorARank {
-            get { return ((string)(this["MonsterFontColorARank"])); }
-            set {
+        public string MonsterFontColorARank
+        {
+            get { return ((string) (this["MonsterFontColorARank"])); }
+            set
+            {
                 this["MonsterFontColorARank"] = value;
                 RaisePropertyChanged();
             }
@@ -712,9 +718,11 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [UserScopedSetting]
         [DebuggerNonUserCode]
         [DefaultSettingValue("Red")]
-        public string MonsterFontColorSRank {
-            get { return ((string)(this["MonsterFontColorSRank"])); }
-            set {
+        public string MonsterFontColorSRank
+        {
+            get { return ((string) (this["MonsterFontColorSRank"])); }
+            set
+            {
                 this["MonsterFontColorSRank"] = value;
                 RaisePropertyChanged();
             }
