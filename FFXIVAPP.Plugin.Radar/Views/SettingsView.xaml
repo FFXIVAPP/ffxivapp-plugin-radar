@@ -298,6 +298,91 @@
                                         </ComboBox>
                                     </StackPanel>
                                 </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_MonsterShowOnlyRankHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <controls:ToggleSwitch IsChecked="{Binding MonsterShowRankOnly,
+                                                                                   Source={StaticResource Settings}}" />
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorARankHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding MonsterFontColorARank,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorBRankHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding MonsterFontColorBRank,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorSRankHeader],
+                                                           Source={StaticResource PluginViewModel}}">
+                                    <StackPanel>
+                                        <ComboBox Margin="5"
+                                                  IsReadOnly="False"
+                                                  ItemsSource="{Binding ColorsList,
+                                                                        Source={StaticResource SettingsViewModel}}"
+                                                  SelectedValue="{Binding MonsterFontColorSRank,
+                                                                          Source={StaticResource Settings}}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Margin="0,0,5,0"
+                                                                BorderBrush="Black"
+                                                                BorderThickness="1">
+                                                            <Rectangle Width="16"
+                                                                       Height="16"
+                                                                       Fill="{Binding}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </GroupBox>
                             </StackPanel>
                         </Expander>
                         <Expander Header="Settings:Radar:Gathering">

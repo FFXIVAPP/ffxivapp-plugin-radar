@@ -334,7 +334,48 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                     var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
+
+
+                    var LanguageRankMobs = LocaleHelper.Update(_cultureInfo);
+
+                    var RankB = LanguageRankMobs["radar_MonsterNameRankB"].Split('|')
+                                                                          .ToList<string>();
+                    var RankA = LanguageRankMobs["radar_MonsterNameRankA"].Split('|')
+                                                                          .ToList<string>();
+                    var RankS = LanguageRankMobs["radar_MonsterNameRankS"].Split('|')
+                                                                          .ToList<string>();
+
+                    var BRank = RankB.Find(x => x == actorEntity.Name);
+                    var ARank = RankA.Find(x => x == actorEntity.Name);
+                    var SRank = RankS.Find(x => x == actorEntity.Name);
+                    var fontColor = Settings.Default.MonsterFontColor;
+
+                    if ((string.IsNullOrEmpty(BRank) && string.IsNullOrEmpty(ARank) && string.IsNullOrEmpty(SRank)) && Settings.Default.MonsterShowRankOnly)
+                    {
+                        continue;
+                    }
+
+                    if (!string.IsNullOrEmpty(ARank))
+                    {
+                        fontColor = Settings.Default.MonsterFontColorARank;
+                        fsModifier += 2;
+                        opacityLevel = 1;
+                    }
+                    else if (!string.IsNullOrEmpty(SRank))
+                    {
+                        fontColor = Settings.Default.MonsterFontColorSRank;
+                        fsModifier += 2;
+                        opacityLevel = 1;
+                    }
+                    else if (!string.IsNullOrEmpty(BRank))
+                    {
+                        fontColor = Settings.Default.MonsterFontColorBRank;
+                        fsModifier += 2;
+                        opacityLevel = 1;
+                    }
+
                     drawingContext.PushOpacity(opacityLevel);
+
                     try
                     {
                         if (!actorEntity.IsValid || user == null)
@@ -402,7 +443,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         if (Settings.Default.MonsterShowName || Settings.Default.MonsterShowHPPercent)
                         {
-                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.MonsterFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.MonsterFontColor));
+                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.MonsterFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(fontColor));
                             drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                         }
                     }
