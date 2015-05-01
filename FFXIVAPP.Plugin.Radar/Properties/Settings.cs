@@ -115,6 +115,11 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("MonsterFontSize");
             Constants.Settings.Add("MonsterFontColor");
 
+            Constants.Settings.Add("MonsterShowRankOnly");
+            Constants.Settings.Add("MonsterFontColorBRank");
+            Constants.Settings.Add("MonsterFontColorARank");
+            Constants.Settings.Add("MonsterFontColorSRank");
+
             #endregion
 
             #region Gathering Options
@@ -667,6 +672,50 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             set
             {
                 this["MonsterFontColor"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("True")]
+        public bool MonsterShowRankOnly {
+            get { return ((bool)(this["MonsterShowRankOnly"])); }
+            set {
+                this["MonsterShowRankOnly"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("Red")]
+        public string MonsterFontColorBRank {
+            get { return ((string)(this["MonsterFontColorBRank"])); }
+            set {
+                this["MonsterFontColorBRank"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("Red")]
+        public string MonsterFontColorARank {
+            get { return ((string)(this["MonsterFontColorARank"])); }
+            set {
+                this["MonsterFontColorARank"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("Red")]
+        public string MonsterFontColorSRank {
+            get { return ((string)(this["MonsterFontColorSRank"])); }
+            set {
+                this["MonsterFontColorSRank"] = value;
                 RaisePropertyChanged();
             }
         }

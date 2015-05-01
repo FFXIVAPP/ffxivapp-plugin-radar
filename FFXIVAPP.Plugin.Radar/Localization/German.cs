@@ -27,6 +27,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
 
+using System.Collections.Generic;
 using System.Windows;
 
 namespace FFXIVAPP.Plugin.Radar.Localization
@@ -34,6 +35,9 @@ namespace FFXIVAPP.Plugin.Radar.Localization
     public abstract class German
     {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
+        private static readonly List<string> RankB = new List<string>() { "Abwasser-Sirup", "Albin Aschfahl", "Barbastelle", "Bloody Marey", "Dalvag", "Dunkelhelm", "Egelkönig", "Gatling", "Monarch Ogerlibelle", "Myradrosh", "Naul", "Ovjang", "Phecda", "Skogs Fu", "Stinkig Sophie", "Vuokho", "Weiß Joker" };
+        private static readonly List<string> RankA = new List<string>() { "Alectryon", "Cornu", "Dalvags Letzte Flamme", "Forneus", "Ghede Titus Häme", "Girtab", "Höllenklaue", "Kurrea", "Mahisha", "Marberry", "Marraco", "Nahn", "Sabotender Bailarina", "Schmelze", "Unktehi", "Vogaal Ja", "Zanig'oh"};
+        private static readonly List<string> RankS = new List<string>() { "Agrippa", "Balaur", "Bonnacon", "Brontes", "Croque Mitaine", "Czernobog", "Garlok", "Laideronette", "Minhocao", "Nandi", "Nunyunuwi", "Quakpuak", "Safat", "Seelenbrenner", "Tausendzahn Theda", "Wulgaru", "Laideronette", "Zona Sucher"};
 
         /// <summary>
         /// </summary>
@@ -82,6 +86,17 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_GatheringFontColorHeader", "Gathering Font Color");
             Dictionary.Add("radar_OtherFontSizeHeader", "Other Font Size");
             Dictionary.Add("radar_OtherFontColorHeader", "Other Font Color");
+
+            Dictionary.Add("radar_MonsterShowOnlyRankHeader", "Show Ranked Monester Only");
+            Dictionary.Add("radar_MonsterShowARankHeader", "Monster Show (A Rank)");
+            Dictionary.Add("radar_MonsterShowSRankHeader", "Monster Show (S Rank)");
+            Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
+            Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
+
+            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
+            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
+            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
+
             return Dictionary;
         }
     }
