@@ -38,17 +38,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FFXIVAPP.Common">
-      <HintPath>..\..\..\..\..\..\..\Downloads\Games\PC\FinalFantasy14\FFXIV-App\FFXIVAPP.Common.dll</HintPath>
+      <HintPath>..\..\ffxivapp-resources\FFXIVAPP.Common.dll</HintPath>
     </Reference>
     <Reference Include="FFXIVAPP.IPluginInterface">
-      <HintPath>..\..\..\..\..\..\..\Downloads\Games\PC\FinalFantasy14\FFXIV-App\FFXIVAPP.IPluginInterface.dll</HintPath>
+      <HintPath>..\..\ffxivapp-resources\FFXIVAPP.IPluginInterface.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Downloads\Games\PC\FinalFantasy14\FFXIV-App\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\ffxivapp-resources\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
-      <HintPath>..\..\..\..\..\..\..\Downloads\Games\PC\FinalFantasy14\FFXIV-App\MahApps.Metro.dll</HintPath>
+      <HintPath>..\..\ffxivapp-resources\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -57,7 +57,7 @@
     </Reference>
     <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Downloads\Games\PC\FinalFantasy14\FFXIV-App\NLog.dll</HintPath>
+      <HintPath>..\..\ffxivapp-resources\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -68,7 +68,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Downloads\Games\PC\FinalFantasy14\FFXIV-App\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\ffxivapp-resources\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
