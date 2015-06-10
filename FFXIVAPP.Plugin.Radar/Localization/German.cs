@@ -35,9 +35,9 @@ namespace FFXIVAPP.Plugin.Radar.Localization
     public abstract class German
     {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
-        private static readonly List<string> RankB = new List<string>() { "Abwasser-Sirup", "Albin Aschfahl", "Barbastelle", "Bloody Marey", "Dalvag", "Dunkelhelm", "Egelkönig", "Gatling", "Monarch Ogerlibelle", "Myradrosh", "Naul", "Ovjang", "Phecda", "Skogs Fu", "Stinkig Sophie", "Vuokho", "Weiß Joker" };
-        private static readonly List<string> RankA = new List<string>() { "Alectryon", "Cornu", "Dalvags Letzte Flamme", "Forneus", "Ghede Titus Häme", "Girtab", "Höllenklaue", "Kurrea", "Mahisha", "Marberry", "Marraco", "Nahn", "Sabotender Bailarina", "Schmelze", "Unktehi", "Vogaal Ja", "Zanig'oh"};
-        private static readonly List<string> RankS = new List<string>() { "Agrippa", "Balaur", "Bonnacon", "Brontes", "Croque Mitaine", "Czernobog", "Garlok", "Laideronette", "Minhocao", "Nandi", "Nunyunuwi", "Quakpuak", "Safat", "Seelenbrenner", "Tausendzahn Theda", "Wulgaru", "Laideronette", "Zona Sucher"};
+        private static readonly List<string> RankB = new List<string>() { "Barbasteile", "Bloody Mary", "Dunkelhelm", "Myradrosh", "Vuokho", "Weißer Joker", "Stinkige Sophie", "Monarch Ogerlibelle", "Phecda", "Abwasser-Sirup", "Ovjang", "Gatling", "Albin Aschfahl", "Dalvag", "Naul", "Egelkönig" };
+        private static readonly List<string> RankA = new List<string>() { "Unktehl", "Höllenklaue", "Nahn", "Marbarry", "Cornus", "Forneus", "Schmelze", "Ghede Titus Häme", "Girtab", "Alectryon", "Sabotender Barlarina", "Mahisha", "Zanig'oh", "Dalvags Letzte Flamme", "Marraco", "Kurrea" };
+        private static readonly List<string> RankS = new List<string>() { "Quakquak", "Garlok", "Bonnacon", "Czernobog", "Nandi", "Laideronette", "Wulgaru", "Seelenbrenner", "Tausendzahn Theda", "Zona Sucher", "Brontes", "Balaur", "Nunyunuwi", "Minhocao", "Safat", "Agrippe" };
 
         /// <summary>
         /// </summary>
@@ -88,16 +88,28 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_OtherFontColorHeader", "Other Font Color");
 
             Dictionary.Add("radar_MonsterShowOnlyRankHeader", "Show Ranked Monester Only");
-            Dictionary.Add("radar_MonsterShowARankHeader", "Monster Show (A Rank)");
-            Dictionary.Add("radar_MonsterShowSRankHeader", "Monster Show (S Rank)");
             Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
+            Dictionary.Add("radar_MonsterFontColorBRankHeader", "Monster Font Color (B Rank)");
             Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
 
-            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
-            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
-            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
-
             return Dictionary;
+        }
+
+        public static List<string> getRankedMob(string name) {
+            List<string> _mobs;
+            switch(name) {
+                case "A":
+                    _mobs = RankA;
+                    break;
+                case "S":
+                    _mobs = RankS;
+                    break;
+                default:
+                    _mobs = RankB;
+                    break;
+            }
+
+            return _mobs;
         }
     }
 }
