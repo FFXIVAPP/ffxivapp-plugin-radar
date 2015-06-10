@@ -1,4 +1,4 @@
-﻿// FFXIVAPP.Plugin.Radar
+// FFXIVAPP.Plugin.Radar
 // English.cs
 // 
 // Copyright © 2007 - 2015 Ryan Wilson - All Rights Reserved
@@ -155,11 +155,24 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
             Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
 
-            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
-            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
-            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
-
             return Dictionary;
+        }
+
+        public static List<string> getRankedMob(string name) {
+            List<string> _mobs;
+            switch(name) {
+                case "A":
+                    _mobs = RankA;
+                    break;
+                case "S":
+                    _mobs = RankS;
+                    break;
+                default:
+                    _mobs = RankB;
+                    break;
+            }
+
+            return _mobs;
         }
     }
 }

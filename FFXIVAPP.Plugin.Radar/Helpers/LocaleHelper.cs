@@ -73,5 +73,31 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
             return dictionary.Cast<DictionaryEntry>()
                              .ToDictionary(item => (string) item.Key, item => (string) item.Value);
         }
+
+        public static List<string> getMobsFromLanguageDictionary(string name)
+        {
+            List<string> _mobs;
+            string culture = Constants.CultureInfo.TwoLetterISOLanguageName;
+
+            switch(culture) {
+                case "fr":
+                    _mobs = French.getRankedMob(name);
+                    break;
+                case "ja":
+                    _mobs = Japanese.getRankedMob(name);
+                    break;
+                case "de":
+                    _mobs = German.getRankedMob(name);
+                    break;
+                case "zh":
+                    _mobs = Chinese.getRankedMob(name);
+                    break;
+                default:
+                    _mobs = English.getRankedMob(name);
+                    break;
+            }
+
+            return _mobs;
+        }
     }
 }
