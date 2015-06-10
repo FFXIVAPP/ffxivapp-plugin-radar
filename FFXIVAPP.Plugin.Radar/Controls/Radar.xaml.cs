@@ -1,4 +1,4 @@
-// FFXIVAPP.Plugin.Radar
+﻿// FFXIVAPP.Plugin.Radar
 // Radar.xaml.cs
 // 
 // Copyright © 2007 - 2015 Ryan Wilson - All Rights Reserved
@@ -32,12 +32,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.ViewModels;
 using NLog;
@@ -47,7 +50,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
     /// <summary>
     ///     Interaction logic for Radar.xaml
     /// </summary>
-    public partial class Radar {
+    public partial class Radar
+    {
         #region Logger
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -57,6 +61,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
         #region Radar Declarations
 
         public bool IsRendered { get; set; }
+        private List<RadarFilterItem> RankedFilterItems = new List<RadarFilterItem>(); 
 
         #endregion
 
@@ -70,37 +75,45 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         public Radar View;
 
-        public Radar() {
+        public Radar()
+        {
             View = this;
             InitializeComponent();
-            if(IsRendered) {
+            if (IsRendered)
+            {
                 return;
             }
             IsRendered = true;
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
             InvalidateVisual();
         }
 
-        protected override void OnRender(DrawingContext drawingContext) {
+        protected override void OnRender(DrawingContext drawingContext)
+        {
             base.OnRender(drawingContext);
 
             var bc = new BrushConverter();
 
             var user = XIVInfoViewModel.Instance.CurrentUser;
 
-            var origin = new Coordinate {
-                X = (float)(ActualWidth / 2),
-                Y = (float)(ActualHeight / 2)
+            var origin = new Coordinate
+            {
+                X = (float) (ActualWidth / 2),
+                Y = (float) (ActualHeight / 2)
             };
 
-            var scale = ((float)(ActualHeight / 2.0f) / 125.0f);
+            var scale = ((float) (ActualHeight / 2.0f) / 125.0f);
             var angle = Math.Abs(user.Heading * (180 / Math.PI) - 180);
 
-            if(Settings.Default.RadarCompassMode) {
-                var drawingGroup = new DrawingGroup {
-                    Transform = new RotateTransform {
+            if (Settings.Default.RadarCompassMode)
+            {
+                var drawingGroup = new DrawingGroup
+                {
+                    Transform = new RotateTransform
+                    {
                         Angle = angle,
                         CenterX = origin.X,
                         CenterY = origin.Y
@@ -108,7 +121,9 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 };
                 drawingGroup.Children.Add(new ImageDrawing(RadarIconHelper.RadarHeading, new Rect(origin.X - 64, origin.Y - 128, 128, 128)));
                 drawingContext.DrawDrawing(drawingGroup);
-            } else {
+            }
+            else
+            {
                 drawingContext.DrawImage(RadarIconHelper.RadarHeading, new Rect(new Point(origin.X - 64, origin.Y - 128), new Size(128, 128)));
             }
 
@@ -118,68 +133,90 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             var monsterEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentMonsters.ToList());
             var pcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentPCs.ToList());
 
-            if(Settings.Default.FilterRadarItems) {
+            if (Settings.Default.FilterRadarItems)
+            {
                 var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster)
                                                 .ToList();
-                if(npcFilters.Any()) {
+                if (npcFilters.Any())
+                {
                     npcEntites = RadarFilterHelper.ResolveFilteredEntities(npcFilters, npcEntites);
                 }
 
                 var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster)
                                                     .ToList();
-                if(monsterFilters.Any()) {
+                if (monsterFilters.Any() && !Settings.Default.MonsterShowRankOnly)
+                {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
-                }
+                }  
 
                 var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC)
                                                .ToList();
-                if(pcFilters.Any()) {
+                if (pcFilters.Any())
+                {
                     pcEntites = RadarFilterHelper.ResolveFilteredEntities(pcFilters, pcEntites);
                 }
             }
 
+            if (Settings.Default.MonsterShowRankOnly)
+            {
+                monsterEntites = RadarFilterHelper.ResolveFilteredEntities(PluginViewModel.Instance.RankedFilters, monsterEntites);
+            }
+
             #region Resolve PCs
 
-            if(Settings.Default.PCShow) {
-                foreach(var actorEntity in pcEntites) {
+            if (Settings.Default.PCShow)
+            {
+                foreach (var actorEntity in pcEntites)
+                {
                     sb.Clear();
                     var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                     drawingContext.PushOpacity(opacityLevel);
-                    try {
-                        if(!actorEntity.IsValid || user == null) {
+                    try
+                    {
+                        if (!actorEntity.IsValid || user == null)
+                        {
                             continue;
                         }
-                        if(actorEntity.ID == user.ID) {
+                        if (actorEntity.ID == user.ID)
+                        {
                             continue;
                         }
                         Coordinate screen;
-                        if(Settings.Default.RadarCompassMode) {
+                        if (Settings.Default.RadarCompassMode)
+                        {
                             var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
                                             .Scale(scale);
                             screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                        } else {
+                        }
+                        else
+                        {
                             screen = user.Coordinate.Subtract(actorEntity.Coordinate)
                                          .Rotate2D(user.Heading)
                                          .Scale(scale)
                                          .Add(origin);
                         }
                         screen = screen.Add(-8, -8, 0);
-                        if(Settings.Default.PCShowName) {
+                        if (Settings.Default.PCShowName)
+                        {
                             sb.Append(actorEntity.Name);
                         }
-                        if(Settings.Default.PCShowHPPercent) {
+                        if (Settings.Default.PCShowHPPercent)
+                        {
                             sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
                         }
-                        if(Settings.Default.PCShowDistance) {
+                        if (Settings.Default.PCShowDistance)
+                        {
                             sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
                         }
                         var useJob = Settings.Default.PCShowJob;
-                        if(Settings.Default.PCShowJob) {
+                        if (Settings.Default.PCShowJob)
+                        {
                             #region Get Job Icons
 
-                            switch(actorEntity.Job) {
+                            switch (actorEntity.Job)
+                            {
                                 case Actor.Job.ACN:
                                     drawingContext.DrawImage(RadarIconHelper.Arcanist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
@@ -256,7 +293,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                     drawingContext.DrawImage(RadarIconHelper.Scholar, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                                 case Actor.Job.Unknown:
-                                    if(actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384) {
+                                    if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
+                                    {
                                         drawingContext.DrawImage(RadarIconHelper.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     }
                                     useJob = false;
@@ -274,15 +312,19 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                             #endregion
                         }
-                        if(!useJob) {
+                        if (!useJob)
+                        {
                             var imageSource = actorEntity.HPCurrent > 0 ? RadarIconHelper.Player : RadarIconHelper.Skull;
                             drawingContext.DrawImage(imageSource, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                         }
-                        if(Settings.Default.PCShowName || Settings.Default.PCShowHPPercent) {
-                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.PCFontSize) + fsModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.PCFontColor));
+                        if (Settings.Default.PCShowName || Settings.Default.PCShowHPPercent)
+                        {
+                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.PCFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.PCFontColor));
                             drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                         }
-                    } catch(Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                         Logging.Log(Logger, ex.Message);
                     }
                     drawingContext.Pop();
@@ -293,49 +335,44 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             #region Resolve Monsters
 
-            if(Settings.Default.MonsterShow) {
-                foreach(var actorEntity in monsterEntites) {
+            if (Settings.Default.MonsterShow)
+            {
+                foreach (var actorEntity in monsterEntites)
+                {
                     sb.Clear();
                     var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
 
-                    List<string> RankB = LocaleHelper.getMobsFromLanguageDictionary("B");
-                    List<string> RankA = LocaleHelper.getMobsFromLanguageDictionary("A");
-                    List<string> RankS = LocaleHelper.getMobsFromLanguageDictionary("S");
+                    var RankB = LocaleHelper.GetRankedMonsters("B");
+                    var RankA = LocaleHelper.GetRankedMonsters("A");
+                    var RankS = LocaleHelper.GetRankedMonsters("S");
+                    var regexOptions = SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase;
 
-                    var LanguageRankMobs = LocaleHelper.Update(_cultureInfo);
+                    var BRank = RankB.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+                    var ARank = RankA.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+                    var SRank = RankS.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
 
-                    var RankB = LanguageRankMobs["radar_MonsterNameRankB"].Split('|')
-                                                                          .ToList<string>();
-                    var RankA = LanguageRankMobs["radar_MonsterNameRankA"].Split('|')
-                                                                          .ToList<string>();
-                    var RankS = LanguageRankMobs["radar_MonsterNameRankS"].Split('|')
-                                                                          .ToList<string>();
-
-                    var BRank = RankB.Find(x => x == actorEntity.Name);
-                    var ARank = RankA.Find(x => x == actorEntity.Name);
-                    var SRank = RankS.Find(x => x == actorEntity.Name);
                     var fontColor = Settings.Default.MonsterFontColor;
 
-                    if ((string.IsNullOrEmpty(BRank) && string.IsNullOrEmpty(ARank) && string.IsNullOrEmpty(SRank)) && Settings.Default.MonsterShowRankOnly)
+                    if ((String.IsNullOrEmpty(BRank) && String.IsNullOrEmpty(ARank) && String.IsNullOrEmpty(SRank)) && Settings.Default.MonsterShowRankOnly)
                     {
                         continue;
                     }
 
-                    if (!string.IsNullOrEmpty(ARank))
+                    if (!String.IsNullOrEmpty(ARank))
                     {
                         fontColor = Settings.Default.MonsterFontColorARank;
                         fsModifier += 2;
                         opacityLevel = 1;
                     }
-                    else if (!string.IsNullOrEmpty(SRank))
+                    else if (!String.IsNullOrEmpty(SRank))
                     {
                         fontColor = Settings.Default.MonsterFontColorSRank;
                         fsModifier += 2;
                         opacityLevel = 1;
                     }
-                    else if (!string.IsNullOrEmpty(BRank))
+                    else if (!String.IsNullOrEmpty(BRank))
                     {
                         fontColor = Settings.Default.MonsterFontColorBRank;
                         fsModifier += 2;
@@ -344,19 +381,25 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                     drawingContext.PushOpacity(opacityLevel);
 
-                    try {
-                        if(!actorEntity.IsValid || user == null) {
+                    try
+                    {
+                        if (!actorEntity.IsValid || user == null)
+                        {
                             continue;
                         }
-                        if(actorEntity.ID == user.ID) {
+                        if (actorEntity.ID == user.ID)
+                        {
                             continue;
                         }
                         Coordinate screen;
-                        if(Settings.Default.RadarCompassMode) {
+                        if (Settings.Default.RadarCompassMode)
+                        {
                             var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
                                             .Scale(scale);
                             screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                        } else {
+                        }
+                        else
+                        {
                             screen = user.Coordinate.Subtract(actorEntity.Coordinate)
                                          .Rotate2D(user.Heading)
                                          .Scale(scale)
@@ -364,39 +407,53 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         screen = screen.Add(-8, -8, 0);
                         ImageSource actorIcon = null;
-                        switch(actorEntity.IsFate) {
+                        switch (actorEntity.IsFate)
+                        {
                             case true:
                                 actorIcon = RadarIconHelper.Fate;
                                 break;
                             case false:
-                                if(actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384) {
+                                if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
+                                {
                                     actorIcon = RadarIconHelper.ChocoboPersonal;
-                                } else {
+                                }
+                                else
+                                {
                                     actorIcon = actorEntity.IsClaimed ? RadarIconHelper.MonsterClaimed : RadarIconHelper.Monster;
                                 }
                                 break;
                         }
-                        if(actorEntity.HPCurrent > 0) {
-                            if(actorIcon != null) {
+                        if (actorEntity.HPCurrent > 0)
+                        {
+                            if (actorIcon != null)
+                            {
                                 drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                             }
-                        } else {
+                        }
+                        else
+                        {
                             drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                         }
-                        if(Settings.Default.MonsterShowName) {
+                        if (Settings.Default.MonsterShowName)
+                        {
                             sb.Append(actorEntity.Name);
                         }
-                        if(Settings.Default.MonsterShowHPPercent) {
+                        if (Settings.Default.MonsterShowHPPercent)
+                        {
                             sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
                         }
-                        if(Settings.Default.MonsterShowDistance) {
+                        if (Settings.Default.MonsterShowDistance)
+                        {
                             sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
                         }
-                        if(Settings.Default.MonsterShowName || Settings.Default.MonsterShowHPPercent) {
+                        if (Settings.Default.MonsterShowName || Settings.Default.MonsterShowHPPercent)
+                        {
                             var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.MonsterFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(fontColor));
                             drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                         }
-                    } catch(Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                         Logging.Log(Logger, ex.Message);
                     }
                     drawingContext.Pop();
@@ -407,57 +464,75 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             #region Resolve NPCs, Gathering & Other
 
-            foreach(var actorEntity in npcEntites) {
-                switch(actorEntity.Type) {
+            foreach (var actorEntity in npcEntites)
+            {
+                switch (actorEntity.Type)
+                {
                     case Actor.Type.NPC:
 
                         #region Resolve NPCs
 
-                        if(Settings.Default.NPCShow) {
+                        if (Settings.Default.NPCShow)
+                        {
                             sb.Clear();
                             var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
                             var fsModifier = ResolveFontSize(opacityLevel);
                             opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                             drawingContext.PushOpacity(opacityLevel);
-                            try {
-                                if(!actorEntity.IsValid || user == null) {
+                            try
+                            {
+                                if (!actorEntity.IsValid || user == null)
+                                {
                                     continue;
                                 }
-                                if(actorEntity.ID == user.ID) {
+                                if (actorEntity.ID == user.ID)
+                                {
                                     continue;
                                 }
                                 Coordinate screen;
-                                if(Settings.Default.RadarCompassMode) {
+                                if (Settings.Default.RadarCompassMode)
+                                {
                                     var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                     .Scale(scale);
                                     screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                                } else {
+                                }
+                                else
+                                {
                                     screen = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                  .Rotate2D(user.Heading)
                                                  .Scale(scale)
                                                  .Add(origin);
                                 }
                                 screen = screen.Add(-8, -8, 0);
-                                if(Settings.Default.NPCShowName) {
+                                if (Settings.Default.NPCShowName)
+                                {
                                     sb.Append(actorEntity.Name);
                                 }
-                                if(Settings.Default.NPCShowHPPercent) {
+                                if (Settings.Default.NPCShowHPPercent)
+                                {
                                     sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
                                 }
-                                if(Settings.Default.NPCShowDistance) {
+                                if (Settings.Default.NPCShowDistance)
+                                {
                                     sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
                                 }
                                 var actorIcon = RadarIconHelper.NPC;
-                                if(actorEntity.HPCurrent > 0) {
+                                if (actorEntity.HPCurrent > 0)
+                                {
                                     drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                } else {
+                                }
+                                else
+                                {
                                     drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
-                                if(Settings.Default.NPCShowName || Settings.Default.NPCShowHPPercent) {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.NPCFontSize) + fsModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.NPCFontColor));
+                                if (Settings.Default.NPCShowName || Settings.Default.NPCShowHPPercent)
+                                {
+                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.NPCFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.NPCFontColor));
                                     drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                                 }
-                            } catch(Exception ex) {
+                            }
+                            catch (Exception ex)
+                            {
                                 Logging.Log(Logger, ex.Message);
                             }
                             drawingContext.Pop();
@@ -470,51 +545,67 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                         #region Resolve Gathering
 
-                        if(Settings.Default.GatheringShow) {
+                        if (Settings.Default.GatheringShow)
+                        {
                             sb.Clear();
                             var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
                             var fsModifier = ResolveFontSize(opacityLevel);
                             opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                             drawingContext.PushOpacity(opacityLevel);
-                            try {
-                                if(!actorEntity.IsValid || user == null) {
+                            try
+                            {
+                                if (!actorEntity.IsValid || user == null)
+                                {
                                     continue;
                                 }
-                                if(actorEntity.ID == user.ID) {
+                                if (actorEntity.ID == user.ID)
+                                {
                                     continue;
                                 }
                                 Coordinate screen;
-                                if(Settings.Default.RadarCompassMode) {
+                                if (Settings.Default.RadarCompassMode)
+                                {
                                     var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                     .Scale(scale);
                                     screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                                } else {
+                                }
+                                else
+                                {
                                     screen = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                  .Rotate2D(user.Heading)
                                                  .Scale(scale)
                                                  .Add(origin);
                                 }
                                 screen = screen.Add(-8, -8, 0);
-                                if(Settings.Default.GatheringShowName) {
+                                if (Settings.Default.GatheringShowName)
+                                {
                                     sb.Append(actorEntity.Name);
                                 }
-                                if(Settings.Default.GatheringShowHPPercent) {
+                                if (Settings.Default.GatheringShowHPPercent)
+                                {
                                     sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
                                 }
-                                if(Settings.Default.GatheringShowDistance) {
+                                if (Settings.Default.GatheringShowDistance)
+                                {
                                     sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
                                 }
                                 var actorIcon = RadarIconHelper.Wood;
-                                if(actorEntity.HPCurrent > 0) {
+                                if (actorEntity.HPCurrent > 0)
+                                {
                                     drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                } else {
+                                }
+                                else
+                                {
                                     drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
-                                if(Settings.Default.GatheringShowName || Settings.Default.GatheringShowHPPercent) {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.GatheringFontSize) + fsModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.GatheringFontColor));
+                                if (Settings.Default.GatheringShowName || Settings.Default.GatheringShowHPPercent)
+                                {
+                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.GatheringFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.GatheringFontColor));
                                     drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                                 }
-                            } catch(Exception ex) {
+                            }
+                            catch (Exception ex)
+                            {
                                 Logging.Log(Logger, ex.Message);
                             }
                             drawingContext.Pop();
@@ -527,32 +618,40 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                         #region Resolve Other
 
-                        if(Settings.Default.OtherShow) {
+                        if (Settings.Default.OtherShow)
+                        {
                             sb.Clear();
                             var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
                             var fsModifier = ResolveFontSize(opacityLevel);
                             opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                             drawingContext.PushOpacity(opacityLevel);
-                            try {
-                                if(!actorEntity.IsValid || user == null) {
+                            try
+                            {
+                                if (!actorEntity.IsValid || user == null)
+                                {
                                     continue;
                                 }
-                                if(actorEntity.ID == user.ID) {
+                                if (actorEntity.ID == user.ID)
+                                {
                                     continue;
                                 }
                                 Coordinate screen;
-                                if(Settings.Default.RadarCompassMode) {
+                                if (Settings.Default.RadarCompassMode)
+                                {
                                     var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                     .Scale(scale);
                                     screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                                } else {
+                                }
+                                else
+                                {
                                     screen = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                  .Rotate2D(user.Heading)
                                                  .Scale(scale);
                                 }
                                 screen = screen.Add(-8, -8, 0);
                                 ImageSource actorIcon;
-                                switch(actorEntity.Type) {
+                                switch (actorEntity.Type)
+                                {
                                     case Actor.Type.Aetheryte:
                                         actorIcon = RadarIconHelper.Crystal;
                                         break;
@@ -563,27 +662,37 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                         actorIcon = RadarIconHelper.NPC;
                                         break;
                                 }
-                                if(actorEntity.HPCurrent > 0 || actorEntity.Type == Actor.Type.Aetheryte) {
-                                    if(actorIcon != null) {
+                                if (actorEntity.HPCurrent > 0 || actorEntity.Type == Actor.Type.Aetheryte)
+                                {
+                                    if (actorIcon != null)
+                                    {
                                         drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
-                                if(Settings.Default.OtherShowName) {
+                                if (Settings.Default.OtherShowName)
+                                {
                                     sb.Append(actorEntity.Name);
                                 }
-                                if(Settings.Default.OtherShowHPPercent) {
+                                if (Settings.Default.OtherShowHPPercent)
+                                {
                                     sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
                                 }
-                                if(Settings.Default.OtherShowDistance) {
+                                if (Settings.Default.OtherShowDistance)
+                                {
                                     sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
                                 }
-                                if(Settings.Default.OtherShowName || Settings.Default.OtherShowHPPercent) {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.OtherFontSize) + fsModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.OtherFontColor));
+                                if (Settings.Default.OtherShowName || Settings.Default.OtherShowHPPercent)
+                                {
+                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.OtherFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.OtherFontColor));
                                     drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
                                 }
-                            } catch(Exception ex) {
+                            }
+                            catch (Exception ex)
+                            {
                                 Logging.Log(Logger, ex.Message);
                             }
                             drawingContext.Pop();
@@ -598,12 +707,16 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             #endregion
         }
 
-        private double ResolveFontSize(double opacityLevel) {
+        private double ResolveFontSize(double opacityLevel)
+        {
             var difference = opacityLevel - 1;
             double fsModifier;
-            if(difference > 0) {
+            if (difference > 0)
+            {
                 fsModifier = (difference >= 20 ? 20 : difference) / 10;
-            } else {
+            }
+            else
+            {
                 difference = Math.Abs(difference);
                 fsModifier = -((difference >= 20 ? 20 : difference) / 10);
             }

@@ -85,6 +85,8 @@ namespace FFXIVAPP.Plugin.Radar
             }
         }
 
+        public List<RadarFilterItem> RankedFilters = new List<RadarFilterItem>();
+
         public static Dictionary<string, string> PluginInfo
         {
             get

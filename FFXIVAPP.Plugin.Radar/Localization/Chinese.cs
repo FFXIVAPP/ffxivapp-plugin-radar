@@ -1,4 +1,4 @@
-// FFXIVAPP.Plugin.Radar
+﻿// FFXIVAPP.Plugin.Radar
 // Chinese.cs
 // 
 // Copyright © 2007 - 2015 Ryan Wilson - All Rights Reserved
@@ -158,21 +158,29 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             return Dictionary;
         }
 
-        public static List<string> getRankedMob(string name) {
-            List<string> _mobs;
-            switch(name) {
+        public static List<string> GetRankedMonster(string name)
+        {
+            List<string> monsters;
+            switch (name)
+            {
+                case "B":
+                    monsters = RankB;
+                    break;
                 case "A":
-                    _mobs = RankA;
+                    monsters = RankA;
                     break;
                 case "S":
-                    _mobs = RankS;
+                    monsters = RankS;
                     break;
                 default:
-                    _mobs = RankB;
+                    monsters = new List<string>();
+                    monsters.AddRange(RankB);
+                    monsters.AddRange(RankA);
+                    monsters.AddRange(RankS);
                     break;
             }
 
-            return _mobs;
+            return monsters;
         }
     }
 }
