@@ -32,12 +32,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.ViewModels;
 using NLog;
@@ -57,6 +60,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         #region Radar Declarations
 
+        private List<RadarFilterItem> RankedFilterItems = new List<RadarFilterItem>();
         public bool IsRendered { get; set; }
 
         #endregion
@@ -140,7 +144,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                 var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster)
                                                     .ToList();
-                if (monsterFilters.Any())
+                if (monsterFilters.Any() && !Settings.Default.MonsterShowRankOnly)
                 {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
                 }
@@ -151,6 +155,11 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 {
                     pcEntites = RadarFilterHelper.ResolveFilteredEntities(pcFilters, pcEntites);
                 }
+            }
+
+            if (Settings.Default.MonsterShowRankOnly)
+            {
+                monsterEntites = RadarFilterHelper.ResolveFilteredEntities(PluginViewModel.Instance.RankedFilters, monsterEntites);
             }
 
             #region Resolve PCs
@@ -335,43 +344,42 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
 
-
-                    var LanguageRankMobs = LocaleHelper.Update(_cultureInfo);
-
-                    var RankB = LanguageRankMobs["radar_MonsterNameRankB"].Split('|')
-                                                                          .ToList<string>();
-                    var RankA = LanguageRankMobs["radar_MonsterNameRankA"].Split('|')
-                                                                          .ToList<string>();
-                    var RankS = LanguageRankMobs["radar_MonsterNameRankS"].Split('|')
-                                                                          .ToList<string>();
-
-                    var BRank = RankB.Find(x => x == actorEntity.Name);
-                    var ARank = RankA.Find(x => x == actorEntity.Name);
-                    var SRank = RankS.Find(x => x == actorEntity.Name);
                     var fontColor = Settings.Default.MonsterFontColor;
 
-                    if ((string.IsNullOrEmpty(BRank) && string.IsNullOrEmpty(ARank) && string.IsNullOrEmpty(SRank)) && Settings.Default.MonsterShowRankOnly)
+                    if (Settings.Default.MonsterShowRankOnly)
                     {
-                        continue;
-                    }
+                        var RankB = LocaleHelper.GetRankedMonsters("B");
+                        var RankA = LocaleHelper.GetRankedMonsters("A");
+                        var RankS = LocaleHelper.GetRankedMonsters("S");
+                        var regexOptions = SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase;
 
-                    if (!string.IsNullOrEmpty(ARank))
-                    {
-                        fontColor = Settings.Default.MonsterFontColorARank;
-                        fsModifier += 2;
-                        opacityLevel = 1;
-                    }
-                    else if (!string.IsNullOrEmpty(SRank))
-                    {
-                        fontColor = Settings.Default.MonsterFontColorSRank;
-                        fsModifier += 2;
-                        opacityLevel = 1;
-                    }
-                    else if (!string.IsNullOrEmpty(BRank))
-                    {
-                        fontColor = Settings.Default.MonsterFontColorBRank;
-                        fsModifier += 2;
-                        opacityLevel = 1;
+                        var BRank = RankB.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+                        var ARank = RankA.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+                        var SRank = RankS.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+
+                        if (String.IsNullOrEmpty(BRank) && String.IsNullOrEmpty(ARank) && String.IsNullOrEmpty(SRank))
+                        {
+                            continue;
+                        }
+
+                        if (!String.IsNullOrEmpty(ARank))
+                        {
+                            fontColor = Settings.Default.MonsterFontColorARank;
+                            fsModifier += 2;
+                            opacityLevel = 1;
+                        }
+                        if (!String.IsNullOrEmpty(SRank))
+                        {
+                            fontColor = Settings.Default.MonsterFontColorSRank;
+                            fsModifier += 2;
+                            opacityLevel = 1;
+                        }
+                        if (!String.IsNullOrEmpty(BRank))
+                        {
+                            fontColor = Settings.Default.MonsterFontColorBRank;
+                            fsModifier += 2;
+                            opacityLevel = 1;
+                        }
                     }
 
                     drawingContext.PushOpacity(opacityLevel);

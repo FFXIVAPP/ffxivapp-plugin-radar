@@ -32,13 +32,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using FFXIVAPP.Common.Core.Memory.Enums;
 using FFXIVAPP.Common.Events;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.IPluginInterface;
 using FFXIVAPP.Plugin.Radar.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using NLog;
 
@@ -105,6 +109,17 @@ namespace FFXIVAPP.Plugin.Radar
                     }
                 }
                 PluginViewModel.Instance.Locale = _locale;
+                PluginViewModel.Instance.RankedFilters.Clear();
+                foreach (var rankedMonster in LocaleHelper.GetRankedMonsters())
+                {
+                    PluginViewModel.Instance.RankedFilters.Add(new RadarFilterItem
+                    {
+                        Key = rankedMonster,
+                        Level = 0,
+                        RegEx =  new Regex(rankedMonster, SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase),
+                        Type = Actor.Type.Monster
+                    });
+                }
                 RaisePropertyChanged();
             }
         }

@@ -155,11 +155,32 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
             Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
 
-            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
-            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
-            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
-
             return Dictionary;
+        }
+
+        public static List<string> GetRankedMonster(string name)
+        {
+            List<string> monsters;
+            switch (name)
+            {
+                case "B":
+                    monsters = RankB;
+                    break;
+                case "A":
+                    monsters = RankA;
+                    break;
+                case "S":
+                    monsters = RankS;
+                    break;
+                default:
+                    monsters = new List<string>();
+                    monsters.AddRange(RankB);
+                    monsters.AddRange(RankA);
+                    monsters.AddRange(RankS);
+                    break;
+            }
+
+            return monsters;
         }
     }
 }

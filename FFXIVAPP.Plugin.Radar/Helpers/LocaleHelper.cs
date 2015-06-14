@@ -73,5 +73,32 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
             return dictionary.Cast<DictionaryEntry>()
                              .ToDictionary(item => (string) item.Key, item => (string) item.Value);
         }
+
+        public static List<string> GetRankedMonsters(string name = "ALL")
+        {
+            List<string> monsters;
+            var culture = Constants.CultureInfo.TwoLetterISOLanguageName;
+
+            switch (culture)
+            {
+                case "fr":
+                    monsters = French.GetRankedMonster(name);
+                    break;
+                case "ja":
+                    monsters = Japanese.GetRankedMonster(name);
+                    break;
+                case "de":
+                    monsters = German.GetRankedMonster(name);
+                    break;
+                case "zh":
+                    monsters = Chinese.GetRankedMonster(name);
+                    break;
+                default:
+                    monsters = English.GetRankedMonster(name);
+                    break;
+            }
+
+            return monsters;
+        }
     }
 }
