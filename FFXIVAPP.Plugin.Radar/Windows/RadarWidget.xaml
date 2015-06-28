@@ -168,7 +168,8 @@
                                                FontWeight="Bold"
                                                Foreground="Black"
                                                Padding="0"
-                                               Text="[RADAR]" />
+                                               Text="{Binding Locale[radar_RadarTitleBar],
+                                                                       Source={StaticResource PluginViewModel}}" />
                                     <TextBlock Grid.Row="0"
                                                Margin="5 2"
                                                HorizontalAlignment="Left"

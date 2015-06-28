@@ -56,7 +56,8 @@
         <GroupBox x:Name="FilterOptionsGroupBox"
                   Grid.Row="1"
                   Margin="3"
-                  Header="Filter Options">
+                  Header="{Binding Locale[radar_FilterOptionsHeader],
+                                   Source={StaticResource PluginViewModel}}">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -66,18 +67,21 @@
                                Margin="3"
                                LastChildFill="True">
                         <TextBlock Padding="5"
-                                   Text="Key:" />
+                                   Text="{Binding Locale[radar_KeyLabel],
+                                                  Source={StaticResource PluginViewModel}}" />
                         <TextBox x:Name="TKey"
                                  Width="150"
                                  Text="Mandragora" />
                         <TextBlock Padding="5"
-                                   Text="Level:" />
+                                   Text="{Binding Locale[radar_LevelLabel],
+                                                  Source={StaticResource PluginViewModel}}" />
                         <TextBox x:Name="TLevel"
                                  Width="40"
                                  HorizontalContentAlignment="Center"
                                  Text="0" />
                         <TextBlock Padding="5"
-                                   Text="Type:" />
+                                   Text="{Binding Locale[radar_TypeLabel],
+                                                  Source={StaticResource PluginViewModel}}" />
                         <ComboBox x:Name="TType">
                             <ComboBoxItem>Unknown</ComboBoxItem>
                             <ComboBoxItem>PC</ComboBoxItem>
@@ -106,15 +110,18 @@
                   utilities:SelectionBehavior.SelectionChanged="{Binding FilterSelectionCommand}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Key}"
-                                    Header="Key"
+                                    Header="{Binding Locale[radar_KeyLabel],
+                                                     Source={StaticResource PluginViewModel}}"
                                     IsReadOnly="True"
                                     utilities:GridViewSort.PropertyName="Key" />
                 <DataGridTextColumn Binding="{Binding Type}"
-                                    Header="Type"
+                                    Header="{Binding Locale[radar_TypeLabel],
+                                                     Source={StaticResource PluginViewModel}}"
                                     IsReadOnly="True"
                                     utilities:GridViewSort.PropertyName="Type" />
                 <DataGridTextColumn Binding="{Binding Level}"
-                                    Header="Level"
+                                    Header="{Binding Locale[radar_LevelLabel],
+                                                     Source={StaticResource PluginViewModel}}"
                                     IsReadOnly="True"
                                     utilities:GridViewSort.PropertyName="Level" />
             </DataGrid.Columns>
@@ -125,10 +132,12 @@
             <Button Width="27"
                     Margin="3 0 0 0"
                     Command="{Binding DeleteFilterCommand}"
-                    Content="-" />
+                    Content="{Binding Locale[radar_DeleteFilterButton],
+                                      Source={StaticResource PluginViewModel}}" />
             <Button Margin="3 0 0 0"
                     Command="{Binding AddOrUpdateFilterCommand}"
-                    Content="Add Or Update Filter" />
+                    Content="{Binding Locale[radar_AddorUpdateFilterButton],
+                                      Source={StaticResource PluginViewModel}}" />
         </DockPanel>
     </Grid>
 </UserControl>

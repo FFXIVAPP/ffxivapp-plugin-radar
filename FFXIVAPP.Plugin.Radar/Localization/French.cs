@@ -38,61 +38,61 @@ namespace FFXIVAPP.Plugin.Radar.Localization
 
         private static readonly List<string> RankB = new List<string>()
         {
-            "Albin Le Blafard",
+            "Albin the Ashen",
             "Barbastelle",
-            "Mary La Sanglante",
-            "Casque Noir",
-            "Sergent-major Dalvag",
-            "Acanthor",
-            "Roi Des Sangsues",
-            "Agrion Ogre Monarque",
+            "Bloody Mary",
+            "Dark Helmet",
+            "Flame Sergeant Dalvag",
+            "Gatling",
+            "Leech King",
+            "Monarch Ogrefly",
             "Myradrosh",
             "Naul",
             "Ovjang",
             "Phecda",
-            "Syrop D'égout",
+            "Sewer Syrup",
             "Skogs Fru",
-            "Sophie La Dardante",
+            "Stinging Sophie",
             "Vuokho",
-            "Joker Blanc"
+            "White Joker"
         };
 
         private static readonly List<string> RankA = new List<string>()
         {
-            "Griffe Des Enfers Magitek",
+            "Hellsclaw",
             "Unktehi",
             "Vogaal Ja",
             "Cornu",
             "Marberry",
             "Nahn",
             "Forneus",
-            "Fondu",
+            "Melt",
             "Girtab",
-            "Guédé Ti-Malice",
+            "Ghede Ti Malice",
             "Marraco",
-            "Pampa Ballerine",
+            "Sabotender Bailarina",
             "Maahes",
-            "Dernière Flamme De Dalvag",
+            "Dalvag's Final Flame",
             "Zanig'oh",
-            "Alectryon",
+            "Alectyron",
             "Kurrea"
         };
 
         private static readonly List<string> RankS = new List<string>()
         {
             "Garlok",
-            "Croabéros",
+            "Croakadile",
             "Croque-Mitaine",
             "Mahisha",
             "Nandi",
             "Bonnacon",
             "Laideronnette",
             "Wulgaru",
-            "Theda La Tripoteuse",
-            "Flagelleur Mental",
+            "Thousand-cast Theda",
+            "Mindflayer",
             "Safat",
             "Brontes",
-            "Balaur",
+            "Lampalagua",
             "Minhocao",
             "Nunyunuwi",
             "Zona Seeker",
@@ -154,6 +154,26 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_MonsterFontColorBRankHeader", "Monster Font Color (B Rank)");
             Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
             Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
+            Dictionary.Add("radar_FilterOptionsHeader", "Filter Options");
+            Dictionary.Add("radar_KeyLabel", "Key:");
+            Dictionary.Add("radar_LevelLabel", "Level:");
+            Dictionary.Add("radar_TypeLabel", "Type:");
+            Dictionary.Add("radar_DeleteFilterButton", " - ");
+            Dictionary.Add("radar_AddorUpdateFilterButton", "Add Or Update Filter");
+            Dictionary.Add("radar_SettingsRadarHeader", "Settings:Radar");
+            Dictionary.Add("radar_CompasModeLabel", "Compass Mode");
+            Dictionary.Add("radar_FilterRadarItemsLabel", "Filter Radar Items");
+            Dictionary.Add("radar_RadarUIScaleLabel", "UI Scale");
+            Dictionary.Add("radar_SettingsRadarPCHeader", "Settings:Radar:PC");
+            Dictionary.Add("radar_SettingsRadarNPCHeader", "Settings:Radar:NPC");
+            Dictionary.Add("radar_SettingsRadarMonsterHeader", "Settings:Radar:Monster");
+            Dictionary.Add("radar_SettingsRadarGatheringHeader", "Settings:Radar:Gathering");
+            Dictionary.Add("radar_SettingsRadarOtherHeader", "Settings:Radar:Other");
+            Dictionary.Add("radar_RadarTitleBar", "[RADAR]");
+
+            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
+            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
+            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
 
             return Dictionary;
         }

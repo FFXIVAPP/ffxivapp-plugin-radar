@@ -154,6 +154,26 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_MonsterFontColorBRankHeader", "Monster Font Color (B Rank)");
             Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
             Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
+            Dictionary.Add("radar_FilterOptionsHeader", "Filter Options");
+            Dictionary.Add("radar_KeyLabel", "Key:");
+            Dictionary.Add("radar_LevelLabel", "Level:");
+            Dictionary.Add("radar_TypeLabel", "Type:");
+            Dictionary.Add("radar_DeleteFilterButton", " - ");
+            Dictionary.Add("radar_AddorUpdateFilterButton", "Add Or Update Filter");
+            Dictionary.Add("radar_SettingsRadarHeader", "Settings:Radar");
+            Dictionary.Add("radar_CompasModeLabel", "Compass Mode");
+            Dictionary.Add("radar_FilterRadarItemsLabel", "Filter Radar Items");
+            Dictionary.Add("radar_RadarUIScaleLabel", "UI Scale");
+            Dictionary.Add("radar_SettingsRadarPCHeader", "Settings:Radar:PC");
+            Dictionary.Add("radar_SettingsRadarNPCHeader", "Settings:Radar:NPC");
+            Dictionary.Add("radar_SettingsRadarMonsterHeader", "Settings:Radar:Monster");
+            Dictionary.Add("radar_SettingsRadarGatheringHeader", "Settings:Radar:Gathering");
+            Dictionary.Add("radar_SettingsRadarOtherHeader", "Settings:Radar:Other");
+            Dictionary.Add("radar_RadarTitleBar", "[RADAR]");
+
+            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
+            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
+            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
 
             return Dictionary;
         }

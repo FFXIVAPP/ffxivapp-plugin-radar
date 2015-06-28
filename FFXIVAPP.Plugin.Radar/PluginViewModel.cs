@@ -52,7 +52,6 @@ namespace FFXIVAPP.Plugin.Radar
         #region Property Bindings
 
         private static PluginViewModel _instance;
-        public List<RadarFilterItem> RankedFilters = new List<RadarFilterItem>();
         private bool _enableHelpLabels;
         private ObservableCollection<RadarFilterItem> _filters;
         private Dictionary<string, string> _locale;
@@ -85,6 +84,8 @@ namespace FFXIVAPP.Plugin.Radar
                 RaisePropertyChanged();
             }
         }
+
+        public List<RadarFilterItem> RankedFilters = new List<RadarFilterItem>();
 
         public static Dictionary<string, string> PluginInfo
         {

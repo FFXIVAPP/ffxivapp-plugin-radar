@@ -116,7 +116,7 @@ namespace FFXIVAPP.Plugin.Radar
                     {
                         Key = rankedMonster,
                         Level = 0,
-                        RegEx = new Regex(rankedMonster, SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase),
+                        RegEx =  new Regex(rankedMonster, SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase),
                         Type = Actor.Type.Monster
                     });
                 }
