@@ -60,21 +60,25 @@
                                       Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <Expander Header="Settings:Radar">
+                        <Expander Header="{Binding Locale[radar_SettingsRadarHeader],
+                                                   Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="Compass Mode">
+                                <GroupBox Header="{Binding Locale[radar_CompasModeLabel],
+                                                   Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <controls:ToggleSwitch IsChecked="{Binding RadarCompassMode,
                                                                                    Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="Filter Radar Items">
+                                <GroupBox Header="{Binding Locale[radar_FilterRadarItemsLabel],
+                                                   Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <controls:ToggleSwitch IsChecked="{Binding FilterRadarItems,
                                                                                    Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="UI Scale">
+                                <GroupBox Header="{Binding Locale[radar_RadarUIScaleLabel],
+                                                   Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -86,7 +90,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:Radar:PC">
+                        <Expander Header="{Binding Locale[radar_SettingsRadarPCHeader],
+                                                   Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[radar_PCShowHeader],
                                                            Source={StaticResource PluginViewModel}}">
@@ -162,7 +167,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:Radar:NPC">
+                        <Expander Header="{Binding Locale[radar_SettingsRadarNPCHeader],
+                                                           Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[radar_NPCShowHeader],
                                                            Source={StaticResource PluginViewModel}}">
@@ -231,7 +237,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:Radar:Monster">
+                        <Expander Header="{Binding Locale[radar_SettingsRadarMonsterHeader],
+                                                           Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[radar_MonsterShowHeader],
                                                            Source={StaticResource PluginViewModel}}">
@@ -385,7 +392,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:Radar:Gathering">
+                        <Expander Header="{Binding Locale[radar_SettingsRadarGatheringHeader],
+                                                           Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[radar_GatheringShowHeader],
                                                            Source={StaticResource PluginViewModel}}">
@@ -454,7 +462,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:Radar:Other">
+                        <Expander Header="{Binding Locale[radar_SettingsRadarOtherHeader],
+                                                           Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[radar_OtherShowHeader],
                                                            Source={StaticResource PluginViewModel}}">

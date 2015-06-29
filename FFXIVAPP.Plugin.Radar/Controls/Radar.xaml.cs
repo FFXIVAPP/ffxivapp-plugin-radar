@@ -344,42 +344,39 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
 
+                    var RankB = LocaleHelper.GetRankedMonsters("B");
+                    var RankA = LocaleHelper.GetRankedMonsters("A");
+                    var RankS = LocaleHelper.GetRankedMonsters("S");
+                    var regexOptions = SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase;
+
+                    var BRank = RankB.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+                    var ARank = RankA.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+                    var SRank = RankS.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
+
                     var fontColor = Settings.Default.MonsterFontColor;
 
-                    if (Settings.Default.MonsterShowRankOnly)
+                    if ((String.IsNullOrEmpty(BRank) && String.IsNullOrEmpty(ARank) && String.IsNullOrEmpty(SRank)) && Settings.Default.MonsterShowRankOnly)
                     {
-                        var RankB = LocaleHelper.GetRankedMonsters("B");
-                        var RankA = LocaleHelper.GetRankedMonsters("A");
-                        var RankS = LocaleHelper.GetRankedMonsters("S");
-                        var regexOptions = SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase;
+                        continue;
+                    }
 
-                        var BRank = RankB.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
-                        var ARank = RankA.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
-                        var SRank = RankS.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
-
-                        if (String.IsNullOrEmpty(BRank) && String.IsNullOrEmpty(ARank) && String.IsNullOrEmpty(SRank))
-                        {
-                            continue;
-                        }
-
-                        if (!String.IsNullOrEmpty(ARank))
-                        {
-                            fontColor = Settings.Default.MonsterFontColorARank;
-                            fsModifier += 2;
-                            opacityLevel = 1;
-                        }
-                        if (!String.IsNullOrEmpty(SRank))
-                        {
-                            fontColor = Settings.Default.MonsterFontColorSRank;
-                            fsModifier += 2;
-                            opacityLevel = 1;
-                        }
-                        if (!String.IsNullOrEmpty(BRank))
-                        {
-                            fontColor = Settings.Default.MonsterFontColorBRank;
-                            fsModifier += 2;
-                            opacityLevel = 1;
-                        }
+                    if (!String.IsNullOrEmpty(ARank))
+                    {
+                        fontColor = Settings.Default.MonsterFontColorARank;
+                        fsModifier += 2;
+                        opacityLevel = 1;
+                    }
+                    else if (!String.IsNullOrEmpty(SRank))
+                    {
+                        fontColor = Settings.Default.MonsterFontColorSRank;
+                        fsModifier += 2;
+                        opacityLevel = 1;
+                    }
+                    else if (!String.IsNullOrEmpty(BRank))
+                    {
+                        fontColor = Settings.Default.MonsterFontColorBRank;
+                        fsModifier += 2;
+                        opacityLevel = 1;
                     }
 
                     drawingContext.PushOpacity(opacityLevel);

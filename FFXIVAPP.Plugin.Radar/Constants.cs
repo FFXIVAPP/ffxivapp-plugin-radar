@@ -45,7 +45,7 @@ namespace FFXIVAPP.Plugin.Radar
 
         public static readonly string[] Supported =
         {
-            "ja", "fr", "en", "de"
+            "ja", "fr", "en", "de", "ru"
         };
 
         public static string BaseDirectory

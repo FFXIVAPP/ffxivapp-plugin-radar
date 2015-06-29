@@ -38,65 +38,65 @@ namespace FFXIVAPP.Plugin.Radar.Localization
 
         private static readonly List<string> RankB = new List<string>()
         {
-            "死灰のアルビン",
-            "バーバステル",
-            "ブラッディ・マリー",
-            "ダークヘルメット",
-            "不滅のフェランド闘軍曹",
-            "ガトリングス",
-            "リーチキング",
-            "モナーク・オーガフライ",
-            "ミラドロッシュ",
-            "ナウル",
-            "アヴゼン",
-            "フェクダ",
-            "スェアーシロップ",
-            "スコッグ・フリュー",
-            "スティンギング・ソフィー",
-            "ヴオコー",
-            "ホワイトジョーカー"
+            "Albin the Ashen",
+            "Barbastelle",
+            "Bloody Mary",
+            "Dark Helmet",
+            "Flame Sergeant Dalvag",
+            "Gatling",
+            "Leech King",
+            "Monarch Ogrefly",
+            "Myradrosh",
+            "Naul",
+            "Ovjang",
+            "Phecda",
+            "Sewer Syrup",
+            "Skogs Fru",
+            "Stinging Sophie",
+            "Vuokho",
+            "White Joker"
         };
 
         private static readonly List<string> RankA = new List<string>()
         {
-            "魔導ヘルズクロー",
-            "ウンクテヒ",
-            "醜男のヴォガージャ",
-            "コンヌ",
-            "マーベリー",
-            "ナン",
-            "ファルネウス",
-            "メルティゼリー",
-            "ギルタブ",
-            "ゲーデ",
-            "マラク",
-            "サボテンダー・バイラリーナ",
-            "マヘス",
-            "ファイナルフレイム",
-            "ザニゴ",
-            "アレクトリオン",
-            "クーレア"
+            "Hellsclaw",
+            "Unktehi",
+            "Vogaal Ja",
+            "Cornu",
+            "Marberry",
+            "Nahn",
+            "Forneus",
+            "Melt",
+            "Girtab",
+            "Ghede Ti Malice",
+            "Marraco",
+            "Sabotender Bailarina",
+            "Maahes",
+            "Dalvag's Final Flame",
+            "Zanig'oh",
+            "Alectyron",
+            "Kurrea"
         };
 
         private static readonly List<string> RankS = new List<string>()
         {
-            "ガーロック",
-            "ケロゲロス",
-            "クロック・ミテーヌ",
-            "チェルノボーグ",
-            "ナンディ",
-            "ボナコン",
-            "レドロネット",
-            "ウルガル",
-            "サウザンドキャスト・セダ",
-            "マインドフレア",
-            "サファト",
-            "ブロンテス",
-            "バルウール",
-            "ミニョーカオン",
-            "ヌニュヌウィ",
-            "ゾーナ・シーカー",
-            "アグリッパ"
+            "Garlok",
+            "Croakadile",
+            "Croque-Mitaine",
+            "Mahisha",
+            "Nandi",
+            "Bonnacon",
+            "Laideronnette",
+            "Wulgaru",
+            "Thousand-cast Theda",
+            "Mindflayer",
+            "Safat",
+            "Brontes",
+            "Lampalagua",
+            "Minhocao",
+            "Nunyunuwi",
+            "Zona Seeker",
+            "Agrippa the Mighty"
         };
 
         /// <summary>
@@ -154,6 +154,26 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_MonsterFontColorBRankHeader", "Monster Font Color (B Rank)");
             Dictionary.Add("radar_MonsterFontColorARankHeader", "Monster Font Color (A Rank)");
             Dictionary.Add("radar_MonsterFontColorSRankHeader", "Monster Font Color (S Rank)");
+            Dictionary.Add("radar_FilterOptionsHeader", "Filter Options");
+            Dictionary.Add("radar_KeyLabel", "Key:");
+            Dictionary.Add("radar_LevelLabel", "Level:");
+            Dictionary.Add("radar_TypeLabel", "Type:");
+            Dictionary.Add("radar_DeleteFilterButton", " - ");
+            Dictionary.Add("radar_AddorUpdateFilterButton", "Add Or Update Filter");
+            Dictionary.Add("radar_SettingsRadarHeader", "Settings:Radar");
+            Dictionary.Add("radar_CompasModeLabel", "Compass Mode");
+            Dictionary.Add("radar_FilterRadarItemsLabel", "Filter Radar Items");
+            Dictionary.Add("radar_RadarUIScaleLabel", "UI Scale");
+            Dictionary.Add("radar_SettingsRadarPCHeader", "Settings:Radar:PC");
+            Dictionary.Add("radar_SettingsRadarNPCHeader", "Settings:Radar:NPC");
+            Dictionary.Add("radar_SettingsRadarMonsterHeader", "Settings:Radar:Monster");
+            Dictionary.Add("radar_SettingsRadarGatheringHeader", "Settings:Radar:Gathering");
+            Dictionary.Add("radar_SettingsRadarOtherHeader", "Settings:Radar:Other");
+            Dictionary.Add("radar_RadarTitleBar", "[RADAR]");
+
+            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
+            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
+            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
 
             return Dictionary;
         }
