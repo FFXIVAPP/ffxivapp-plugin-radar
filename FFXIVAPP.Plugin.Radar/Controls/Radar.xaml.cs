@@ -60,8 +60,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         #region Radar Declarations
 
+        private List<RadarFilterItem> RankedFilterItems = new List<RadarFilterItem>();
         public bool IsRendered { get; set; }
-        private List<RadarFilterItem> RankedFilterItems = new List<RadarFilterItem>(); 
 
         #endregion
 
@@ -147,7 +147,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 if (monsterFilters.Any() && !Settings.Default.MonsterShowRankOnly)
                 {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
-                }  
+                }
 
                 var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC)
                                                .ToList();
