@@ -172,10 +172,6 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_SettingsRadarOtherHeader", "Settings:Radar:Other");
             Dictionary.Add("radar_RadarTitleBar", "[RADAR]");
 
-            Dictionary.Add("radar_MonsterNameRankB", string.Join("|", RankB));
-            Dictionary.Add("radar_MonsterNameRankA", string.Join("|", RankA));
-            Dictionary.Add("radar_MonsterNameRankS", string.Join("|", RankS));
-
             return Dictionary;
         }
 
