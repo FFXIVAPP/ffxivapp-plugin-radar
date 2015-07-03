@@ -229,6 +229,9 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 case Actor.Job.ARM:
                                     drawingContext.DrawImage(RadarIconHelper.Armorer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
+                                case Actor.Job.AST:
+                                    drawingContext.DrawImage(RadarIconHelper.Astrologian, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    break;
                                 case Actor.Job.BLM:
                                     drawingContext.DrawImage(RadarIconHelper.Blackmage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
@@ -253,6 +256,9 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 case Actor.Job.DRG:
                                     drawingContext.DrawImage(RadarIconHelper.Dragoon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
+                                case Actor.Job.DRK:
+                                    drawingContext.DrawImage(RadarIconHelper.DarkKnight, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    break;
                                 case Actor.Job.FSH:
                                     drawingContext.DrawImage(RadarIconHelper.Fisher, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
@@ -267,6 +273,9 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                     break;
                                 case Actor.Job.LTW:
                                     drawingContext.DrawImage(RadarIconHelper.Leatherworker, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    break;
+                                case Actor.Job.MCH:
+                                    drawingContext.DrawImage(RadarIconHelper.Machinist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                                 case Actor.Job.MIN:
                                     drawingContext.DrawImage(RadarIconHelper.Miner, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
@@ -344,39 +353,37 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
 
+                    var fontColor = Settings.Default.MonsterFontColor;
+
                     var RankB = LocaleHelper.GetRankedMonsters("B");
                     var RankA = LocaleHelper.GetRankedMonsters("A");
                     var RankS = LocaleHelper.GetRankedMonsters("S");
                     var regexOptions = SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase;
 
-                    var BRank = RankB.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
-                    var ARank = RankA.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
-                    var SRank = RankS.Find(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name));
-
-                    var fontColor = Settings.Default.MonsterFontColor;
-
-                    if ((String.IsNullOrEmpty(BRank) && String.IsNullOrEmpty(ARank) && String.IsNullOrEmpty(SRank)) && Settings.Default.MonsterShowRankOnly)
+                    if (Settings.Default.MonsterShowRankOnly)
                     {
-                        continue;
-                    }
-
-                    if (!String.IsNullOrEmpty(ARank))
-                    {
-                        fontColor = Settings.Default.MonsterFontColorARank;
-                        fsModifier += 2;
-                        opacityLevel = 1;
-                    }
-                    else if (!String.IsNullOrEmpty(SRank))
-                    {
-                        fontColor = Settings.Default.MonsterFontColorSRank;
-                        fsModifier += 2;
-                        opacityLevel = 1;
-                    }
-                    else if (!String.IsNullOrEmpty(BRank))
-                    {
-                        fontColor = Settings.Default.MonsterFontColorBRank;
-                        fsModifier += 2;
-                        opacityLevel = 1;
+                        if (RankA.Any(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name)))
+                        {
+                            fontColor = Settings.Default.MonsterFontColorARank;
+                            fsModifier += 2;
+                            opacityLevel = 1;
+                        }
+                        else if (RankS.Any(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name)))
+                        {
+                            fontColor = Settings.Default.MonsterFontColorSRank;
+                            fsModifier += 2;
+                            opacityLevel = 1;
+                        }
+                        else if (RankB.Any(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name)))
+                        {
+                            fontColor = Settings.Default.MonsterFontColorBRank;
+                            fsModifier += 2;
+                            opacityLevel = 1;
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
 
                     drawingContext.PushOpacity(opacityLevel);

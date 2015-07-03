@@ -190,6 +190,9 @@
     <Resource Include="Media\RadarIcons\chocobo_personal.png" />
     <Resource Include="Media\RadarIcons\ninja.png" />
     <Resource Include="Media\RadarIcons\rogue.png" />
+    <Resource Include="Media\RadarIcons\astrologian.png" />
+    <Resource Include="Media\RadarIcons\darkknight.png" />
+    <Resource Include="Media\RadarIcons\machinist.png" />
     <Content Include="PluginInfo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
