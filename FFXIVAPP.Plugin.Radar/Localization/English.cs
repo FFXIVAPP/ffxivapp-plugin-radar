@@ -87,7 +87,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Maahes",
             "Dalvag's Final Flame",
             "Zanig'oh",
-            "Alectyron",
+            "Alectryon",
             "Kurrea",
             // Heavensward Rank A
             "Mirka",
