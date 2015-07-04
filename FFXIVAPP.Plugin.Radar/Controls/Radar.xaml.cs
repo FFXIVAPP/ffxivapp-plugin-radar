@@ -169,7 +169,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in pcEntites)
                 {
                     sb.Clear();
-                    var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
+                    var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                     drawingContext.PushOpacity(opacityLevel);
@@ -208,7 +208,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         if (Settings.Default.PCShowDistance)
                         {
-                            sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
+                            sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                         }
                         var useJob = Settings.Default.PCShowJob;
                         if (Settings.Default.PCShowJob)
@@ -349,7 +349,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in monsterEntites)
                 {
                     sb.Clear();
-                    var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
+                    var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
                     var fsModifier = ResolveFontSize(opacityLevel);
                     opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
 
@@ -451,7 +451,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         if (Settings.Default.MonsterShowDistance)
                         {
-                            sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
+                            sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                         }
                         if (Settings.Default.MonsterShowName || Settings.Default.MonsterShowHPPercent)
                         {
@@ -482,7 +482,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.NPCShow)
                         {
                             sb.Clear();
-                            var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
+                            var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
                             var fsModifier = ResolveFontSize(opacityLevel);
                             opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                             drawingContext.PushOpacity(opacityLevel);
@@ -521,7 +521,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 if (Settings.Default.NPCShowDistance)
                                 {
-                                    sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
+                                    sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                                 }
                                 var actorIcon = RadarIconHelper.NPC;
                                 if (actorEntity.HPCurrent > 0)
@@ -555,7 +555,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.GatheringShow)
                         {
                             sb.Clear();
-                            var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
+                            var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
                             var fsModifier = ResolveFontSize(opacityLevel);
                             opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                             drawingContext.PushOpacity(opacityLevel);
@@ -594,7 +594,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 if (Settings.Default.GatheringShowDistance)
                                 {
-                                    sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
+                                    sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                                 }
                                 var actorIcon = RadarIconHelper.Wood;
                                 if (actorEntity.HPCurrent > 0)
@@ -628,7 +628,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.OtherShow)
                         {
                             sb.Clear();
-                            var opacityLevel = (actorEntity.Coordinate.Z / XIVInfoViewModel.Instance.CurrentUser.Coordinate.Z);
+                            var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
                             var fsModifier = ResolveFontSize(opacityLevel);
                             opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
                             drawingContext.PushOpacity(opacityLevel);
@@ -690,7 +690,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 if (Settings.Default.OtherShowDistance)
                                 {
-                                    sb.AppendFormat(" {0:N2}", XIVInfoViewModel.Instance.CurrentUser.GetDistanceTo(actorEntity));
+                                    sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                                 }
                                 if (Settings.Default.OtherShowName || Settings.Default.OtherShowHPPercent)
                                 {
@@ -728,6 +728,23 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 fsModifier = -((difference >= 20 ? 20 : difference) / 10);
             }
             return fsModifier;
+        }
+
+        private string ResolveHeightVariance(ActorEntity user, ActorEntity actorEntity)
+        {
+            double variance = 0;
+            var modifier = "";
+            if (user.Z < actorEntity.Z)
+            {
+                modifier = "+";
+                variance = user.Z - actorEntity.Z;
+            }
+            if (user.Z > actorEntity.Z)
+            {
+                modifier = "-";
+                variance = actorEntity.Z - user.Z;
+            }
+            return String.Format("{0}{1:N2}", modifier, Math.Abs(variance));
         }
     }
 }
