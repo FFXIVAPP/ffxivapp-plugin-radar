@@ -32,12 +32,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Core.Memory.Enums;
-using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Helpers;
 using FFXIVAPP.Plugin.Radar.Models;
@@ -98,6 +96,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             var bc = new BrushConverter();
 
             var user = XIVInfoViewModel.Instance.CurrentUser;
+            var fsModifier = 0;
 
             var origin = new Coordinate
             {
@@ -144,7 +143,12 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                 var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster)
                                                     .ToList();
-                if (monsterFilters.Any() && !Settings.Default.MonsterShowRankOnly)
+                if (PluginViewModel.Instance.RankedFilters.Any())
+                {
+                    monsterFilters.AddRange(PluginViewModel.Instance.RankedFilters);
+                }
+
+                if (monsterFilters.Any())
                 {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
                 }
@@ -157,11 +161,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 }
             }
 
-            if (Settings.Default.MonsterShowRankOnly)
-            {
-                monsterEntites = RadarFilterHelper.ResolveFilteredEntities(PluginViewModel.Instance.RankedFilters, monsterEntites);
-            }
-
             #region Resolve PCs
 
             if (Settings.Default.PCShow)
@@ -169,10 +168,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in pcEntites)
                 {
                     sb.Clear();
-                    var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
-                    var fsModifier = ResolveFontSize(opacityLevel);
-                    opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
-                    drawingContext.PushOpacity(opacityLevel);
+                    drawingContext.PushOpacity(1);
                     try
                     {
                         if (!actorEntity.IsValid || user == null)
@@ -349,44 +345,33 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in monsterEntites)
                 {
                     sb.Clear();
-                    var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
-                    var fsModifier = ResolveFontSize(opacityLevel);
-                    opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
 
                     var fontColor = Settings.Default.MonsterFontColor;
 
                     var RankB = LocaleHelper.GetRankedMonsters("B");
                     var RankA = LocaleHelper.GetRankedMonsters("A");
                     var RankS = LocaleHelper.GetRankedMonsters("S");
-                    var regexOptions = SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase;
 
-                    if (Settings.Default.MonsterShowRankOnly)
+                    if (Settings.Default.MonsterShowRankColor)
                     {
-                        if (RankA.Any(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name)))
+                        if (RankA.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             fontColor = Settings.Default.MonsterFontColorARank;
                             fsModifier += 2;
-                            opacityLevel = 1;
                         }
-                        else if (RankS.Any(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name)))
+                        else if (RankS.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             fontColor = Settings.Default.MonsterFontColorSRank;
                             fsModifier += 2;
-                            opacityLevel = 1;
                         }
-                        else if (RankB.Any(x => (new Regex(x, regexOptions)).IsMatch(actorEntity.Name)))
+                        else if (RankB.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             fontColor = Settings.Default.MonsterFontColorBRank;
                             fsModifier += 2;
-                            opacityLevel = 1;
-                        }
-                        else
-                        {
-                            continue;
                         }
                     }
 
-                    drawingContext.PushOpacity(opacityLevel);
+                    drawingContext.PushOpacity(1);
 
                     try
                     {
@@ -482,10 +467,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.NPCShow)
                         {
                             sb.Clear();
-                            var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
-                            var fsModifier = ResolveFontSize(opacityLevel);
-                            opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
-                            drawingContext.PushOpacity(opacityLevel);
+                            drawingContext.PushOpacity(1);
                             try
                             {
                                 if (!actorEntity.IsValid || user == null)
@@ -555,10 +537,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.GatheringShow)
                         {
                             sb.Clear();
-                            var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
-                            var fsModifier = ResolveFontSize(opacityLevel);
-                            opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
-                            drawingContext.PushOpacity(opacityLevel);
+                            drawingContext.PushOpacity(1);
                             try
                             {
                                 if (!actorEntity.IsValid || user == null)
@@ -628,10 +607,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.OtherShow)
                         {
                             sb.Clear();
-                            var opacityLevel = (actorEntity.Coordinate.Z / user.Coordinate.Z);
-                            var fsModifier = ResolveFontSize(opacityLevel);
-                            opacityLevel = opacityLevel < 0.5 ? 0.5 : opacityLevel > 1 ? 1 : opacityLevel;
-                            drawingContext.PushOpacity(opacityLevel);
+                            drawingContext.PushOpacity(1);
                             try
                             {
                                 if (!actorEntity.IsValid || user == null)
@@ -714,37 +690,32 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             #endregion
         }
 
-        private double ResolveFontSize(double opacityLevel)
-        {
-            var difference = opacityLevel - 1;
-            double fsModifier;
-            if (difference > 0)
-            {
-                fsModifier = (difference >= 20 ? 20 : difference) / 10;
-            }
-            else
-            {
-                difference = Math.Abs(difference);
-                fsModifier = -((difference >= 20 ? 20 : difference) / 10);
-            }
-            return fsModifier;
-        }
-
         private string ResolveHeightVariance(ActorEntity user, ActorEntity actorEntity)
         {
-            double variance = 0;
             var modifier = "";
             if (user.Z < actorEntity.Z)
             {
                 modifier = "+";
-                variance = user.Z - actorEntity.Z;
             }
             if (user.Z > actorEntity.Z)
             {
                 modifier = "-";
+            }
+            return String.Format("{0}{1:N2}", modifier, Math.Abs(ResolveHeightVarianceDecimal(user, actorEntity)));
+        }
+
+        private decimal ResolveHeightVarianceDecimal(ActorEntity user, ActorEntity actorEntity)
+        {
+            double variance = 0;
+            if (user.Z < actorEntity.Z)
+            {
+                variance = user.Z - actorEntity.Z;
+            }
+            if (user.Z > actorEntity.Z)
+            {
                 variance = actorEntity.Z - user.Z;
             }
-            return String.Format("{0}{1:N2}", modifier, Math.Abs(variance));
+            return (decimal) variance;
         }
     }
 }

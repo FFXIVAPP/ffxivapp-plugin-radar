@@ -115,7 +115,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("MonsterFontSize");
             Constants.Settings.Add("MonsterFontColor");
 
-            Constants.Settings.Add("MonsterShowRankOnly");
+            Constants.Settings.Add("MonsterShowRankColor");
             Constants.Settings.Add("MonsterFontColorBRank");
             Constants.Settings.Add("MonsterFontColorARank");
             Constants.Settings.Add("MonsterFontColorSRank");
@@ -678,20 +678,20 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 
         [UserScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue("True")]
-        public bool MonsterShowRankOnly
+        [DefaultSettingValue("False")]
+        public bool MonsterShowRankColor
         {
-            get { return ((bool) (this["MonsterShowRankOnly"])); }
+            get { return ((bool) (this["MonsterShowRankColor"])); }
             set
             {
-                this["MonsterShowRankOnly"] = value;
+                this["MonsterShowRankColor"] = value;
                 RaisePropertyChanged();
             }
         }
 
         [UserScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue("Red")]
+        [DefaultSettingValue("Plum")]
         public string MonsterFontColorBRank
         {
             get { return ((string) (this["MonsterFontColorBRank"])); }
@@ -704,7 +704,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 
         [UserScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue("Red")]
+        [DefaultSettingValue("Silver")]
         public string MonsterFontColorARank
         {
             get { return ((string) (this["MonsterFontColorARank"])); }
@@ -717,7 +717,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 
         [UserScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue("Red")]
+        [DefaultSettingValue("SkyBlue")]
         public string MonsterFontColorSRank
         {
             get { return ((string) (this["MonsterFontColorSRank"])); }
