@@ -119,10 +119,12 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             {
                 return;
             }
-            var radarFilterItem = new RadarFilterItem
+            var xKey = MainView.View.TKey.Text;
+            if (!SharedRegEx.IsValidRegex(xKey))
             {
-                Key = MainView.View.TKey.Text
-            };
+                return;
+            }
+            var radarFilterItem = new RadarFilterItem(xKey);
             int level;
             if (Int32.TryParse(MainView.View.TLevel.Text, out level))
             {
@@ -148,10 +150,6 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
                 case "Minion":
                     radarFilterItem.Type = Actor.Type.Minion;
                     break;
-            }
-            if (SharedRegEx.IsValidRegex(radarFilterItem.Key))
-            {
-                radarFilterItem.RegEx = new Regex(radarFilterItem.Key, SharedRegEx.DefaultOptions);
             }
             if (String.IsNullOrWhiteSpace(selectedKey))
             {
