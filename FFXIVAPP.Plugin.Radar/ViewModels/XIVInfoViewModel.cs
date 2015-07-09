@@ -59,7 +59,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
                 if (CurrentPCs.Any())
                 {
                     return CurrentPCs.FirstOrDefault()
-                                     .Value;
+                                     .Value.CurrentUser;
                 }
                 return null;
             }
