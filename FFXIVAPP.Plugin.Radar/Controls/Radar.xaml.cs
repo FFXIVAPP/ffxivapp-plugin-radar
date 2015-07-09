@@ -58,7 +58,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         #region Radar Declarations
 
-        private List<RadarFilterItem> RankedFilterItems = new List<RadarFilterItem>();
         public bool IsRendered { get; set; }
 
         #endregion
@@ -92,7 +91,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-
+            
             var bc = new BrushConverter();
 
             var user = XIVInfoViewModel.Instance.CurrentUser;
