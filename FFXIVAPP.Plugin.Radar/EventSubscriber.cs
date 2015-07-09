@@ -27,9 +27,6 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
 
-using System.Collections.ObjectModel;
-using System.Linq;
-using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.IPluginInterface.Events;
 using FFXIVAPP.Plugin.Radar.ViewModels;
 

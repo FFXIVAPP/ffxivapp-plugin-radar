@@ -28,7 +28,7 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -42,9 +42,9 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
         #region Property Bindings
 
         private static XIVInfoViewModel _instance;
-        private IDictionary<UInt32, ActorEntity> _currentMonsters;
-        private IDictionary<uint, ActorEntity> _currentNPCs;
-        private IDictionary<uint, ActorEntity> _currentPCs;
+        private ConcurrentDictionary<UInt32, ActorEntity> _currentMonsters;
+        private ConcurrentDictionary<uint, ActorEntity> _currentNPCs;
+        private ConcurrentDictionary<uint, ActorEntity> _currentPCs;
 
         public static XIVInfoViewModel Instance
         {
@@ -61,9 +61,9 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             }
         }
 
-        public IDictionary<uint, ActorEntity> CurrentNPCs
+        public ConcurrentDictionary<uint, ActorEntity> CurrentNPCs
         {
-            get { return _currentNPCs ?? (_currentNPCs = new Dictionary<uint, ActorEntity>()); }
+            get { return _currentNPCs ?? (_currentNPCs = new ConcurrentDictionary<uint, ActorEntity>()); }
             set
             {
                 _currentNPCs = value;
@@ -71,9 +71,9 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             }
         }
 
-        public IDictionary<UInt32, ActorEntity> CurrentMonsters
+        public ConcurrentDictionary<UInt32, ActorEntity> CurrentMonsters
         {
-            get { return _currentMonsters ?? (_currentMonsters = new Dictionary<uint, ActorEntity>()); }
+            get { return _currentMonsters ?? (_currentMonsters = new ConcurrentDictionary<uint, ActorEntity>()); }
             set
             {
                 _currentMonsters = value;
@@ -81,9 +81,9 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             }
         }
 
-        public IDictionary<uint, ActorEntity> CurrentPCs
+        public ConcurrentDictionary<uint, ActorEntity> CurrentPCs
         {
-            get { return _currentPCs ?? (_currentPCs = new Dictionary<uint, ActorEntity>()); }
+            get { return _currentPCs ?? (_currentPCs = new ConcurrentDictionary<uint, ActorEntity>()); }
             set
             {
                 _currentPCs = value;
