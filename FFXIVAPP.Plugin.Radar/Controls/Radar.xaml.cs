@@ -58,7 +58,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         #region Radar Declarations
 
-        private List<RadarFilterItem> RankedFilterItems = new List<RadarFilterItem>();
         public bool IsRendered { get; set; }
 
         #endregion
@@ -92,11 +91,14 @@ namespace FFXIVAPP.Plugin.Radar.Controls
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-
+            
             var bc = new BrushConverter();
 
             var user = XIVInfoViewModel.Instance.CurrentUser;
-            var fsModifier = 0;
+            if (user == null)
+            {
+                return;
+            }
 
             var origin = new Coordinate
             {
@@ -128,9 +130,12 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             var sb = new StringBuilder();
 
-            var npcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentNPCs.ToList());
-            var monsterEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentMonsters.ToList());
-            var pcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentPCs.ToList());
+            var npcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentNPCs.Select(kvp => kvp.Value)
+                                                                   .ToList());
+            var monsterEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentMonsters.Select(kvp => kvp.Value)
+                                                                       .ToList());
+            var pcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentPCs.Select(kvp => kvp.Value)
+                                                                  .ToList());
 
             if (Settings.Default.FilterRadarItems)
             {
@@ -168,6 +173,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in pcEntites)
                 {
                     sb.Clear();
+                    var fsModifier = 0;
                     drawingContext.PushOpacity(1);
                     try
                     {
@@ -345,7 +351,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in monsterEntites)
                 {
                     sb.Clear();
-
+                    var fsModifier = 0;
                     var fontColor = Settings.Default.MonsterFontColor;
 
                     var RankB = LocaleHelper.GetRankedMonsters("B");
@@ -467,6 +473,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.NPCShow)
                         {
                             sb.Clear();
+                            var fsModifier = 0;
                             drawingContext.PushOpacity(1);
                             try
                             {
@@ -537,6 +544,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.GatheringShow)
                         {
                             sb.Clear();
+                            var fsModifier = 0;
                             drawingContext.PushOpacity(1);
                             try
                             {
@@ -607,6 +615,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (Settings.Default.OtherShow)
                         {
                             sb.Clear();
+                            var fsModifier = 0;
                             drawingContext.PushOpacity(1);
                             try
                             {

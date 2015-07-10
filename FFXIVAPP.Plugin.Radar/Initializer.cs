@@ -29,7 +29,6 @@
 
 using System;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using FFXIVAPP.Common.Core.Memory.Enums;
 using FFXIVAPP.Common.RegularExpressions;
