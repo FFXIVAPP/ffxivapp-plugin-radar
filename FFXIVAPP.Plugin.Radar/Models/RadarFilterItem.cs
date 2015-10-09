@@ -35,12 +35,12 @@ namespace FFXIVAPP.Plugin.Radar.Models
 {
     public class RadarFilterItem
     {
-        public RadarFilterItem()
+        public RadarFilterItem(string key = "INVALID")
         {
-            Key = "INVALID";
+            Key = key;
             Level = 0;
             Type = Actor.Type.Unknown;
-            RegEx = new Regex("\\*INVALID\\*", SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase);
+            RegEx = new Regex(key, SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         }
 
         public string Key { get; set; }

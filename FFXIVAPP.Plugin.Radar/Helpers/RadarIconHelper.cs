@@ -39,6 +39,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
         public static ImageSource Arcanist = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/arcanist.png"));
         public static ImageSource Archer = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/archer.png"));
         public static ImageSource Armorer = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/armorer.png"));
+        public static ImageSource Astrologian = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/astrologian.png"));
         public static ImageSource Bard = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/bard.png"));
         public static ImageSource Blackmage = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/blackmage.png"));
         public static ImageSource Blacksmith = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/blacksmith.png"));
@@ -53,6 +54,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
         public static ImageSource Crystal = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/crystal.png"));
         public static ImageSource Culinarian = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/culinarian.png"));
         public static ImageSource Dragoon = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/dragoon.png"));
+        public static ImageSource DarkKnight = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/darkknight.png"));
         public static ImageSource Dungeon = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/dungeon.png"));
         public static ImageSource Fate = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/fate.png"));
         public static ImageSource Fate2 = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/fate2.png"));
@@ -66,6 +68,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
         public static ImageSource Lancer = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/lancer.png"));
         public static ImageSource Leatherworker = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/leatherworker.png"));
         public static ImageSource Mail = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/mail.png"));
+        public static ImageSource Machinist = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/machinist.png"));
         public static ImageSource Marauder = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/marauder.png"));
         public static ImageSource Merchant = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/merchant.png"));
         public static ImageSource Merchant2 = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/merchant2.png"));

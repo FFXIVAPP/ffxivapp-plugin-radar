@@ -147,7 +147,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_OtherFontSizeHeader", "Размер Шрифта Других");
             Dictionary.Add("radar_OtherFontColorHeader", "Цвет Шрифта Других");
 
-            Dictionary.Add("radar_MonsterShowOnlyRankHeader", "Показывать Только Монстров с Рангом");
+            Dictionary.Add("radar_MonsterShowRankColorHeader", "Показывать Только Монстров с Рангом");
             Dictionary.Add("radar_MonsterShowBRankHeader", "Показывать Монстров (B Rank)");
             Dictionary.Add("radar_MonsterShowARankHeader", "Показывать Монстров (A Rank)");
             Dictionary.Add("radar_MonsterShowSRankHeader", "Показывать Монстров (S Rank)");

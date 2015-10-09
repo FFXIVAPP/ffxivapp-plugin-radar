@@ -54,7 +54,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Skogs Fru",
             "Stinging Sophie",
             "Vuokho",
-            "White Joker"
+            "White Joker",
+            // Heavensward Rank B
+            "Alteci",
+            "Giantopithecus",
+            "Gnath Cometdrone",
+            "Kreutzet",
+            "Lycidas",
+            "Omni",
+            "Pterygotus",
+            "Sanu Vali of Dancing Wings",
+            "Scitalis",
+            "Squonk",
+            "The Scarecrow",
+            "Thextera",
         };
 
         private static readonly List<string> RankA = new List<string>()
@@ -74,8 +87,21 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Maahes",
             "Dalvag's Final Flame",
             "Zanig'oh",
-            "Alectyron",
-            "Kurrea"
+            "Alectryon",
+            "Kurrea",
+            // Heavensward Rank A
+            "Mirka",
+            "Lyuba",
+            "Bune",
+            "Agathos",
+            "Pylraster",
+            "Lord of the Wyverns",
+            "Slipkinx Steeljoints",
+            "Stolas",
+            "Campacti",
+            "Stench Blossom",
+            "Enkelados",
+            "Sisiutl"
         };
 
         private static readonly List<string> RankS = new List<string>()
@@ -96,7 +122,14 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Minhocao",
             "Nunyunuwi",
             "Zona Seeker",
-            "Agrippa the Mighty"
+            "Agrippa the Mighty",
+            // Heavensward Rank S
+            "Kaiser Behemoth",
+            "Gandarewa",
+            "Senmurv",
+            "The Pale Rider",
+            "Leucrotta",
+            "Bird of Paradise",
         };
 
         /// <summary>
@@ -147,7 +180,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_OtherFontSizeHeader", "Other Font Size");
             Dictionary.Add("radar_OtherFontColorHeader", "Other Font Color");
 
-            Dictionary.Add("radar_MonsterShowOnlyRankHeader", "Show Ranked Monester Only");
+            Dictionary.Add("radar_MonsterShowRankColorHeader", "Show Ranked Monsters In Color");
             Dictionary.Add("radar_MonsterShowBRankHeader", "Monster Show (B Rank)");
             Dictionary.Add("radar_MonsterShowARankHeader", "Monster Show (A Rank)");
             Dictionary.Add("radar_MonsterShowSRankHeader", "Monster Show (S Rank)");

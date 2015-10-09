@@ -29,7 +29,6 @@
 
 using System;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using FFXIVAPP.Common.Core.Memory.Enums;
 using FFXIVAPP.Common.RegularExpressions;
@@ -84,6 +83,10 @@ namespace FFXIVAPP.Plugin.Radar
                                                   .Elements("Filter"))
                 {
                     var xKey = (string) xElement.Attribute("Key");
+                    if (!SharedRegEx.IsValidRegex(xKey))
+                    {
+                        continue;
+                    }
                     var xLevel = (string) xElement.Element("Level");
                     var xType = (string) xElement.Element("Type");
                     if (String.IsNullOrWhiteSpace(xKey) || String.IsNullOrWhiteSpace(xType))
@@ -92,16 +95,10 @@ namespace FFXIVAPP.Plugin.Radar
                     }
                     int level;
                     Int32.TryParse(xLevel, out level);
-                    var radarFilterItem = new RadarFilterItem
+                    var radarFilterItem = new RadarFilterItem(xKey)
                     {
-                        Key = xKey,
                         Level = level
                     };
-                    if (!SharedRegEx.IsValidRegex(radarFilterItem.Key))
-                    {
-                        continue;
-                    }
-                    radarFilterItem.RegEx = new Regex(radarFilterItem.Key, SharedRegEx.DefaultOptions);
                     switch (xType)
                     {
                         case "PC":
