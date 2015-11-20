@@ -43,13 +43,6 @@ namespace FFXIVAPP.Plugin.Radar.Windows
     /// </summary>
     public partial class RadarWidget
     {
-        #region Radar Declarations
-
-        private readonly Timer RefreshTimer = new Timer(100);
-        public bool IsRendered { get; set; }
-
-        #endregion
-
         public static RadarWidget View;
 
         public RadarWidget()
@@ -97,5 +90,12 @@ namespace FFXIVAPP.Plugin.Radar.Windows
             e.Cancel = true;
             Hide();
         }
+
+        #region Radar Declarations
+
+        private readonly Timer RefreshTimer = new Timer(100);
+        public bool IsRendered { get; set; }
+
+        #endregion
     }
 }

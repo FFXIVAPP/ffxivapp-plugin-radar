@@ -36,7 +36,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
     {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
 
-        private static readonly List<string> RankB = new List<string>()
+        private static readonly List<string> RankB = new List<string>
         {
             "Albin the Ashen",
             "Barbastelle",
@@ -67,10 +67,10 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Scitalis",
             "Squonk",
             "The Scarecrow",
-            "Thextera",
+            "Thextera"
         };
 
-        private static readonly List<string> RankA = new List<string>()
+        private static readonly List<string> RankA = new List<string>
         {
             "Hellsclaw",
             "Unktehi",
@@ -104,7 +104,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Sisiutl"
         };
 
-        private static readonly List<string> RankS = new List<string>()
+        private static readonly List<string> RankS = new List<string>
         {
             "Garlok",
             "Croakadile",
@@ -129,7 +129,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Senmurv",
             "The Pale Rider",
             "Leucrotta",
-            "Bird of Paradise",
+            "Bird of Paradise"
         };
 
         /// <summary>

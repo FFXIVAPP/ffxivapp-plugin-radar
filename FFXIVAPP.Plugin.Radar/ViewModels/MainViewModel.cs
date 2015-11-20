@@ -46,31 +46,6 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 {
     internal sealed class MainViewModel : INotifyPropertyChanged
     {
-        #region Property Bindings
-
-        private static MainViewModel _instance;
-
-        public static MainViewModel Instance
-        {
-            get { return _instance ?? (_instance = new MainViewModel()); }
-        }
-
-        #endregion
-
-        #region Declarations
-
-        public ICommand AddOrUpdateFilterCommand { get; private set; }
-        public ICommand DeleteFilterCommand { get; private set; }
-        public ICommand FilterSelectionCommand { get; private set; }
-        public ICommand ResetRadarWidgetCommand { get; private set; }
-        public ICommand OpenRadarWidgetCommand { get; private set; }
-
-        #endregion
-
-        #region Loading Functions
-
-        #endregion
-
         public MainViewModel()
         {
             AddOrUpdateFilterCommand = new DelegateCommand(AddOrUpdateFilter);
@@ -93,6 +68,31 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             return property.GetValue(listView.SelectedItem, null)
                            .ToString();
         }
+
+        #endregion
+
+        #region Property Bindings
+
+        private static MainViewModel _instance;
+
+        public static MainViewModel Instance
+        {
+            get { return _instance ?? (_instance = new MainViewModel()); }
+        }
+
+        #endregion
+
+        #region Declarations
+
+        public ICommand AddOrUpdateFilterCommand { get; private set; }
+        public ICommand DeleteFilterCommand { get; private set; }
+        public ICommand FilterSelectionCommand { get; private set; }
+        public ICommand ResetRadarWidgetCommand { get; private set; }
+        public ICommand OpenRadarWidgetCommand { get; private set; }
+
+        #endregion
+
+        #region Loading Functions
 
         #endregion
 

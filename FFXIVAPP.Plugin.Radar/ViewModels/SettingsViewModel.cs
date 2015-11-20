@@ -64,10 +64,6 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 
         #endregion
 
-        public SettingsViewModel()
-        {
-        }
-
         #region Loading Functions
 
         #endregion

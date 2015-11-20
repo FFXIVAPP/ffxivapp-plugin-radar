@@ -38,33 +38,14 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 {
     internal sealed class AboutViewModel : INotifyPropertyChanged
     {
-        #region Property Bindings
-
-        private static AboutViewModel _instance;
-
-        public static AboutViewModel Instance
-        {
-            get { return _instance ?? (_instance = new AboutViewModel()); }
-        }
-
-        #endregion
-
-        #region Declarations
-
-        public DelegateCommand OpenWebSiteCommand { get; private set; }
-
-        #endregion
-
         public AboutViewModel()
         {
             OpenWebSiteCommand = new DelegateCommand(OpenWebSite);
         }
 
-        #region Loading Functions
+        #region Declarations
 
-        #endregion
-
-        #region Utility Functions
+        public DelegateCommand OpenWebSiteCommand { get; private set; }
 
         #endregion
 
@@ -84,6 +65,25 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
                 Plugin.PHost.PopupMessage(Plugin.PName, popupContent);
             }
         }
+
+        #endregion
+
+        #region Property Bindings
+
+        private static AboutViewModel _instance;
+
+        public static AboutViewModel Instance
+        {
+            get { return _instance ?? (_instance = new AboutViewModel()); }
+        }
+
+        #endregion
+
+        #region Loading Functions
+
+        #endregion
+
+        #region Utility Functions
 
         #endregion
 

@@ -36,12 +36,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
     /// </summary>
     public partial class Map
     {
-        #region Map Declarations
-
-        public bool IsRendered { get; set; }
-
-        #endregion
-
         public Map View;
 
         public Map()
@@ -54,6 +48,12 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             }
             IsRendered = true;
         }
+
+        #region Map Declarations
+
+        public bool IsRendered { get; set; }
+
+        #endregion
 
         public void Refresh()
         {

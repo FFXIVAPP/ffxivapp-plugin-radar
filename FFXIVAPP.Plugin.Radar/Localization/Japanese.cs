@@ -36,7 +36,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
     {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
 
-        private static readonly List<string> RankB = new List<string>()
+        private static readonly List<string> RankB = new List<string>
         {
             "死灰のアルビン",
             "バーバステル",
@@ -57,7 +57,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "ホワイトジョーカー"
         };
 
-        private static readonly List<string> RankA = new List<string>()
+        private static readonly List<string> RankA = new List<string>
         {
             "魔導ヘルズクロー",
             "ウンクテヒ",
@@ -78,7 +78,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "クーレア"
         };
 
-        private static readonly List<string> RankS = new List<string>()
+        private static readonly List<string> RankS = new List<string>
         {
             "ガーロック",
             "ケロゲロス",

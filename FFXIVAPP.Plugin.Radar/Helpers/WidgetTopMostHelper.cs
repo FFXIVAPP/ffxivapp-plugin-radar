@@ -45,18 +45,6 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
     {
         private static WinAPI.WinEventDelegate _delegate;
         private static IntPtr _mainHandleHook;
-
-        #region Helpers
-
-        private static WindowInteropHelper _radarWidgetInteropHelper;
-
-        private static WindowInteropHelper RadarWidgetInteropHelper
-        {
-            get { return _radarWidgetInteropHelper ?? (_radarWidgetInteropHelper = new WindowInteropHelper(Widgets.Instance.RadarWidget)); }
-        }
-
-        #endregion
-
         private static Timer SetWindowTimer { get; set; }
 
         public static void HookWidgetTopMost()
@@ -135,5 +123,16 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
                 window.Show();
             }
         }
+
+        #region Helpers
+
+        private static WindowInteropHelper _radarWidgetInteropHelper;
+
+        private static WindowInteropHelper RadarWidgetInteropHelper
+        {
+            get { return _radarWidgetInteropHelper ?? (_radarWidgetInteropHelper = new WindowInteropHelper(Widgets.Instance.RadarWidget)); }
+        }
+
+        #endregion
     }
 }

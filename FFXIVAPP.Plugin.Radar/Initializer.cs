@@ -40,10 +40,6 @@ namespace FFXIVAPP.Plugin.Radar
 {
     internal static class Initializer
     {
-        #region Declarations
-
-        #endregion
-
         /// <summary>
         /// </summary>
         public static void LoadSettings()
@@ -129,5 +125,9 @@ namespace FFXIVAPP.Plugin.Radar
         {
             WidgetTopMostHelper.HookWidgetTopMost();
         }
+
+        #region Declarations
+
+        #endregion
     }
 }

@@ -38,7 +38,6 @@ using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Core.Memory.Enums;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Helpers;
-using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.ViewModels;
 using NLog;
@@ -56,20 +55,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         #endregion
 
-        #region Radar Declarations
-
-        public bool IsRendered { get; set; }
-
-        #endregion
-
-        #region DrawContext Declaratoins
-
-        private CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
-        private FlowDirection _flowDirection = FlowDirection.LeftToRight;
-        private Typeface _typeface = new Typeface("Verdana");
-
-        #endregion
-
         public Radar View;
 
         public Radar()
@@ -83,6 +68,12 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             IsRendered = true;
         }
 
+        #region Radar Declarations
+
+        public bool IsRendered { get; set; }
+
+        #endregion
+
         public void Refresh()
         {
             InvalidateVisual();
@@ -91,7 +82,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            
+
             var bc = new BrushConverter();
 
             var user = XIVInfoViewModel.Instance.CurrentUser;
@@ -726,5 +717,13 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             }
             return (decimal) variance;
         }
+
+        #region DrawContext Declaratoins
+
+        private CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
+        private FlowDirection _flowDirection = FlowDirection.LeftToRight;
+        private Typeface _typeface = new Typeface("Verdana");
+
+        #endregion
     }
 }
