@@ -28,8 +28,8 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System.Text.RegularExpressions;
-using FFXIVAPP.Common.Core.Memory.Enums;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Memory.Core.Enums;
 
 namespace FFXIVAPP.Plugin.Radar.Models
 {

@@ -28,7 +28,7 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System.Collections.Generic;
-using FFXIVAPP.Common.Core.Memory;
+using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Radar.Models;
 
 namespace FFXIVAPP.Plugin.Radar.Helpers

@@ -30,8 +30,8 @@
 using System;
 using System.Globalization;
 using System.Xml.Linq;
-using FFXIVAPP.Common.Core.Memory.Enums;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Radar.Helpers;
 using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;

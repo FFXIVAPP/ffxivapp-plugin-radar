@@ -28,7 +28,7 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
-using FFXIVAPP.Common.Core.Memory;
+using FFXIVAPP.Memory.Core;
 
 namespace FFXIVAPP.Plugin.Radar.Utilities
 {

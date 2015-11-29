@@ -33,7 +33,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Timers;
-using FFXIVAPP.Common.Core.Memory;
+using FFXIVAPP.Memory.Core;
 
 namespace FFXIVAPP.Plugin.Radar.ViewModels
 {
