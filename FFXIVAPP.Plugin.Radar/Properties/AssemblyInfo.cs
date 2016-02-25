@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Radar ~ AssemblyInfo.cs
 // 
-// Copyright © 2007 - 2015 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SyndicatedLife")]
 [assembly: AssemblyProduct("FFXIVAPP.Plugin.Radar")]
-[assembly: AssemblyCopyright("Copyright © 2007 - 2015 Ryan Wilson")]
+[assembly: AssemblyCopyright("Copyright © 2007 - 2016 Ryan Wilson")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
