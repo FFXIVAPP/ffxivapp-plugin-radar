@@ -42,7 +42,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Skogs Fru",
             "Sophie La Dardante",
             "Vuokho",
-            "Joker Blanc"
+            "Joker Blanc",
+            // Heavensward Rank B
+            "Altek",
+            "Gigantopithèque",
+            "Gnathe Myrmicomète",
+            "Kreutzet",
+            "Lycidas",
+            "Omni",
+            "Pterygotus",
+            "Sanu Vali",
+            "Scitalis",
+            "Squonk",
+            "Dracosaure Primus",
+            "Texta"
         };
 
         private static readonly List<string> RankA = new List<string>
@@ -63,7 +76,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Dernière Flamme De Dalvag",
             "Zanig'oh",
             "Alectryon",
-            "Kurrea"
+            "Kurrea",
+            // Heavensward Rank A
+            "Mirka",
+            "Lyuba",
+            "Bune",
+            "Agathos",
+            "Pirlasta",
+            "Seigneur Des Wyvernes",
+            "Slipkinx Joints-d'acier",
+            "Stolas",
+            "Campacti",
+            "Fleur Nauséabonde",
+            "Enkélados",
+            "Sisiutl"
         };
 
         private static readonly List<string> RankS = new List<string>
@@ -84,7 +110,14 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Minhocao",
             "Nunyunuwi",
             "Zona Seeker",
-            "Agrippa the Mighty"
+            "Agrippa the Mighty",
+            // Heavensward Rank S
+            "Béhémoth Empereur",
+            "Gandharva",
+            "Sênmurw",
+            "Cavalier Pâle",
+            "Leucrotta",
+            "Oiseau De Paradis"
         };
 
         /// <summary>
