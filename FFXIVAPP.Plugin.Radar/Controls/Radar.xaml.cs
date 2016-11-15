@@ -108,7 +108,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             }
 
             var sb = new StringBuilder();
-
+            
             var npcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentNPCs.Select(kvp => kvp.Value)
                                                                    .ToList());
             var monsterEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentMonsters.Select(kvp => kvp.Value)
@@ -136,13 +136,15 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
                 }
-
+                
                 var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC)
                                                .ToList();
                 if (pcFilters.Any())
                 {
                     pcEntites = RadarFilterHelper.ResolveFilteredEntities(pcFilters, pcEntites);
                 }
+
+                monsterEntites = RadarFilterHelper.CleanupEntities(monsterEntites);
             }
 
             #region Resolve PCs

@@ -28,8 +28,8 @@ namespace FFXIVAPP.Plugin.Radar.Localization
         {
             "Abwasser-Sirup",
             "Albin Aschfahl",
-            "Barbastelle",
-            "Bloody Marey",
+            "Barbasteile",
+            "Bloody Mary",
             "Dalvag",
             "Dunkelhelm",
             "Egelkönig",
@@ -39,10 +39,23 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Naul",
             "Ovjang",
             "Phecda",
-            "Skogs Fu",
-            "Stinkig Sophie",
+            "Skogs Fru",
+            "Stinkige Sophie",
             "Vuokho",
-            "Weiß Joker"
+            "Weißer Joker",
+            // Heavensward Rank B
+            "Artic",
+            "Gigantopithecus",
+            "Gnath-Kometdrohne",
+            "Kreutzet",
+            "Lykidas",
+            "Omni",
+            "Pterygotus",
+            "Sanu Vali die Tanzende Schwinge",
+            "Scitalis",
+            "Squonk",
+            "Tyranno",
+            "Dexter"
         };
 
         private static readonly List<string> RankA = new List<string>
@@ -63,7 +76,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Schmelze",
             "Unktehi",
             "Vogaal Ja",
-            "Zanig'oh"
+            "Zanig'oh",
+            // Heavensward Rank A
+            "Mirka",
+            "Lyuba",
+            "Bune",
+            "Agathos",
+            "Xhauron",
+            "Wyvern-Lord",
+            "Rutschfix Stahlscharnier",
+            "Stolas",
+            "Campacti",
+            "Pestwurz",
+            "Engedoras",
+            "Sisiutl"
         };
 
         private static readonly List<string> RankS = new List<string>
@@ -85,7 +111,14 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Tausendzahn Theda",
             "Wulgaru",
             "Laideronette",
-            "Zona Sucher"
+            "Zona Sucher",
+            // Heavensward Rank S
+            "Kaiser-Behemoth",
+            "Gandalva",
+            "Simurgh",
+            "Bleich Reiter",
+            "Leucrotta",
+            "Paradiesvogel"
         };
 
         /// <summary>

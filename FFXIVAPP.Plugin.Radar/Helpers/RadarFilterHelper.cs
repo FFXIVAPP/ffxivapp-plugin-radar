@@ -38,5 +38,21 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
             }
             return filtered;
         }
+
+        public static List<ActorEntity> CleanupEntities(IEnumerable<ActorEntity> entities)
+        {
+            var filtered = new List<ActorEntity>();
+            foreach (var actorEntity in entities)
+            {
+                bool correctMap = ViewModels.XIVInfoViewModel.Instance.CurrentUser.MapIndex == actorEntity.MapIndex;
+                bool isDead = actorEntity.ActionStatus != Memory.Core.Enums.Actor.ActionStatus.Dead;
+
+                if (isDead && correctMap)
+                {
+                    filtered.Add(actorEntity);
+                }
+            }
+            return filtered;
+        }
     }
 }
