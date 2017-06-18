@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Radar ~ Plugin.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@ using FFXIVAPP.Common.Events;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.IPluginInterface;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Radar.Helpers;
 using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
@@ -34,7 +33,7 @@ using NLog;
 
 namespace FFXIVAPP.Plugin.Radar
 {
-    [Export(typeof (IPlugin))]
+    [Export(typeof(IPlugin))]
     public class Plugin : IPlugin, INotifyPropertyChanged
     {
         private IPluginHost _host;
@@ -90,7 +89,7 @@ namespace FFXIVAPP.Plugin.Radar
                     PluginViewModel.Instance.RankedFilters.Add(new RadarFilterItem(rankedMonster)
                     {
                         Level = 0,
-                        Type = Actor.Type.Monster
+                        Type = "Monster"
                     });
                 }
                 RaisePropertyChanged();

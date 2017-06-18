@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Radar ~ Radar.xaml.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -108,7 +108,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             }
 
             var sb = new StringBuilder();
-            
+
             var npcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentNPCs.Select(kvp => kvp.Value)
                                                                    .ToList());
             var monsterEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentMonsters.Select(kvp => kvp.Value)
@@ -118,14 +118,14 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             if (Settings.Default.FilterRadarItems)
             {
-                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != Actor.Type.PC && filter.Type != Actor.Type.Monster)
+                var npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != "PC" && filter.Type != "Monster")
                                                 .ToList();
                 if (npcFilters.Any())
                 {
                     npcEntites = RadarFilterHelper.ResolveFilteredEntities(npcFilters, npcEntites);
                 }
 
-                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.Monster)
+                var monsterFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == "Monster")
                                                     .ToList();
                 if (PluginViewModel.Instance.RankedFilters.Any())
                 {
@@ -136,8 +136,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 {
                     monsterEntites = RadarFilterHelper.ResolveFilteredEntities(monsterFilters, monsterEntites);
                 }
-                
-                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == Actor.Type.PC)
+
+                var pcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type == "PC")
                                                .ToList();
                 if (pcFilters.Any())
                 {
@@ -200,104 +200,104 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                             switch (actorEntity.Job)
                             {
-                                case Actor.Job.ACN:
+                                case "ACN":
                                     drawingContext.DrawImage(RadarIconHelper.Arcanist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.ALC:
+                                case "ALC":
                                     drawingContext.DrawImage(RadarIconHelper.Alchemist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.ARC:
+                                case "ARC":
                                     drawingContext.DrawImage(RadarIconHelper.Archer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.ARM:
+                                case "ARM":
                                     drawingContext.DrawImage(RadarIconHelper.Armorer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.AST:
+                                case "AST":
                                     drawingContext.DrawImage(RadarIconHelper.Astrologian, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.BLM:
+                                case "BLM":
                                     drawingContext.DrawImage(RadarIconHelper.Blackmage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.BRD:
+                                case "BRD":
                                     drawingContext.DrawImage(RadarIconHelper.Bard, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.BSM:
+                                case "BSM":
                                     drawingContext.DrawImage(RadarIconHelper.Blacksmith, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.BTN:
+                                case "BTN":
                                     drawingContext.DrawImage(RadarIconHelper.Botanist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.CNJ:
+                                case "CNJ":
                                     drawingContext.DrawImage(RadarIconHelper.Conjurer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.CPT:
+                                case "CPT":
                                     drawingContext.DrawImage(RadarIconHelper.Carpenter, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.CUL:
+                                case "CUL":
                                     drawingContext.DrawImage(RadarIconHelper.Culinarian, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.DRG:
+                                case "DRG":
                                     drawingContext.DrawImage(RadarIconHelper.Dragoon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.DRK:
+                                case "DRK":
                                     drawingContext.DrawImage(RadarIconHelper.DarkKnight, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.FSH:
+                                case "FSH":
                                     drawingContext.DrawImage(RadarIconHelper.Fisher, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.GLD:
+                                case "GLD":
                                     drawingContext.DrawImage(RadarIconHelper.Gladiator, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.GSM:
+                                case "GSM":
                                     drawingContext.DrawImage(RadarIconHelper.Goldsmith, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.LNC:
+                                case "LNC":
                                     drawingContext.DrawImage(RadarIconHelper.Leatherworker, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.LTW:
+                                case "LTW":
                                     drawingContext.DrawImage(RadarIconHelper.Leatherworker, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.MCH:
+                                case "MCH":
                                     drawingContext.DrawImage(RadarIconHelper.Machinist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.MIN:
+                                case "MIN":
                                     drawingContext.DrawImage(RadarIconHelper.Miner, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.MNK:
+                                case "MNK":
                                     drawingContext.DrawImage(RadarIconHelper.Monk, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.MRD:
+                                case "MRD":
                                     drawingContext.DrawImage(RadarIconHelper.Marauder, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.NIN:
+                                case "NIN":
                                     drawingContext.DrawImage(RadarIconHelper.Ninja, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.PGL:
+                                case "PGL":
                                     drawingContext.DrawImage(RadarIconHelper.Pugilist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.PLD:
+                                case "PLD":
                                     drawingContext.DrawImage(RadarIconHelper.Paladin, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.ROG:
+                                case "ROG":
                                     drawingContext.DrawImage(RadarIconHelper.Rogue, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.SCH:
+                                case "SCH":
                                     drawingContext.DrawImage(RadarIconHelper.Scholar, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.Unknown:
+                                case "Unknown":
                                     if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
                                     {
                                         drawingContext.DrawImage(RadarIconHelper.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     }
                                     useJob = false;
                                     break;
-                                case Actor.Job.WAR:
+                                case "WAR":
                                     drawingContext.DrawImage(RadarIconHelper.Warrior, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.WHM:
+                                case "WHM":
                                     drawingContext.DrawImage(RadarIconHelper.Whitemage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
-                                case Actor.Job.WVR:
+                                case "WVR":
                                     drawingContext.DrawImage(RadarIconHelper.Weaver, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                             }
@@ -447,7 +447,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             {
                 switch (actorEntity.Type)
                 {
-                    case Actor.Type.NPC:
+                    case "NPC":
 
                         #region Resolve NPCs
 
@@ -518,7 +518,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         #endregion
 
                         break;
-                    case Actor.Type.Gathering:
+                    case "Gathering":
 
                         #region Resolve Gathering
 
@@ -625,17 +625,17 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 ImageSource actorIcon;
                                 switch (actorEntity.Type)
                                 {
-                                    case Actor.Type.Aetheryte:
+                                    case "Aetheryte":
                                         actorIcon = RadarIconHelper.Crystal;
                                         break;
-                                    case Actor.Type.Minion:
+                                    case "Minion":
                                         actorIcon = RadarIconHelper.Sheep;
                                         break;
                                     default:
                                         actorIcon = RadarIconHelper.NPC;
                                         break;
                                 }
-                                if (actorEntity.HPCurrent > 0 || actorEntity.Type == Actor.Type.Aetheryte)
+                                if (actorEntity.HPCurrent > 0 || actorEntity.Type == "Aetheryte")
                                 {
                                     if (actorIcon != null)
                                     {

@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Radar ~ RadarFilterItem.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.RegularExpressions;
-using FFXIVAPP.Memory.Core.Enums;
 
 namespace FFXIVAPP.Plugin.Radar.Models
 {
@@ -27,13 +26,13 @@ namespace FFXIVAPP.Plugin.Radar.Models
         {
             Key = key;
             Level = 0;
-            Type = Actor.Type.Unknown;
+            Type = "Unknown";
             RegEx = new Regex(key, SharedRegEx.DefaultOptions | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         }
 
         public string Key { get; set; }
         public int Level { get; set; }
-        public Actor.Type Type { get; set; }
+        public string Type { get; set; }
         public Regex RegEx { get; set; }
     }
 }

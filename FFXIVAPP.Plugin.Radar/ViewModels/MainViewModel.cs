@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Radar ~ MainViewModel.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@ using System.Windows.Input;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Common.ViewModelBase;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.Views;
@@ -117,27 +116,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             {
                 radarFilterItem.Level = level;
             }
-            switch (MainView.View.TType.Text)
-            {
-                case "PC":
-                    radarFilterItem.Type = Actor.Type.PC;
-                    break;
-                case "Monster":
-                    radarFilterItem.Type = Actor.Type.Monster;
-                    break;
-                case "NPC":
-                    radarFilterItem.Type = Actor.Type.NPC;
-                    break;
-                case "Aetheryte":
-                    radarFilterItem.Type = Actor.Type.Aetheryte;
-                    break;
-                case "Gathering":
-                    radarFilterItem.Type = Actor.Type.Gathering;
-                    break;
-                case "Minion":
-                    radarFilterItem.Type = Actor.Type.Minion;
-                    break;
-            }
+            radarFilterItem.Type = MainView.View.TType.Text;
             if (String.IsNullOrWhiteSpace(selectedKey))
             {
                 PluginViewModel.Instance.Filters.Add(radarFilterItem);
@@ -190,11 +169,16 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 
         public void ResetRadarWidget()
         {
-            Settings.Default.RadarWidgetUIScale = Settings.Default.Properties["RadarWidgetUIScale"].DefaultValue.ToString();
-            Settings.Default.RadarWidgetTop = Int32.Parse(Settings.Default.Properties["RadarWidgetTop"].DefaultValue.ToString());
-            Settings.Default.RadarWidgetLeft = Int32.Parse(Settings.Default.Properties["RadarWidgetLeft"].DefaultValue.ToString());
-            Settings.Default.RadarWidgetHeight = Int32.Parse(Settings.Default.Properties["RadarWidgetHeight"].DefaultValue.ToString());
-            Settings.Default.RadarWidgetWidth = Int32.Parse(Settings.Default.Properties["RadarWidgetWidth"].DefaultValue.ToString());
+            Settings.Default.RadarWidgetUIScale = Settings.Default.Properties["RadarWidgetUIScale"]
+                                                          .DefaultValue.ToString();
+            Settings.Default.RadarWidgetTop = Int32.Parse(Settings.Default.Properties["RadarWidgetTop"]
+                                                                  .DefaultValue.ToString());
+            Settings.Default.RadarWidgetLeft = Int32.Parse(Settings.Default.Properties["RadarWidgetLeft"]
+                                                                   .DefaultValue.ToString());
+            Settings.Default.RadarWidgetHeight = Int32.Parse(Settings.Default.Properties["RadarWidgetHeight"]
+                                                                     .DefaultValue.ToString());
+            Settings.Default.RadarWidgetWidth = Int32.Parse(Settings.Default.Properties["RadarWidgetWidth"]
+                                                                    .DefaultValue.ToString());
         }
 
         public void OpenRadarWidget()

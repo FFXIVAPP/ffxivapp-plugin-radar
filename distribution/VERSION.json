@@ -1,21 +1,21 @@
 ﻿{
-    "PluginInfo": {
-        "Name": "FFXIVAPP.Plugin.Radar",
-        "Version": "3.0.6134.35660",
-        "Files": [
-            {
-                "Name": "FFXIVAPP.Plugin.Radar.dll",
-                "Location": ""
-            },
-            {
-                "Name": "Logo.png",
-                "Location": ""
-            },
-            {
-                "Name": "PluginInfo.xml",
-                "Location": ""
-            }
-        ],
-		"SourceURI": "https://github.com/Icehunter/ffxivapp-plugin-radar/raw/master/distribution/"
-    }
+  "PluginInfo": {
+    "Name": "FFXIVAPP.Plugin.Radar",
+    "Version": "3.0.6377.38479",
+    "Files": [
+      {
+        "Name": "FFXIVAPP.Plugin.Radar.dll",
+        "Location": ""
+      },
+      {
+        "Name": "Logo.png",
+        "Location": ""
+      },
+      {
+        "Name": "PluginInfo.xml",
+        "Location": ""
+      }
+    ],
+    "SourceURI": "https://github.com/Icehunter/ffxivapp-plugin-radar/raw/master/distribution/"
+  }
 }
