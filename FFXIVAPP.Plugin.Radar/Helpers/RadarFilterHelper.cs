@@ -45,7 +45,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
             foreach (var actorEntity in entities)
             {
                 bool correctMap = ViewModels.XIVInfoViewModel.Instance.CurrentUser.MapIndex == actorEntity.MapIndex;
-                bool isDead = actorEntity.ActionStatus != Memory.Core.Enums.Actor.ActionStatus.Dead;
+                bool isDead = actorEntity.ActionStatus != "Dead";
 
                 if (isDead && correctMap)
                 {
