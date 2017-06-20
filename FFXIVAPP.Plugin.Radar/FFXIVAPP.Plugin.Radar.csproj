@@ -184,6 +184,8 @@
     <Resource Include="Media\RadarIcons\astrologian.png" />
     <Resource Include="Media\RadarIcons\darkknight.png" />
     <Resource Include="Media\RadarIcons\machinist.png" />
+    <Resource Include="Media\RadarIcons\samurai.png" />
+    <Resource Include="Media\RadarIcons\redmage.png" />
     <Content Include="PluginInfo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

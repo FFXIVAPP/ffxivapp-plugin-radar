@@ -71,7 +71,9 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
         public static ImageSource Player = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/player.png"));
         public static ImageSource Pugilist = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/pugilist.png"));
         public static ImageSource RadarHeading = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/radar_heading.png"));
+        public static ImageSource RedMage = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/redmage.png"));
         public static ImageSource Rogue = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/rogue.png"));
+        public static ImageSource Samurai = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/samurai.png"));
         public static ImageSource Scholar = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/scholar.png"));
         public static ImageSource Sheep = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/sheep.png"));
         public static ImageSource SilverChest = new BitmapImage(new Uri(Constants.LibraryPack + "/Media/RadarIcons/silver_chest.png"));

@@ -278,8 +278,14 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 case Actor.Job.PLD:
                                     drawingContext.DrawImage(RadarIconHelper.Paladin, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
+                                case Actor.Job.RDM:
+                                    drawingContext.DrawImage(RadarIconHelper.RedMage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    break;
                                 case Actor.Job.ROG:
                                     drawingContext.DrawImage(RadarIconHelper.Rogue, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    break;
+                                case Actor.Job.SAM:
+                                    drawingContext.DrawImage(RadarIconHelper.Samurai, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                                 case Actor.Job.SCH:
                                     drawingContext.DrawImage(RadarIconHelper.Scholar, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
