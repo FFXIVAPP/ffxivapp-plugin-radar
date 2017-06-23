@@ -625,7 +625,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 {
                                     screen = user.Coordinate.Subtract(actorEntity.Coordinate)
                                                  .Rotate2D(user.Heading)
-                                                 .Scale(scale);
+                                                 .Scale(scale)
+                                                 .Add(origin);
                                 }
                                 screen = screen.Add(-8, -8, 0);
                                 ImageSource actorIcon;
