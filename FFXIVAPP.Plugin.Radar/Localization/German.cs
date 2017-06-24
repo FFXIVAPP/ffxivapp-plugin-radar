@@ -55,7 +55,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Scitalis",
             "Squonk",
             "Tyranno",
-            "Dexter"
+            "Dexter",
+            // Stormblood Rank B
+            "Aswang",
+            "Buccaboo",
+            "Deidar",
+            "Gauki Starkklinge",
+            "Guhuo Niao",
+            "Gwas-y-neidr",
+            "Gyorai Schnellschlag",
+            "Kiwa",
+            "Kurma",
+            "Manes",
+            "Ouzelum",
+            "Schattenkauer-Yamini"
         };
 
         private static readonly List<string> RankA = new List<string>
@@ -89,7 +102,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Campacti",
             "Pestwurz",
             "Engedoras",
-            "Sisiutl"
+            "Sisiutl",
+            // Stormblood Rank A
+            "Angada",
+            "Aqrabuamelu",
+            "Erle",
+            "Funa Yurei",
+            "Gajasura",
+            "Girimekhala",
+            "Luminare",
+            "Mahisha",
+            "Oni Yumemi",
+            "Orcus",
+            "Sum",
+            "Vochstein"
         };
 
         private static readonly List<string> RankS = new List<string>
@@ -118,7 +144,12 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Simurgh",
             "Bleich Reiter",
             "Leucrotta",
-            "Paradiesvogel"
+            "Paradiesvogel",
+            // Stormblood Rank S
+            "Gamma",
+            "Okina",
+            "Orghana",
+            "Salzlicht"
         };
 
         /// <summary>
