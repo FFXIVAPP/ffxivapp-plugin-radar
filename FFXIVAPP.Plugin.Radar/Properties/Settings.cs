@@ -959,7 +959,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             {
                 var xKey = filter.Key;
                 var xLevel = filter.Level.ToString();
-                var xType = filter.Type.ToString();
+                var xType = filter.Type;
                 var keyPairList = new List<XValuePair>
                 {
                     new XValuePair

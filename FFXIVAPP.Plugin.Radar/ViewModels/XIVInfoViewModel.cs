@@ -57,18 +57,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             set { _instance = value; }
         }
 
-        public ActorEntity CurrentUser
-        {
-            get
-            {
-                if (CurrentPCs.Any())
-                {
-                    return CurrentPCs.FirstOrDefault()
-                                     .Value.CurrentUser;
-                }
-                return null;
-            }
-        }
+        public ActorEntity CurrentUser => ActorEntity.CurrentUser;
 
         public ConcurrentDictionary<uint, ActorEntity> CurrentNPCs
         {
