@@ -42,7 +42,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "スコッグ・フリュー",
             "スティンギング・ソフィー",
             "ヴオコー",
-            "ホワイトジョーカー"
+            "ホワイトジョーカー",
+            // Stormblood Rank B
+            "アスワング",
+            "ブッカブー",
+            "デイダラ",
+            "剣豪ガウキ",
+            "姑獲鳥",
+            "グアス・ア・ニードル",
+            "雷撃のギョライ",
+            "キワ",
+            "クールマ",
+            "マネス",
+            "オゼルム",
+            "宵闇のヤミニ"
         };
 
         private static readonly List<string> RankA = new List<string>
@@ -63,7 +76,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "ファイナルフレイム",
             "ザニゴ",
             "アレクトリオン",
-            "クーレア"
+            "クーレア",
+            // Stormblood Rank A
+            "アンガダ",
+            "アクラブアメル",
+            "アール",
+            "船幽霊",
+            "ガジャースラ",
+            "ギリメカラ",
+            "ルミナーレ",
+            "マヒシャ",
+            "オニユメミ",
+            "オルクス",
+            "ソム",
+            "バックスタイン"
         };
 
         private static readonly List<string> RankS = new List<string>
@@ -84,7 +110,12 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "ミニョーカオン",
             "ヌニュヌウィ",
             "ゾーナ・シーカー",
-            "アグリッパ"
+            "アグリッパ",
+            // Stormblood Rank S
+            "ガンマ",
+            "オキナ",
+            "オルガナ",
+            "ソルト・アンド・ライト"
         };
 
         /// <summary>

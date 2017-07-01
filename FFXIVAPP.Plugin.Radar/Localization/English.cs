@@ -45,7 +45,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "White Joker",
             // Heavensward Rank B
             "Alteci",
-            "Gigantopithecus",
+            "False Gigantopithecus",
             "Gnath Cometdrone",
             "Kreutzet",
             "Lycidas",
@@ -55,7 +55,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Scitalis",
             "Squonk",
             "The Scarecrow",
-            "Thextera"
+            "Thextera",
+            // Stormblood Rank B
+            "Aswang",
+            "Buccaboo",
+            "Deidar",
+            "Gauki Strongblade",
+            "Guhuo Niao",
+            "Gwas-y-neidr",
+            "Gyorai Quickstrike",
+            "Kiwa",
+            "Kurma",
+            "Manes",
+            "Ouzelum",
+            "Shadow-dweller Yamini"
         };
 
         private static readonly List<string> RankA = new List<string>
@@ -89,7 +102,20 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Campacti",
             "Stench Blossom",
             "Enkelados",
-            "Sisiutl"
+            "Sisiutl",
+            // Stormblood Rank A
+            "Angada",
+            "Aqrabuamelu",
+            "Erle",
+            "Funa Yurei",
+            "Gajasura",
+            "Girimekhala",
+            "Luminare",
+            "Mahisha",
+            "Oni Yumemi",
+            "Orcus",
+            "Sum",
+            "Vochstein"
         };
 
         private static readonly List<string> RankS = new List<string>
@@ -97,7 +123,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Garlok",
             "Croakadile",
             "Croque-Mitaine",
-            "Mahisha",
+            "Chernobog",
             "Nandi",
             "Bonnacon",
             "Laideronnette",
@@ -117,7 +143,12 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Senmurv",
             "The Pale Rider",
             "Leucrotta",
-            "Bird of Paradise"
+            "Bird of Paradise",
+            // Stormblood Rank S
+            "Gamma",
+            "Okina",
+            "Orghana",
+            "Salt and Light"
         };
 
         /// <summary>
