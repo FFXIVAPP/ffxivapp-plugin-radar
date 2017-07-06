@@ -39,11 +39,17 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 {
     internal class Settings : ApplicationSettingsBase, INotifyPropertyChanged
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static Settings _default;
 
         public static Settings Default
         {
-            get { return _default ?? (_default = ((Settings) (Synchronized(new Settings())))); }
+            get { return _default ?? (_default = (Settings) Synchronized(new Settings())); }
         }
 
         public override void Save()
@@ -183,7 +189,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             }
             catch (Exception ex)
             {
-                Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             RaisePropertyChanged(key);
         }
@@ -195,7 +201,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("0.7")]
         public string WidgetOpacity
         {
-            get { return ((string) (this["WidgetOpacity"])); }
+            get { return (string) this["WidgetOpacity"]; }
             set
             {
                 this["WidgetOpacity"] = value;
@@ -205,8 +211,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.5</string>
   <string>0.6</string>
   <string>0.7</string>
@@ -216,7 +222,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 </ArrayOfString>")]
         public StringCollection WidgetOpacityList
         {
-            get { return ((StringCollection) (this["WidgetOpacityList"])); }
+            get { return (StringCollection) this["WidgetOpacityList"]; }
             set
             {
                 this["WidgetOpacityList"] = value;
@@ -229,7 +235,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool WidgetClickThroughEnabled
         {
-            get { return ((bool) (this["WidgetClickThroughEnabled"])); }
+            get { return (bool) this["WidgetClickThroughEnabled"]; }
             set
             {
                 this["WidgetClickThroughEnabled"] = value;
@@ -242,7 +248,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool ShowTitleOnWidgets
         {
-            get { return ((bool) (this["ShowTitleOnWidgets"])); }
+            get { return (bool) this["ShowTitleOnWidgets"]; }
             set
             {
                 this["ShowTitleOnWidgets"] = value;
@@ -255,7 +261,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool RadarCompassMode
         {
-            get { return ((bool) (this["RadarCompassMode"])); }
+            get { return (bool) this["RadarCompassMode"]; }
             set
             {
                 this["RadarCompassMode"] = value;
@@ -268,7 +274,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool FilterRadarItems
         {
-            get { return ((bool) (this["FilterRadarItems"])); }
+            get { return (bool) this["FilterRadarItems"]; }
             set
             {
                 this["FilterRadarItems"] = value;
@@ -278,8 +284,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>8</string>
   <string>9</string>
   <string>10</string>
@@ -300,7 +306,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 </ArrayOfString>")]
         public StringCollection FontSizeList
         {
-            get { return ((StringCollection) (this["FontSizeList"])); }
+            get { return (StringCollection) this["FontSizeList"]; }
             set
             {
                 this["FontSizeList"] = value;
@@ -315,7 +321,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("600")]
         public int RadarWidgetWidth
         {
-            get { return ((int) (this["RadarWidgetWidth"])); }
+            get { return (int) this["RadarWidgetWidth"]; }
             set
             {
                 this["RadarWidgetWidth"] = value;
@@ -328,7 +334,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("600")]
         public int RadarWidgetHeight
         {
-            get { return ((int) (this["RadarWidgetHeight"])); }
+            get { return (int) this["RadarWidgetHeight"]; }
             set
             {
                 this["RadarWidgetHeight"] = value;
@@ -341,7 +347,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool ShowRadarWidgetOnLoad
         {
-            get { return ((bool) (this["ShowRadarWidgetOnLoad"])); }
+            get { return (bool) this["ShowRadarWidgetOnLoad"]; }
             set
             {
                 this["ShowRadarWidgetOnLoad"] = value;
@@ -354,7 +360,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("100")]
         public int RadarWidgetTop
         {
-            get { return ((int) (this["RadarWidgetTop"])); }
+            get { return (int) this["RadarWidgetTop"]; }
             set
             {
                 this["RadarWidgetTop"] = value;
@@ -367,7 +373,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("100")]
         public int RadarWidgetLeft
         {
-            get { return ((int) (this["RadarWidgetLeft"])); }
+            get { return (int) this["RadarWidgetLeft"]; }
             set
             {
                 this["RadarWidgetLeft"] = value;
@@ -380,7 +386,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("1.0")]
         public string RadarWidgetUIScale
         {
-            get { return ((string) (this["RadarWidgetUIScale"])); }
+            get { return (string) this["RadarWidgetUIScale"]; }
             set
             {
                 this["RadarWidgetUIScale"] = value;
@@ -390,8 +396,8 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.8</string>
   <string>0.9</string>
   <string>1.0</string>
@@ -403,7 +409,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
 </ArrayOfString>")]
         public StringCollection RadarWidgetUIScaleList
         {
-            get { return ((StringCollection) (this["RadarWidgetUIScaleList"])); }
+            get { return (StringCollection) this["RadarWidgetUIScaleList"]; }
         }
 
         #endregion
@@ -415,7 +421,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool PCShow
         {
-            get { return ((bool) (this["PCShow"])); }
+            get { return (bool) this["PCShow"]; }
             set
             {
                 this["PCShow"] = value;
@@ -428,7 +434,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool PCShowName
         {
-            get { return ((bool) (this["PCShowName"])); }
+            get { return (bool) this["PCShowName"]; }
             set
             {
                 this["PCShowName"] = value;
@@ -441,7 +447,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool PCShowHPPercent
         {
-            get { return ((bool) (this["PCShowHPPercent"])); }
+            get { return (bool) this["PCShowHPPercent"]; }
             set
             {
                 this["PCShowHPPercent"] = value;
@@ -454,7 +460,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool PCShowJob
         {
-            get { return ((bool) (this["PCShowJob"])); }
+            get { return (bool) this["PCShowJob"]; }
             set
             {
                 this["PCShowJob"] = value;
@@ -467,7 +473,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool PCShowDistance
         {
-            get { return ((bool) (this["PCShowDistance"])); }
+            get { return (bool) this["PCShowDistance"]; }
             set
             {
                 this["PCShowDistance"] = value;
@@ -480,7 +486,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("12")]
         public string PCFontSize
         {
-            get { return ((string) (this["PCFontSize"])); }
+            get { return (string) this["PCFontSize"]; }
             set
             {
                 this["PCFontSize"] = value;
@@ -493,7 +499,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("White")]
         public string PCFontColor
         {
-            get { return ((string) (this["PCFontColor"])); }
+            get { return (string) this["PCFontColor"]; }
             set
             {
                 this["PCFontColor"] = value;
@@ -510,7 +516,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool NPCShow
         {
-            get { return ((bool) (this["NPCShow"])); }
+            get { return (bool) this["NPCShow"]; }
             set
             {
                 this["NPCShow"] = value;
@@ -523,7 +529,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool NPCShowName
         {
-            get { return ((bool) (this["NPCShowName"])); }
+            get { return (bool) this["NPCShowName"]; }
             set
             {
                 this["NPCShowName"] = value;
@@ -536,7 +542,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool NPCShowHPPercent
         {
-            get { return ((bool) (this["NPCShowHPPercent"])); }
+            get { return (bool) this["NPCShowHPPercent"]; }
             set
             {
                 this["NPCShowHPPercent"] = value;
@@ -549,7 +555,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool NPCShowDistance
         {
-            get { return ((bool) (this["NPCShowDistance"])); }
+            get { return (bool) this["NPCShowDistance"]; }
             set
             {
                 this["NPCShowDistance"] = value;
@@ -562,7 +568,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("12")]
         public string NPCFontSize
         {
-            get { return ((string) (this["NPCFontSize"])); }
+            get { return (string) this["NPCFontSize"]; }
             set
             {
                 this["NPCFontSize"] = value;
@@ -575,7 +581,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("LimeGreen")]
         public string NPCFontColor
         {
-            get { return ((string) (this["NPCFontColor"])); }
+            get { return (string) this["NPCFontColor"]; }
             set
             {
                 this["NPCFontColor"] = value;
@@ -592,7 +598,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool MonsterShow
         {
-            get { return ((bool) (this["MonsterShow"])); }
+            get { return (bool) this["MonsterShow"]; }
             set
             {
                 this["MonsterShow"] = value;
@@ -605,7 +611,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool MonsterShowName
         {
-            get { return ((bool) (this["MonsterShowName"])); }
+            get { return (bool) this["MonsterShowName"]; }
             set
             {
                 this["MonsterShowName"] = value;
@@ -618,7 +624,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool MonsterShowHPPercent
         {
-            get { return ((bool) (this["MonsterShowHPPercent"])); }
+            get { return (bool) this["MonsterShowHPPercent"]; }
             set
             {
                 this["MonsterShowHPPercent"] = value;
@@ -631,7 +637,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool MonsterShowDistance
         {
-            get { return ((bool) (this["MonsterShowDistance"])); }
+            get { return (bool) this["MonsterShowDistance"]; }
             set
             {
                 this["MonsterShowDistance"] = value;
@@ -644,7 +650,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("12")]
         public string MonsterFontSize
         {
-            get { return ((string) (this["MonsterFontSize"])); }
+            get { return (string) this["MonsterFontSize"]; }
             set
             {
                 this["MonsterFontSize"] = value;
@@ -657,7 +663,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("Red")]
         public string MonsterFontColor
         {
-            get { return ((string) (this["MonsterFontColor"])); }
+            get { return (string) this["MonsterFontColor"]; }
             set
             {
                 this["MonsterFontColor"] = value;
@@ -670,7 +676,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool MonsterShowRankColor
         {
-            get { return ((bool) (this["MonsterShowRankColor"])); }
+            get { return (bool) this["MonsterShowRankColor"]; }
             set
             {
                 this["MonsterShowRankColor"] = value;
@@ -683,7 +689,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("Plum")]
         public string MonsterFontColorBRank
         {
-            get { return ((string) (this["MonsterFontColorBRank"])); }
+            get { return (string) this["MonsterFontColorBRank"]; }
             set
             {
                 this["MonsterFontColorBRank"] = value;
@@ -696,7 +702,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("Silver")]
         public string MonsterFontColorARank
         {
-            get { return ((string) (this["MonsterFontColorARank"])); }
+            get { return (string) this["MonsterFontColorARank"]; }
             set
             {
                 this["MonsterFontColorARank"] = value;
@@ -709,7 +715,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("SkyBlue")]
         public string MonsterFontColorSRank
         {
-            get { return ((string) (this["MonsterFontColorSRank"])); }
+            get { return (string) this["MonsterFontColorSRank"]; }
             set
             {
                 this["MonsterFontColorSRank"] = value;
@@ -726,7 +732,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool GatheringShow
         {
-            get { return ((bool) (this["GatheringShow"])); }
+            get { return (bool) this["GatheringShow"]; }
             set
             {
                 this["GatheringShow"] = value;
@@ -739,7 +745,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool GatheringShowName
         {
-            get { return ((bool) (this["GatheringShowName"])); }
+            get { return (bool) this["GatheringShowName"]; }
             set
             {
                 this["GatheringShowName"] = value;
@@ -752,7 +758,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool GatheringShowHPPercent
         {
-            get { return ((bool) (this["GatheringShowHPPercent"])); }
+            get { return (bool) this["GatheringShowHPPercent"]; }
             set
             {
                 this["GatheringShowHPPercent"] = value;
@@ -765,7 +771,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool GatheringShowDistance
         {
-            get { return ((bool) (this["GatheringShowDistance"])); }
+            get { return (bool) this["GatheringShowDistance"]; }
             set
             {
                 this["GatheringShowDistance"] = value;
@@ -778,7 +784,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("12")]
         public string GatheringFontSize
         {
-            get { return ((string) (this["GatheringFontSize"])); }
+            get { return (string) this["GatheringFontSize"]; }
             set
             {
                 this["GatheringFontSize"] = value;
@@ -791,7 +797,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("Orange")]
         public string GatheringFontColor
         {
-            get { return ((string) (this["GatheringFontColor"])); }
+            get { return (string) this["GatheringFontColor"]; }
             set
             {
                 this["GatheringFontColor"] = value;
@@ -808,7 +814,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool OtherShow
         {
-            get { return ((bool) (this["OtherShow"])); }
+            get { return (bool) this["OtherShow"]; }
             set
             {
                 this["OtherShow"] = value;
@@ -821,7 +827,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("True")]
         public bool OtherShowName
         {
-            get { return ((bool) (this["OtherShowName"])); }
+            get { return (bool) this["OtherShowName"]; }
             set
             {
                 this["OtherShowName"] = value;
@@ -834,7 +840,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool OtherShowHPPercent
         {
-            get { return ((bool) (this["OtherShowHPPercent"])); }
+            get { return (bool) this["OtherShowHPPercent"]; }
             set
             {
                 this["OtherShowHPPercent"] = value;
@@ -847,7 +853,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("False")]
         public bool OtherShowDistance
         {
-            get { return ((bool) (this["OtherShowDistance"])); }
+            get { return (bool) this["OtherShowDistance"]; }
             set
             {
                 this["OtherShowDistance"] = value;
@@ -860,7 +866,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("12")]
         public string OtherFontSize
         {
-            get { return ((string) (this["OtherFontSize"])); }
+            get { return (string) this["OtherFontSize"]; }
             set
             {
                 this["OtherFontSize"] = value;
@@ -873,7 +879,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
         [DefaultSettingValue("Yellow")]
         public string OtherFontColor
         {
-            get { return ((string) (this["OtherFontColor"])); }
+            get { return (string) this["OtherFontColor"]; }
             set
             {
                 this["OtherFontColor"] = value;

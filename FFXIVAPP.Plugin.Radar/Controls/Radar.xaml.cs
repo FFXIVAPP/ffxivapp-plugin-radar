@@ -22,6 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Memory.Core.Enums;
@@ -85,7 +86,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 Y = (float) (ActualHeight / 2)
             };
 
-            var scale = ((float) (ActualHeight / 2.0f) / 125.0f);
+            var scale = (float) (ActualHeight / 2.0f) / 125.0f;
             var angle = Math.Abs(user.Heading * (180 / Math.PI) - 180);
 
             if (Settings.Default.RadarCompassMode)
@@ -323,7 +324,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                     }
                     catch (Exception ex)
                     {
-                        Logging.Log(Logger, ex.Message);
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     drawingContext.Pop();
                 }
@@ -439,7 +440,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                     }
                     catch (Exception ex)
                     {
-                        Logging.Log(Logger, ex.Message);
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     drawingContext.Pop();
                 }
@@ -516,7 +517,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                             }
                             catch (Exception ex)
                             {
-                                Logging.Log(Logger, ex.Message);
+                                Logging.Log(Logger, new LogItem(ex, true));
                             }
                             drawingContext.Pop();
                         }
@@ -587,7 +588,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                             }
                             catch (Exception ex)
                             {
-                                Logging.Log(Logger, ex.Message);
+                                Logging.Log(Logger, new LogItem(ex, true));
                             }
                             drawingContext.Pop();
                         }
@@ -673,7 +674,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                             }
                             catch (Exception ex)
                             {
-                                Logging.Log(Logger, ex.Message);
+                                Logging.Log(Logger, new LogItem(ex, true));
                             }
                             drawingContext.Pop();
                         }
@@ -689,7 +690,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
         private string ResolveHeightVariance(ActorEntity user, ActorEntity actorEntity)
         {
-            var modifier = "";
+            var modifier = string.Empty;
             if (user.Z < actorEntity.Z)
             {
                 modifier = "+";
@@ -698,7 +699,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
             {
                 modifier = "-";
             }
-            return String.Format("{0}{1:N2}", modifier, Math.Abs(ResolveHeightVarianceDecimal(user, actorEntity)));
+            return $"{modifier}{Math.Abs(ResolveHeightVarianceDecimal(user, actorEntity)):N2}";
         }
 
         private decimal ResolveHeightVarianceDecimal(ActorEntity user, ActorEntity actorEntity)

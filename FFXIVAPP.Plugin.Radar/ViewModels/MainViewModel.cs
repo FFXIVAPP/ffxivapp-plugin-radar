@@ -21,6 +21,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Common.ViewModelBase;
@@ -33,6 +34,12 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 {
     internal sealed class MainViewModel : INotifyPropertyChanged
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public MainViewModel()
         {
             AddOrUpdateFilterCommand = new DelegateCommand(AddOrUpdateFilter);
@@ -89,7 +96,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
         /// </summary>
         private static void AddOrUpdateFilter()
         {
-            var selectedKey = "";
+            var selectedKey = string.Empty;
             try
             {
                 if (MainView.View.Filters.SelectedItems.Count == 1)
@@ -99,9 +106,9 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             }
             catch (Exception ex)
             {
-                Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
+                Logging.Log(Logger, new LogItem(ex, true));
             }
-            if (MainView.View.TKey.Text.Trim() == "" || MainView.View.TLevel.Text.Trim() == "")
+            if (MainView.View.TKey.Text.Trim() == string.Empty || MainView.View.TLevel.Text.Trim() == string.Empty)
             {
                 return;
             }
@@ -128,7 +135,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
                 PluginViewModel.Instance.Filters[index] = radarFilterItem;
             }
             MainView.View.Filters.UnselectAll();
-            MainView.View.TKey.Text = "";
+            MainView.View.TKey.Text = string.Empty;
         }
 
         /// <summary>
@@ -142,7 +149,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
             }
             catch (Exception ex)
             {
-                Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
+                Logging.Log(Logger, new LogItem(ex, true));
                 return;
             }
             var index = PluginViewModel.Instance.Filters.TakeWhile(@event => @event.Key.ToString() != selectedKey)

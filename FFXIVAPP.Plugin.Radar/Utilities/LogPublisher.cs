@@ -16,12 +16,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Radar.Utilities
 {
     public static class LogPublisher
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public static void Process(ChatLogEntry chatLogEntry)
         {
             try
@@ -29,6 +38,7 @@ namespace FFXIVAPP.Plugin.Radar.Utilities
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 

@@ -53,7 +53,7 @@ namespace FFXIVAPP.Plugin.Radar
                         Settings.Default.RadarWidgetWidth = (int) (600 * Double.Parse(Settings.Default.RadarWidgetUIScale));
                         Settings.Default.RadarWidgetHeight = (int) (600 * Double.Parse(Settings.Default.RadarWidgetUIScale));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         Settings.Default.RadarWidgetWidth = 600;
                         Settings.Default.RadarWidgetHeight = 600;

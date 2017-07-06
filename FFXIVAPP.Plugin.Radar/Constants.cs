@@ -77,7 +77,7 @@ namespace FFXIVAPP.Plugin.Radar
                         _xSettings = found ? XDocument.Load(legacyFile) : ResourceHelper.XDocResource(LibraryPack + "/Defaults/Settings.xml");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     _xSettings = ResourceHelper.XDocResource(LibraryPack + "/Defaults/Settings.xml");
                 }
@@ -106,7 +106,7 @@ namespace FFXIVAPP.Plugin.Radar
                     var found = File.Exists(file);
                     _xFilters = found ? XDocument.Load(file) : ResourceHelper.XDocResource(LibraryPack + "/Defaults/Filters.xml");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     _xFilters = ResourceHelper.XDocResource(LibraryPack + "/Defaults/Filters.xml");
                 }

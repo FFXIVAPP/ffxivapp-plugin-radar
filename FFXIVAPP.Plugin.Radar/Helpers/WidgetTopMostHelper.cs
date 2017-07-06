@@ -23,14 +23,23 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Interop;
 using FFXIVAPP.Plugin.Radar.Properties;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Radar.Helpers
 {
     public static class WidgetTopMostHelper
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static WinAPI.WinEventDelegate _delegate;
         private static IntPtr _mainHandleHook;
         private static Timer SetWindowTimer { get; set; }
@@ -42,8 +51,9 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
                 _delegate = BringWidgetsIntoFocus;
                 _mainHandleHook = WinAPI.SetWinEventHook(WinAPI.EVENT_SYSTEM_FOREGROUND, WinAPI.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, _delegate, 0, 0, WinAPI.WINEVENT_OUTOFCONTEXT);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             SetWindowTimer = new Timer(1000);
             SetWindowTimer.Elapsed += SetWindowTimerOnElapsed;
@@ -82,6 +92,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 

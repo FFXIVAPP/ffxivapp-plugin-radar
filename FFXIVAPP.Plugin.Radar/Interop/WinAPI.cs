@@ -20,7 +20,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Interop;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Properties;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Radar.Interop
 {
@@ -29,9 +32,15 @@ namespace FFXIVAPP.Plugin.Radar.Interop
         public delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
 
         private const int WS_EX_TRANSPARENT = 0x00000020;
-        private const int GWL_EXSTYLE = (-20);
+        private const int GWL_EXSTYLE = -20;
         public const uint WINEVENT_OUTOFCONTEXT = 0;
         public const uint EVENT_SYSTEM_FOREGROUND = 3;
+
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hwnd, int index);
@@ -54,7 +63,7 @@ namespace FFXIVAPP.Plugin.Radar.Interop
             var handle = IntPtr.Zero;
             var Buff = new StringBuilder(nChars);
             handle = GetForegroundWindow();
-            return GetWindowText(handle, Buff, nChars) > 0 ? Buff.ToString() : "";
+            return GetWindowText(handle, Buff, nChars) > 0 ? Buff.ToString() : string.Empty;
         }
 
         private static void SetWindowTransparent(IntPtr hwnd)
@@ -86,6 +95,7 @@ namespace FFXIVAPP.Plugin.Radar.Interop
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
     }

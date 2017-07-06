@@ -16,12 +16,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Windows;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Radar
 {
     public class Widgets
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static Widgets _instance;
         private RadarWidget _radarWidget;
 
@@ -45,6 +54,7 @@ namespace FFXIVAPP.Plugin.Radar
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
     }

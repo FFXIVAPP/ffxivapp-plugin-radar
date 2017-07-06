@@ -34,10 +34,10 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
         {
             get
             {
-                return (typeof(Brushes).GetProperties(BindingFlags.Public | BindingFlags.Static)
-                                       .Where(propInfo => propInfo.PropertyType == typeof(SolidColorBrush))
-                                       .Select(propInfo => propInfo.Name)
-                                       .ToList());
+                return typeof(Brushes).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                                      .Where(propInfo => propInfo.PropertyType == typeof(SolidColorBrush))
+                                      .Select(propInfo => propInfo.Name)
+                                      .ToList();
             }
         }
 
