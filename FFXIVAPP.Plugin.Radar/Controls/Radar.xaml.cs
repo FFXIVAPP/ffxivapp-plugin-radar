@@ -572,7 +572,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                     sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                                 }
                                 var actorIcon = RadarIconHelper.Wood;
-                                if (actorEntity.HPCurrent > 0)
+                                if (actorEntity.GatheringInvisible == 0)
                                 {
                                     drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
