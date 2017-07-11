@@ -56,6 +56,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Sharlayan, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\ffxivapp-aio\packages\Sharlayan.3.0.0\lib\NET461\Sharlayan.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
@@ -249,10 +252,6 @@
     <ProjectReference Include="..\..\ffxivapp-iplugininterface\FFXIVAPP.IPluginInterface\FFXIVAPP.IPluginInterface.csproj">
       <Project>{56e3fd21-17c4-4306-ba2c-adaf6aaea330}</Project>
       <Name>FFXIVAPP.IPluginInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ffxivapp-memory\FFXIVAPP.Memory\FFXIVAPP.Memory.csproj">
-      <Project>{9510d5ef-208a-4897-a582-8eae5c6e9406}</Project>
-      <Name>FFXIVAPP.Memory</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,8 +18,8 @@
 using System;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
 using NLog;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Radar.Utilities
 {

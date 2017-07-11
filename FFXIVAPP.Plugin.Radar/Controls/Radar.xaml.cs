@@ -24,12 +24,12 @@ using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Radar.Helpers;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.ViewModels;
 using NLog;
+using Sharlayan.Core;
+using Sharlayan.Core.Enums;
 
 namespace FFXIVAPP.Plugin.Radar.Controls
 {

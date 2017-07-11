@@ -16,10 +16,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using FFXIVAPP.Memory.Core;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.ViewModels;
+using Sharlayan.Core;
+using Sharlayan.Core.Enums;
 
 namespace FFXIVAPP.Plugin.Radar.Helpers
 {
