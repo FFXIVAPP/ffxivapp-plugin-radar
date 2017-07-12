@@ -45,15 +45,14 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 
         #region Property Bindings
 
-        private static XIVInfoViewModel _instance;
+        private static Lazy<XIVInfoViewModel> _instance = new Lazy<XIVInfoViewModel>(() => new XIVInfoViewModel());
         private ConcurrentDictionary<UInt32, ActorEntity> _currentMonsters;
         private ConcurrentDictionary<uint, ActorEntity> _currentNPCs;
         private ConcurrentDictionary<uint, ActorEntity> _currentPCs;
 
         public static XIVInfoViewModel Instance
         {
-            get { return _instance ?? (_instance = new XIVInfoViewModel()); }
-            set { _instance = value; }
+            get { return _instance.Value; }
         }
 
         public ActorEntity CurrentUser => ActorEntity.CurrentUser;

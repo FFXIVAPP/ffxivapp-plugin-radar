@@ -58,11 +58,11 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels
 
         #region Property Bindings
 
-        private static AboutViewModel _instance;
+        private static Lazy<AboutViewModel> _instance = new Lazy<AboutViewModel>(() => new AboutViewModel());
 
         public static AboutViewModel Instance
         {
-            get { return _instance ?? (_instance = new AboutViewModel()); }
+            get { return _instance.Value; }
         }
 
         #endregion

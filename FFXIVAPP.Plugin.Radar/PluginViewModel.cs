@@ -39,7 +39,7 @@ namespace FFXIVAPP.Plugin.Radar
 
         #region Property Bindings
 
-        private static PluginViewModel _instance;
+        private static Lazy<PluginViewModel> _instance = new Lazy<PluginViewModel>(() => new PluginViewModel());
         public List<RadarFilterItem> RankedFilters = new List<RadarFilterItem>();
         private bool _enableHelpLabels;
         private ObservableCollection<RadarFilterItem> _filters;
@@ -47,7 +47,7 @@ namespace FFXIVAPP.Plugin.Radar
 
         public static PluginViewModel Instance
         {
-            get { return _instance ?? (_instance = new PluginViewModel()); }
+            get { return _instance.Value; }
         }
 
         public Dictionary<string, string> Locale
