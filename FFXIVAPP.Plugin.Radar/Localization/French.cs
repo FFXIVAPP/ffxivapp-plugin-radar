@@ -146,9 +146,11 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Oiseau De Paradis",
             // Stormblood Rank S
             "Gamma",
+            "Mangeur D'os",
             "Okina",
             "Orghana",
-            "Salaclux"
+            "Salaclux",
+            "Udumbara"
         };
 
         /// <summary>

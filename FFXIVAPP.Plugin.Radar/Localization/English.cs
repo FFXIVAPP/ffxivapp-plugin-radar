@@ -145,10 +145,12 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Leucrotta",
             "Bird of Paradise",
             // Stormblood Rank S
+            "Bone Crawler",
             "Gamma",
             "Okina",
             "Orghana",
-            "Salt and Light"
+            "Salt and Light",
+            "Udumbara"
         };
 
         /// <summary>
