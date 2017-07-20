@@ -115,7 +115,9 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "ガンマ",
             "オキナ",
             "オルガナ",
-            "ソルト・アンド・ライト"
+            "ソルト・アンド・ライト",
+            "ボーンクローラー",
+            "ウドンゲ"
         };
 
         /// <summary>

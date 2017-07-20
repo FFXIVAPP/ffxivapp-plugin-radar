@@ -147,9 +147,11 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Paradiesvogel",
             // Stormblood Rank S
             "Gamma",
+            "Knochenkriecher",
             "Okina",
             "Orghana",
-            "Salzlicht"
+            "Salzlicht",
+            "Udumbara"
         };
 
         /// <summary>
