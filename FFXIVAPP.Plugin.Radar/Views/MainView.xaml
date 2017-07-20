@@ -6,6 +6,7 @@
              xmlns:Radar="clr-namespace:FFXIVAPP.Plugin.Radar"
              xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Radar.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:utilities="clr-namespace:FFXIVAPP.Common.Utilities;assembly=FFXIVAPP.Common"
              d:DesignHeight="300"
@@ -14,50 +15,38 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <x:Static x:Key="MainViewModel"
-                      Member="ViewModels:MainViewModel.Instance" />
-            <x:Static x:Key="PluginViewModel"
-                      Member="Radar:PluginViewModel.Instance" />
-            <x:Static x:Key="Settings"
-                      Member="Properties:Settings.Default" />
+            <x:Static x:Key="MainViewModel" Member="ViewModels:MainViewModel.Instance" />
+            <x:Static x:Key="PluginViewModel" Member="Radar:PluginViewModel.Instance" />
+            <x:Static x:Key="Settings" Member="Properties:Settings.Default" />
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot"
-          DataContext="{StaticResource MainViewModel}">
+    <Grid x:Name="LayoutRoot" DataContext="{StaticResource MainViewModel}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="{Binding ElementName=OpenRadarWidgetGroupBox,
-                                            Path=Height}" />
-            <RowDefinition Height="{Binding ElementName=FilterOptionsGroupBox,
-                                            Path=Height}" />
+            <RowDefinition Height="{Binding ElementName=OpenRadarWidgetGroupBox, Path=Height}" />
+            <RowDefinition Height="{Binding ElementName=FilterOptionsGroupBox, Path=Height}" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="33" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <GroupBox x:Name="OpenRadarWidgetGroupBox"
                   Grid.Row="0"
-                  Header="{Binding Locale[radar_RadarWidgetHeader],
-                                   Source={StaticResource PluginViewModel}}">
+                  Header="{Binding Locale[radar_RadarWidgetHeader], Source={StaticResource PluginViewModel}}">
             <StackPanel>
                 <DockPanel LastChildFill="True">
                     <Button Margin="3"
-                            Command="{Binding ResetRadarWidgetCommand,
-                                              Source={StaticResource MainViewModel}}"
-                            Content="{Binding Locale[radar_ResetPositionButtonText],
-                                              Source={StaticResource PluginViewModel}}"
+                            Command="{Binding ResetRadarWidgetCommand, Source={StaticResource MainViewModel}}"
+                            Content="{Binding Locale[radar_ResetPositionButtonText], Source={StaticResource PluginViewModel}}"
                             DockPanel.Dock="Right" />
                     <Button Margin="3"
-                            Command="{Binding OpenRadarWidgetCommand,
-                                              Source={StaticResource MainViewModel}}"
-                            Content="{Binding Locale[radar_OpenNowButtonText],
-                                              Source={StaticResource PluginViewModel}}" />
+                            Command="{Binding OpenRadarWidgetCommand, Source={StaticResource MainViewModel}}"
+                            Content="{Binding Locale[radar_OpenNowButtonText], Source={StaticResource PluginViewModel}}" />
                 </DockPanel>
             </StackPanel>
         </GroupBox>
         <GroupBox x:Name="FilterOptionsGroupBox"
                   Grid.Row="1"
                   Margin="3"
-                  Header="{Binding Locale[radar_FilterOptionsHeader],
-                                   Source={StaticResource PluginViewModel}}">
+                  Header="{Binding Locale[radar_FilterOptionsHeader], Source={StaticResource PluginViewModel}}">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -66,22 +55,16 @@
                     <DockPanel Grid.Row="0"
                                Margin="3"
                                LastChildFill="True">
-                        <TextBlock Padding="5"
-                                   Text="{Binding Locale[radar_KeyLabel],
-                                                  Source={StaticResource PluginViewModel}}" />
+                        <TextBlock Padding="5" Text="{Binding Locale[radar_KeyLabel], Source={StaticResource PluginViewModel}}" />
                         <TextBox x:Name="TKey"
                                  Width="150"
                                  Text="Mandragora" />
-                        <TextBlock Padding="5"
-                                   Text="{Binding Locale[radar_LevelLabel],
-                                                  Source={StaticResource PluginViewModel}}" />
+                        <TextBlock Padding="5" Text="{Binding Locale[radar_LevelLabel], Source={StaticResource PluginViewModel}}" />
                         <TextBox x:Name="TLevel"
                                  Width="40"
                                  HorizontalContentAlignment="Center"
                                  Text="0" />
-                        <TextBlock Padding="5"
-                                   Text="{Binding Locale[radar_TypeLabel],
-                                                  Source={StaticResource PluginViewModel}}" />
+                        <TextBlock Padding="5" Text="{Binding Locale[radar_TypeLabel], Source={StaticResource PluginViewModel}}" />
                         <ComboBox x:Name="TType">
                             <ComboBoxItem>Unknown</ComboBoxItem>
                             <ComboBoxItem>PC</ComboBoxItem>
@@ -100,44 +83,38 @@
         <DataGrid x:Name="Filters"
                   Grid.Row="2"
                   Margin="3"
+                  utilities:SelectionBehavior.SelectionChanged="{Binding FilterSelectionCommand}"
                   AutoGenerateColumns="False"
                   BorderBrush="{DynamicResource AccentColorBrush}"
                   BorderThickness="1"
                   CanUserAddRows="False"
-                  ItemsSource="{Binding Filters,
-                                        Source={StaticResource PluginViewModel}}"
-                  SelectionMode="Single"
-                  utilities:SelectionBehavior.SelectionChanged="{Binding FilterSelectionCommand}">
+                  ItemsSource="{Binding Filters, Source={StaticResource PluginViewModel}}"
+                  SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Key}"
-                                    Header="{Binding Locale[radar_KeyLabel],
-                                                     Source={StaticResource PluginViewModel}}"
-                                    IsReadOnly="True"
-                                    utilities:GridViewSort.PropertyName="Key" />
-                <DataGridTextColumn Binding="{Binding Type}"
-                                    Header="{Binding Locale[radar_TypeLabel],
-                                                     Source={StaticResource PluginViewModel}}"
-                                    IsReadOnly="True"
-                                    utilities:GridViewSort.PropertyName="Type" />
-                <DataGridTextColumn Binding="{Binding Level}"
-                                    Header="{Binding Locale[radar_LevelLabel],
-                                                     Source={StaticResource PluginViewModel}}"
-                                    IsReadOnly="True"
-                                    utilities:GridViewSort.PropertyName="Level" />
+                <DataGridTextColumn utilities:GridViewSort.PropertyName="Key"
+                                    Binding="{Binding Key}"
+                                    Header="{Binding Locale[radar_KeyLabel], Source={StaticResource PluginViewModel}}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn utilities:GridViewSort.PropertyName="Type"
+                                    Binding="{Binding Type}"
+                                    Header="{Binding Locale[radar_TypeLabel], Source={StaticResource PluginViewModel}}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn utilities:GridViewSort.PropertyName="Level"
+                                    Binding="{Binding Level}"
+                                    Header="{Binding Locale[radar_LevelLabel], Source={StaticResource PluginViewModel}}"
+                                    IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel Grid.Row="3"
                    Margin="3"
                    LastChildFill="True">
-            <Button Width="27"
-                    Margin="3 0 0 0"
+            <Button Width="35"
+                    Margin="3,0,0,0"
                     Command="{Binding DeleteFilterCommand}"
-                    Content="{Binding Locale[radar_DeleteFilterButton],
-                                      Source={StaticResource PluginViewModel}}" />
-            <Button Margin="3 0 0 0"
+                    Content="{iconPacks:PackIconFontAwesome Kind=Times}" />
+            <Button Margin="3,0,0,0"
                     Command="{Binding AddOrUpdateFilterCommand}"
-                    Content="{Binding Locale[radar_AddorUpdateFilterButton],
-                                      Source={StaticResource PluginViewModel}}" />
+                    Content="{Binding Locale[radar_AddorUpdateFilterButton], Source={StaticResource PluginViewModel}}" />
         </DockPanel>
     </Grid>
 </UserControl>

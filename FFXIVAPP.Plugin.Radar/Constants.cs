@@ -22,6 +22,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 
 namespace FFXIVAPP.Plugin.Radar
 {
@@ -35,7 +36,7 @@ namespace FFXIVAPP.Plugin.Radar
         {
             "ja", "fr", "en", "de", "ru"
         };
-
+        
         public static string BaseDirectory
         {
             get
@@ -45,6 +46,8 @@ namespace FFXIVAPP.Plugin.Radar
                 return Path.Combine(appDirectory, "Plugins", Plugin.PName);
             }
         }
+
+        public static Dictionary<string, List<GatheringNode>> GatheringNodes = new Dictionary<string, List<GatheringNode>>();
 
         #endregion
 

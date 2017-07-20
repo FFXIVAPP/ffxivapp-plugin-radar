@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,9 +25,12 @@ using System.Windows;
 using System.Windows.Media;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
+using FFXIVAPP.Plugin.Radar.Enums;
 using FFXIVAPP.Plugin.Radar.Helpers;
+using FFXIVAPP.Plugin.Radar.Models;
 using FFXIVAPP.Plugin.Radar.Properties;
 using FFXIVAPP.Plugin.Radar.ViewModels;
+using FFXIVAPP.ResourceFiles;
 using NLog;
 using Sharlayan.Core;
 using Sharlayan.Core.Enums;
@@ -100,12 +104,13 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         CenterY = origin.Y
                     }
                 };
-                drawingGroup.Children.Add(new ImageDrawing(RadarIconHelper.RadarHeading, new Rect(origin.X - 64, origin.Y - 128, 128, 128)));
+                drawingGroup.Children.Add(new ImageDrawing(Game.RadarHeading, new Rect(origin.X - 64, origin.Y - 128, 128, 128)));
+                drawingGroup.Children.Add(new ImageDrawing(Game.Player, new Rect(origin.X - 8, origin.Y - 21, 16, 21)));
                 drawingContext.DrawDrawing(drawingGroup);
             }
             else
             {
-                drawingContext.DrawImage(RadarIconHelper.RadarHeading, new Rect(new Point(origin.X - 64, origin.Y - 128), new Size(128, 128)));
+                drawingContext.DrawImage(Game.RadarHeading, new Rect(new Point(origin.X - 64, origin.Y - 128), new Size(128, 128)));
             }
 
             var sb = new StringBuilder();
@@ -201,111 +206,15 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
                             switch (actorEntity.Job)
                             {
-                                case Actor.Job.ACN:
-                                    drawingContext.DrawImage(RadarIconHelper.Arcanist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.ALC:
-                                    drawingContext.DrawImage(RadarIconHelper.Alchemist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.ARC:
-                                    drawingContext.DrawImage(RadarIconHelper.Archer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.ARM:
-                                    drawingContext.DrawImage(RadarIconHelper.Armorer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.AST:
-                                    drawingContext.DrawImage(RadarIconHelper.Astrologian, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.BLM:
-                                    drawingContext.DrawImage(RadarIconHelper.Blackmage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.BRD:
-                                    drawingContext.DrawImage(RadarIconHelper.Bard, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.BSM:
-                                    drawingContext.DrawImage(RadarIconHelper.Blacksmith, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.BTN:
-                                    drawingContext.DrawImage(RadarIconHelper.Botanist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.CNJ:
-                                    drawingContext.DrawImage(RadarIconHelper.Conjurer, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.CPT:
-                                    drawingContext.DrawImage(RadarIconHelper.Carpenter, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.CUL:
-                                    drawingContext.DrawImage(RadarIconHelper.Culinarian, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.DRG:
-                                    drawingContext.DrawImage(RadarIconHelper.Dragoon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.DRK:
-                                    drawingContext.DrawImage(RadarIconHelper.DarkKnight, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.FSH:
-                                    drawingContext.DrawImage(RadarIconHelper.Fisher, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.GLD:
-                                    drawingContext.DrawImage(RadarIconHelper.Gladiator, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.GSM:
-                                    drawingContext.DrawImage(RadarIconHelper.Goldsmith, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.LNC:
-                                    drawingContext.DrawImage(RadarIconHelper.Leatherworker, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.LTW:
-                                    drawingContext.DrawImage(RadarIconHelper.Leatherworker, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.MCH:
-                                    drawingContext.DrawImage(RadarIconHelper.Machinist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.MIN:
-                                    drawingContext.DrawImage(RadarIconHelper.Miner, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.MNK:
-                                    drawingContext.DrawImage(RadarIconHelper.Monk, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.MRD:
-                                    drawingContext.DrawImage(RadarIconHelper.Marauder, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.NIN:
-                                    drawingContext.DrawImage(RadarIconHelper.Ninja, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.PGL:
-                                    drawingContext.DrawImage(RadarIconHelper.Pugilist, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.PLD:
-                                    drawingContext.DrawImage(RadarIconHelper.Paladin, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.RDM:
-                                    drawingContext.DrawImage(RadarIconHelper.RedMage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.ROG:
-                                    drawingContext.DrawImage(RadarIconHelper.Rogue, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.SAM:
-                                    drawingContext.DrawImage(RadarIconHelper.Samurai, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.SCH:
-                                    drawingContext.DrawImage(RadarIconHelper.Scholar, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
                                 case Actor.Job.Unknown:
                                     if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
                                     {
-                                        drawingContext.DrawImage(RadarIconHelper.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                        drawingContext.DrawImage(Game.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     }
                                     useJob = false;
                                     break;
-                                case Actor.Job.WAR:
-                                    drawingContext.DrawImage(RadarIconHelper.Warrior, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.WHM:
-                                    drawingContext.DrawImage(RadarIconHelper.Whitemage, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                    break;
-                                case Actor.Job.WVR:
-                                    drawingContext.DrawImage(RadarIconHelper.Weaver, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                default:
+                                    drawingContext.DrawImage(Game.GetIconByName(actorEntity.Job.ToString()), new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                             }
 
@@ -313,7 +222,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         if (!useJob)
                         {
-                            var imageSource = actorEntity.HPCurrent > 0 ? RadarIconHelper.Player : RadarIconHelper.Skull;
+                            var imageSource = actorEntity.HPCurrent > 0 ? Game.Player : Game.Unknown;
                             drawingContext.DrawImage(imageSource, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                         }
                         if (Settings.Default.PCShowName || Settings.Default.PCShowHPPercent)
@@ -396,16 +305,28 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         switch (actorEntity.IsFate)
                         {
                             case true:
-                                actorIcon = RadarIconHelper.Fate;
+                                actorIcon = Game.MobFate;
                                 break;
                             case false:
                                 if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
                                 {
-                                    actorIcon = RadarIconHelper.ChocoboPersonal;
+                                    actorIcon = Game.Chocobo;
                                 }
                                 else
                                 {
-                                    actorIcon = actorEntity.IsClaimed ? RadarIconHelper.MonsterClaimed : RadarIconHelper.Monster;
+                                    actorIcon = actorEntity.IsClaimed ? Game.MobClaimed : Game.MobUnclaimed;
+                                }
+                                if (RankA.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
+                                {
+                                    actorIcon = Game.MobPassive4;
+                                }
+                                else if (RankS.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
+                                {
+                                    actorIcon = Game.MobAggressive4;
+                                }
+                                else if (RankB.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
+                                {
+                                    actorIcon = Game.MobAggressive4;
                                 }
                                 break;
                         }
@@ -418,7 +339,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         }
                         else
                         {
-                            drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                            drawingContext.DrawImage(Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                         }
                         if (Settings.Default.MonsterShowName)
                         {
@@ -500,14 +421,14 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 {
                                     sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                                 }
-                                var actorIcon = RadarIconHelper.NPC;
+                                var actorIcon = Game.Vendor;
                                 if (actorEntity.HPCurrent > 0)
                                 {
                                     drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
                                 else
                                 {
-                                    drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    drawingContext.DrawImage(Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
                                 if (Settings.Default.NPCShowName || Settings.Default.NPCShowHPPercent)
                                 {
@@ -544,6 +465,10 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 {
                                     continue;
                                 }
+                                if (actorEntity.GatheringInvisible != 0)
+                                {
+                                    continue;
+                                }
                                 Coordinate screen;
                                 if (Settings.Default.RadarCompassMode)
                                 {
@@ -571,15 +496,44 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 {
                                     sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                                 }
-                                var actorIcon = RadarIconHelper.Wood;
-                                if (actorEntity.GatheringInvisible == 0)
+
+                                var actorIcon = Game.Gathering;
+                                if (Constants.GatheringNodes.TryGetValue(user.Job.ToString(), out List<GatheringNode> node))
                                 {
-                                    drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    var nodeMatch = node.FirstOrDefault(n => n.Localization.Matches(actorEntity.Name));
+                                    if (nodeMatch != null)
+                                    {
+                                        switch (user.Job)
+                                        {
+                                            case Actor.Job.BTN:
+                                                actorIcon = Game.Harvesting;
+                                                switch (nodeMatch.Rarity)
+                                                {
+                                                    case GatheringRarity.Unspoiled:
+                                                    case GatheringRarity.Ephemeral:
+                                                    case GatheringRarity.Legendary:
+                                                        actorIcon = Game.HarvestingSuper;
+                                                        break;
+                                                }
+                                                break;
+                                            case Actor.Job.FSH:
+                                                actorIcon = Game.Fishing;
+                                                break;
+                                            case Actor.Job.MIN:
+                                                actorIcon = Game.Mining;
+                                                switch (nodeMatch.Rarity)
+                                                {
+                                                    case GatheringRarity.Unspoiled:
+                                                    case GatheringRarity.Ephemeral:
+                                                    case GatheringRarity.Legendary:
+                                                        actorIcon = Game.MiningSuper;
+                                                        break;
+                                                }
+                                                break;
+                                        }
+                                    }
                                 }
-                                else
-                                {
-                                    drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                }
+                                drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 if (Settings.Default.GatheringShowName || Settings.Default.GatheringShowHPPercent)
                                 {
                                     var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.GatheringFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.GatheringFontColor));
@@ -634,13 +588,13 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 switch (actorEntity.Type)
                                 {
                                     case Actor.Type.Aetheryte:
-                                        actorIcon = RadarIconHelper.Crystal;
+                                        actorIcon = Game.Aetheryte;
                                         break;
                                     case Actor.Type.Minion:
-                                        actorIcon = RadarIconHelper.Sheep;
+                                        actorIcon = Game.Avatar;
                                         break;
                                     default:
-                                        actorIcon = RadarIconHelper.NPC;
+                                        actorIcon = Game.Vendor;
                                         break;
                                 }
                                 if (actorEntity.HPCurrent > 0 || actorEntity.Type == Actor.Type.Aetheryte)
@@ -652,7 +606,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 }
                                 else
                                 {
-                                    drawingContext.DrawImage(RadarIconHelper.Skull, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    drawingContext.DrawImage(Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                 }
                                 if (Settings.Default.OtherShowName)
                                 {

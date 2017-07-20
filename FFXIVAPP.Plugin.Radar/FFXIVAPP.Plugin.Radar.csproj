@@ -38,17 +38,23 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FFXIVAPP.Common, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ffxivapp-aio\packages\FFXIVAPP.Common.3.0.2\lib\net461\FFXIVAPP.Common.dll</HintPath>
+    <Reference Include="FFXIVAPP.Common, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FFXIVAPP.Common.4.0.2\lib\net461\FFXIVAPP.Common.dll</HintPath>
     </Reference>
-    <Reference Include="FFXIVAPP.IPluginInterface, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ffxivapp-aio\packages\FFXIVAPP.IPluginInterface.3.0.2\lib\net461\FFXIVAPP.IPluginInterface.dll</HintPath>
+    <Reference Include="FFXIVAPP.IPluginInterface, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FFXIVAPP.IPluginInterface.4.0.2\lib\net461\FFXIVAPP.IPluginInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="FFXIVAPP.ResourceFiles, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FFXIVAPP.ResourceFiles.1.0.1\lib\net461\FFXIVAPP.ResourceFiles.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.2.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.2.0.0\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.1.9.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -63,7 +69,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Sharlayan, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ffxivapp-aio\packages\Sharlayan.3.0.1\lib\net461\Sharlayan.dll</HintPath>
+      <HintPath>..\packages\Sharlayan.3.0.1\lib\net461\Sharlayan.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -71,7 +77,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -86,10 +92,11 @@
     <Compile Include="Controls\Radar.xaml.cs">
       <DependentUpon>Radar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums\GatheringRarity.cs" />
+    <Compile Include="Enums\GatheringType.cs" />
     <Compile Include="EventSubscriber.cs" />
     <Compile Include="Helpers\LocaleHelper.cs" />
     <Compile Include="Helpers\RadarFilterHelper.cs" />
-    <Compile Include="Helpers\RadarIconHelper.cs" />
     <Compile Include="Helpers\WidgetTopMostHelper.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="Interop\WinAPI.cs" />
@@ -99,6 +106,7 @@
     <Compile Include="Localization\German.cs" />
     <Compile Include="Localization\Japanese.cs" />
     <Compile Include="Localization\Russian.cs" />
+    <Compile Include="Models\GatheringNode.cs" />
     <Compile Include="Models\RadarFilterItem.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginException.cs" />
@@ -131,71 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Defaults\Settings.xml" />
-    <Resource Include="Media\RadarIcons\alchemist.png" />
-    <Resource Include="Media\RadarIcons\arcanist.png" />
-    <Resource Include="Media\RadarIcons\archer.png" />
-    <Resource Include="Media\RadarIcons\armorer.png" />
-    <Resource Include="Media\RadarIcons\bard.png" />
-    <Resource Include="Media\RadarIcons\blackmage.png" />
-    <Resource Include="Media\RadarIcons\blacksmith.png" />
-    <Resource Include="Media\RadarIcons\botanist.png" />
-    <Resource Include="Media\RadarIcons\carpenter.png" />
-    <Resource Include="Media\RadarIcons\conjurer.png" />
-    <Resource Include="Media\RadarIcons\culinarian.png" />
-    <Resource Include="Media\RadarIcons\dragoon.png" />
-    <Resource Include="Media\RadarIcons\fisher.png" />
-    <Resource Include="Media\RadarIcons\gladiator.png" />
-    <Resource Include="Media\RadarIcons\goldsmith.png" />
-    <Resource Include="Media\RadarIcons\lancer.png" />
-    <Resource Include="Media\RadarIcons\leatherworker.png" />
-    <Resource Include="Media\RadarIcons\marauder.png" />
-    <Resource Include="Media\RadarIcons\miner.png" />
-    <Resource Include="Media\RadarIcons\monk.png" />
-    <Resource Include="Media\RadarIcons\paladin.png" />
-    <Resource Include="Media\RadarIcons\player.png" />
-    <Resource Include="Media\RadarIcons\pugilist.png" />
-    <Resource Include="Media\RadarIcons\radar_heading.png" />
-    <Resource Include="Media\RadarIcons\scholar.png" />
-    <Resource Include="Media\RadarIcons\summoner.png" />
-    <Resource Include="Media\RadarIcons\thaumaturge.png" />
-    <Resource Include="Media\RadarIcons\warrior.png" />
-    <Resource Include="Media\RadarIcons\weaver.png" />
-    <Resource Include="Media\RadarIcons\whitemage.png" />
-    <Resource Include="Media\RadarIcons\boat.png" />
-    <Resource Include="Media\RadarIcons\boss.png" />
-    <Resource Include="Media\RadarIcons\bronze_chest.png" />
-    <Resource Include="Media\RadarIcons\chocobo.png" />
-    <Resource Include="Media\RadarIcons\crystal.png" />
-    <Resource Include="Media\RadarIcons\dungeon.png" />
-    <Resource Include="Media\RadarIcons\fate.png" />
-    <Resource Include="Media\RadarIcons\fate2.png" />
-    <Resource Include="Media\RadarIcons\fate3.png" />
-    <Resource Include="Media\RadarIcons\field.png" />
-    <Resource Include="Media\RadarIcons\field2.png" />
-    <Resource Include="Media\RadarIcons\gold_chest.png" />
-    <Resource Include="Media\RadarIcons\mail.png" />
-    <Resource Include="Media\RadarIcons\merchant.png" />
-    <Resource Include="Media\RadarIcons\merchant2.png" />
-    <Resource Include="Media\RadarIcons\mining.png" />
-    <Resource Include="Media\RadarIcons\monster.png" />
-    <Resource Include="Media\RadarIcons\monster_claimed.png" />
-    <Resource Include="Media\RadarIcons\npc.png" />
-    <Resource Include="Media\RadarIcons\sheep.png" />
-    <Resource Include="Media\RadarIcons\silver_chest.png" />
-    <Resource Include="Media\RadarIcons\skull.png" />
-    <Resource Include="Media\RadarIcons\town.png" />
-    <Resource Include="Media\RadarIcons\wood.png" />
-    <Resource Include="Media\RadarIcons\zone.png" />
     <Resource Include="Defaults\Filters.xml" />
-    <Resource Include="Media\RadarIcons\chocobo_personal.png" />
-    <Resource Include="Media\RadarIcons\ninja.png" />
-    <Resource Include="Media\RadarIcons\rogue.png" />
-    <Resource Include="Media\RadarIcons\astrologian.png" />
-    <Resource Include="Media\RadarIcons\darkknight.png" />
-    <Resource Include="Media\RadarIcons\machinist.png" />
-    <Resource Include="Media\RadarIcons\samurai.png" />
-    <Resource Include="Media\RadarIcons\redmage.png" />
-    <Content Include="FodyWeavers.xml" />
     <Content Include="Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -212,11 +156,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <Resource Include="Media\Images\License.png" />
-    <Resource Include="Media\Images\Refresh.png" />
-    <Resource Include="Media\Images\About.png" />
-    <Resource Include="Media\Images\Main.png" />
-    <Resource Include="Media\Images\Settings.png" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>

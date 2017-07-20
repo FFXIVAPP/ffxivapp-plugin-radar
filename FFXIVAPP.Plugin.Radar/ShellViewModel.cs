@@ -30,6 +30,7 @@ namespace FFXIVAPP.Plugin.Radar
         {
             Initializer.LoadSettings();
             Initializer.LoadFilters();
+            Initializer.SetGatheringNodes();
             Initializer.SetupWindowTopMost();
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }
