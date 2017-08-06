@@ -76,6 +76,7 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             Constants.Settings.Add("WidgetOpacity");
             Constants.Settings.Add("RadarCompassMode");
             Constants.Settings.Add("FilterRadarItems");
+            Constants.Settings.Add("ShowEntityDebug");
 
             #region PC Options
 
@@ -278,6 +279,19 @@ namespace FFXIVAPP.Plugin.Radar.Properties
             set
             {
                 this["FilterRadarItems"] = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        [UserScopedSetting]
+        [DebuggerNonUserCode]
+        [DefaultSettingValue("False")]
+        public bool ShowEntityDebug
+        {
+            get { return (bool)this["ShowEntityDebug"]; }
+            set
+            {
+                this["ShowEntityDebug"] = value;
                 RaisePropertyChanged();
             }
         }

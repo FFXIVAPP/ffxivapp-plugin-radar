@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Radar.Enums;
@@ -89,29 +90,26 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 X = (float) (ActualWidth / 2),
                 Y = (float) (ActualHeight / 2)
             };
-
+            
             var scale = (float) (ActualHeight / 2.0f) / 125.0f;
             var angle = Math.Abs(user.Heading * (180 / Math.PI) - 180);
 
+            var drawingGroup = new DrawingGroup();
+
             if (Settings.Default.RadarCompassMode)
             {
-                var drawingGroup = new DrawingGroup
+                drawingGroup.Transform = new RotateTransform
                 {
-                    Transform = new RotateTransform
-                    {
-                        Angle = angle,
-                        CenterX = origin.X,
-                        CenterY = origin.Y
-                    }
+                    Angle = angle,
+                    CenterX = origin.X,
+                    CenterY = origin.Y
                 };
-                drawingGroup.Children.Add(new ImageDrawing(Game.RadarHeading, new Rect(origin.X - 64, origin.Y - 128, 128, 128)));
-                drawingGroup.Children.Add(new ImageDrawing(Game.Player, new Rect(origin.X - 8, origin.Y - 21, 16, 21)));
-                drawingContext.DrawDrawing(drawingGroup);
             }
-            else
-            {
-                drawingContext.DrawImage(Game.RadarHeading, new Rect(new Point(origin.X - 64, origin.Y - 128), new Size(128, 128)));
-            }
+
+            drawingGroup.Children.Add(new ImageDrawing(Game.RadarHeading, new Rect(origin.X - 64, origin.Y - 128, 128, 128)));
+            drawingGroup.Children.Add(new ImageDrawing(Game.Player, new Rect(origin.X - 8, origin.Y - 16, 16, 21)));
+
+            DrawDrawing(drawingContext, drawingGroup);
 
             var sb = new StringBuilder();
 
@@ -121,6 +119,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                                                        .ToList());
             var pcEntites = new List<ActorEntity>(XIVInfoViewModel.Instance.CurrentPCs.Select(kvp => kvp.Value)
                                                                   .ToList());
+
+            #region Filtering
 
             if (Settings.Default.FilterRadarItems)
             {
@@ -153,6 +153,8 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 monsterEntites = RadarFilterHelper.CleanupEntities(monsterEntites);
             }
 
+            #endregion
+
             #region Resolve PCs
 
             if (Settings.Default.PCShow)
@@ -160,7 +162,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in pcEntites)
                 {
                     sb.Clear();
-                    var fsModifier = 0;
+                    var fontSizeModifier = 0;
                     drawingContext.PushOpacity(1);
                     try
                     {
@@ -209,12 +211,12 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                 case Actor.Job.Unknown:
                                     if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
                                     {
-                                        drawingContext.DrawImage(Game.Chocobo, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                        DrawImage(drawingContext, Game.Chocobo, new Rect(new Point(), new Size(16, 16)));
                                     }
                                     useJob = false;
                                     break;
                                 default:
-                                    drawingContext.DrawImage(Game.GetIconByName(actorEntity.Job.ToString()), new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    DrawImage(drawingContext, Game.GetIconByName(actorEntity.Job.ToString()), new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                                     break;
                             }
 
@@ -223,12 +225,15 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         if (!useJob)
                         {
                             var imageSource = actorEntity.HPCurrent > 0 ? Game.Player : Game.Unknown;
-                            drawingContext.DrawImage(imageSource, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                            DrawImage(drawingContext, imageSource, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
                         }
+
+                        RenderDebugInformation(actorEntity, ref sb);
+
                         if (Settings.Default.PCShowName || Settings.Default.PCShowHPPercent)
                         {
-                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.PCFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.PCFontColor));
-                            drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
+                            var text = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.PCFontSize) + fontSizeModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.PCFontColor));
+                            DrawText(drawingContext, text, screen.X + 20, screen.Y);
                         }
                     }
                     catch (Exception ex)
@@ -248,29 +253,34 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                 foreach (var actorEntity in monsterEntites)
                 {
                     sb.Clear();
-                    var fsModifier = 0;
+                    var fontSizeModifier = 0;
                     var fontColor = Settings.Default.MonsterFontColor;
 
                     var RankB = LocaleHelper.GetRankedMonsters("B");
                     var RankA = LocaleHelper.GetRankedMonsters("A");
                     var RankS = LocaleHelper.GetRankedMonsters("S");
 
+                    var isRanked = false;
+
                     if (Settings.Default.MonsterShowRankColor)
                     {
                         if (RankA.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             fontColor = Settings.Default.MonsterFontColorARank;
-                            fsModifier += 2;
+                            fontSizeModifier += 2;
+                            isRanked = true;
                         }
                         else if (RankS.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             fontColor = Settings.Default.MonsterFontColorSRank;
-                            fsModifier += 2;
+                            fontSizeModifier += 2;
+                            isRanked = true;
                         }
                         else if (RankB.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             fontColor = Settings.Default.MonsterFontColorBRank;
-                            fsModifier += 2;
+                            fontSizeModifier += 2;
+                            isRanked = true;
                         }
                     }
 
@@ -301,46 +311,62 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                                          .Add(origin);
                         }
                         screen = screen.Add(-8, -8, 0);
-                        ImageSource actorIcon = null;
-                        switch (actorEntity.IsFate)
+                        BitmapImage actorIcon;
+
+                        if (actorEntity.IsFate)
                         {
-                            case true:
-                                actorIcon = Game.MobFate;
-                                break;
-                            case false:
-                                if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
-                                {
-                                    actorIcon = Game.Chocobo;
-                                }
-                                else
-                                {
-                                    actorIcon = actorEntity.IsClaimed ? Game.MobClaimed : Game.MobUnclaimed;
-                                }
-                                if (RankA.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
-                                {
-                                    actorIcon = Game.MobPassive4;
-                                }
-                                else if (RankS.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
-                                {
-                                    actorIcon = Game.MobAggressive4;
-                                }
-                                else if (RankB.Any(x => x.Equals(actorEntity.Name, StringComparison.InvariantCultureIgnoreCase)))
-                                {
-                                    actorIcon = Game.MobAggressive4;
-                                }
-                                break;
+                            actorIcon = Game.MobFate;
                         }
+                        else
+                        {
+                            switch (actorEntity.DifficultyRank)
+                            {
+                                case 6:
+                                    actorIcon = actorEntity.IsAggressive ? Game.MobAggressive5 : Game.MobPassive5;
+                                    break;
+                                case 4:
+                                    actorIcon = actorEntity.IsAggressive ? Game.MobAggressive3 : Game.MobPassive3;
+                                    break;
+                                case 3:
+                                    actorIcon = actorEntity.IsAggressive ? Game.MobAggressive2 : Game.MobPassive2;
+                                    break;
+                                case 2:
+                                    actorIcon = actorEntity.IsAggressive ? Game.MobAggressive6 : Game.MobPassive6;
+                                    break;
+                                case 1:
+                                    actorIcon = actorEntity.IsAggressive ? Game.MobAggressive4 : Game.MobPassive4;
+                                    break;
+                                default:
+                                    actorIcon = actorEntity.IsAggressive ? Game.MobAggressive1 : Game.MobPassive1;
+                                    break;
+                            }
+                            if (actorEntity.OwnerID > 0 && actorEntity.OwnerID < 3758096384)
+                            {
+                                actorIcon = Game.Chocobo;
+                            }
+                        }
+
+                        var iconSize = new Size(16, 16);
+                        var point = new Point(screen.X, screen.Y);
+
+                        if (isRanked)
+                        {
+                            iconSize = new Size(24, 24);
+                            point = new Point(screen.X - 4, screen.Y - 4);
+                        }
+
                         if (actorEntity.HPCurrent > 0)
                         {
                             if (actorIcon != null)
                             {
-                                drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                DrawImage(drawingContext, actorIcon, new Rect(point, iconSize));
                             }
                         }
                         else
                         {
-                            drawingContext.DrawImage(Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                            DrawImage(drawingContext, Game.Unknown, new Rect(point, iconSize));
                         }
+
                         if (Settings.Default.MonsterShowName)
                         {
                             sb.Append(actorEntity.Name);
@@ -353,10 +379,13 @@ namespace FFXIVAPP.Plugin.Radar.Controls
                         {
                             sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
                         }
+
+                        RenderDebugInformation(actorEntity, ref sb);
+
                         if (Settings.Default.MonsterShowName || Settings.Default.MonsterShowHPPercent)
                         {
-                            var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.MonsterFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(fontColor));
-                            drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
+                            var text = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.MonsterFontSize) + fontSizeModifier, (SolidColorBrush) bc.ConvertFromString(fontColor));
+                            DrawText(drawingContext, text, screen.X + 20, screen.Y);
                         }
                     }
                     catch (Exception ex)
@@ -373,273 +402,261 @@ namespace FFXIVAPP.Plugin.Radar.Controls
 
             foreach (var actorEntity in npcEntites)
             {
-                switch (actorEntity.Type)
+                sb.Clear();
+                var fontSizeModifier = 0;
+                drawingContext.PushOpacity(1);
+
+                try
                 {
-                    case Actor.Type.NPC:
+                    if (!actorEntity.IsValid || user == null)
+                    {
+                        continue;
+                    }
+                    if (actorEntity.ID == user.ID)
+                    {
+                        continue;
+                    }
+                    Coordinate screen;
+                    if (Settings.Default.RadarCompassMode)
+                    {
+                        var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
+                                        .Scale(scale);
+                        screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
+                    }
+                    else
+                    {
+                        screen = user.Coordinate.Subtract(actorEntity.Coordinate)
+                                     .Rotate2D(user.Heading)
+                                     .Scale(scale)
+                                     .Add(origin);
+                    }
+                    screen = screen.Add(-8, -8, 0);
+                    BitmapImage actorIcon;
 
-                        #region Resolve NPCs
+                    switch (actorEntity.Type)
+                    {
+                        case Actor.Type.NPC:
 
-                        if (Settings.Default.NPCShow)
-                        {
-                            sb.Clear();
-                            var fsModifier = 0;
-                            drawingContext.PushOpacity(1);
-                            try
+                            #region Resolve NPCs
+
+                            if (Settings.Default.NPCShow)
                             {
-                                if (!actorEntity.IsValid || user == null)
+                                try
                                 {
-                                    continue;
-                                }
-                                if (actorEntity.ID == user.ID)
-                                {
-                                    continue;
-                                }
-                                Coordinate screen;
-                                if (Settings.Default.RadarCompassMode)
-                                {
-                                    var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
-                                                    .Scale(scale);
-                                    screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                                }
-                                else
-                                {
-                                    screen = user.Coordinate.Subtract(actorEntity.Coordinate)
-                                                 .Rotate2D(user.Heading)
-                                                 .Scale(scale)
-                                                 .Add(origin);
-                                }
-                                screen = screen.Add(-8, -8, 0);
-                                if (Settings.Default.NPCShowName)
-                                {
-                                    sb.Append(actorEntity.Name);
-                                }
-                                if (Settings.Default.NPCShowHPPercent)
-                                {
-                                    sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
-                                }
-                                if (Settings.Default.NPCShowDistance)
-                                {
-                                    sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
-                                }
-                                var actorIcon = Game.Vendor;
-                                if (actorEntity.HPCurrent > 0)
-                                {
-                                    drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                }
-                                else
-                                {
-                                    drawingContext.DrawImage(Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                }
-                                if (Settings.Default.NPCShowName || Settings.Default.NPCShowHPPercent)
-                                {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.NPCFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.NPCFontColor));
-                                    drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Logging.Log(Logger, new LogItem(ex, true));
-                            }
-                            drawingContext.Pop();
-                        }
-
-                        #endregion
-
-                        break;
-                    case Actor.Type.Gathering:
-
-                        #region Resolve Gathering
-
-                        if (Settings.Default.GatheringShow)
-                        {
-                            sb.Clear();
-                            var fsModifier = 0;
-                            drawingContext.PushOpacity(1);
-                            try
-                            {
-                                if (!actorEntity.IsValid || user == null)
-                                {
-                                    continue;
-                                }
-                                if (actorEntity.ID == user.ID)
-                                {
-                                    continue;
-                                }
-                                if (actorEntity.GatheringInvisible != 0)
-                                {
-                                    continue;
-                                }
-                                Coordinate screen;
-                                if (Settings.Default.RadarCompassMode)
-                                {
-                                    var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
-                                                    .Scale(scale);
-                                    screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                                }
-                                else
-                                {
-                                    screen = user.Coordinate.Subtract(actorEntity.Coordinate)
-                                                 .Rotate2D(user.Heading)
-                                                 .Scale(scale)
-                                                 .Add(origin);
-                                }
-                                screen = screen.Add(-8, -8, 0);
-                                if (Settings.Default.GatheringShowName)
-                                {
-                                    sb.Append(actorEntity.Name);
-                                }
-                                if (Settings.Default.GatheringShowHPPercent)
-                                {
-                                    sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
-                                }
-                                if (Settings.Default.GatheringShowDistance)
-                                {
-                                    sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
-                                }
-
-                                var actorIcon = Game.Gathering;
-                                if (Constants.GatheringNodes.TryGetValue(user.Job.ToString(), out List<GatheringNode> node))
-                                {
-                                    var nodeMatch = node.FirstOrDefault(n => n.Localization.Matches(actorEntity.Name));
-                                    if (nodeMatch != null)
+                                    if (Settings.Default.NPCShowName)
                                     {
-                                        switch (user.Job)
+                                        sb.Append(actorEntity.Name);
+                                    }
+                                    if (Settings.Default.NPCShowHPPercent)
+                                    {
+                                        sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
+                                    }
+                                    if (Settings.Default.NPCShowDistance)
+                                    {
+                                        sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
+                                    }
+                                    actorIcon = actorEntity.HPCurrent > 0 ? Game.Vendor : Game.Unknown;
+                                    DrawImage(drawingContext, actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+
+                                    RenderDebugInformation(actorEntity, ref sb);
+
+                                    if (Settings.Default.NPCShowName || Settings.Default.NPCShowHPPercent)
+                                    {
+                                        var text = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.NPCFontSize) + fontSizeModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.NPCFontColor));
+                                        DrawText(drawingContext, text, screen.X + 20, screen.Y);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Logging.Log(Logger, new LogItem(ex, true));
+                                }
+                                drawingContext.Pop();
+                            }
+
+                            #endregion
+
+                            break;
+                        case Actor.Type.Gathering:
+
+                            #region Resolve Gathering
+                            
+                            if (Settings.Default.GatheringShow && actorEntity.GatheringInvisible == 0)
+                            {
+                                try
+                                {
+                                    if (Settings.Default.GatheringShowName)
+                                    {
+                                        sb.Append(actorEntity.Name);
+                                    }
+                                    if (Settings.Default.GatheringShowHPPercent)
+                                    {
+                                        sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
+                                    }
+                                    if (Settings.Default.GatheringShowDistance)
+                                    {
+                                        sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
+                                    }
+
+                                    actorIcon = Game.Gathering;
+                                    if (Constants.GatheringNodes.TryGetValue(user.Job.ToString(), out List<GatheringNode> node))
+                                    {
+                                        var nodeMatch = node.FirstOrDefault(n => n.Localization.Matches(actorEntity.Name));
+                                        if (nodeMatch != null)
                                         {
-                                            case Actor.Job.BTN:
-                                                actorIcon = Game.Harvesting;
-                                                switch (nodeMatch.Rarity)
-                                                {
-                                                    case GatheringRarity.Unspoiled:
-                                                    case GatheringRarity.Ephemeral:
-                                                    case GatheringRarity.Legendary:
-                                                        actorIcon = Game.HarvestingSuper;
-                                                        break;
-                                                }
-                                                break;
-                                            case Actor.Job.FSH:
-                                                actorIcon = Game.Fishing;
-                                                break;
-                                            case Actor.Job.MIN:
-                                                actorIcon = Game.Mining;
-                                                switch (nodeMatch.Rarity)
-                                                {
-                                                    case GatheringRarity.Unspoiled:
-                                                    case GatheringRarity.Ephemeral:
-                                                    case GatheringRarity.Legendary:
-                                                        actorIcon = Game.MiningSuper;
-                                                        break;
-                                                }
-                                                break;
+                                            switch (user.Job)
+                                            {
+                                                case Actor.Job.BTN:
+                                                    actorIcon = Game.Harvesting;
+                                                    switch (nodeMatch.Rarity)
+                                                    {
+                                                        case GatheringRarity.Unspoiled:
+                                                        case GatheringRarity.Ephemeral:
+                                                        case GatheringRarity.Legendary:
+                                                            actorIcon = Game.HarvestingSuper;
+                                                            break;
+                                                    }
+                                                    break;
+                                                case Actor.Job.FSH:
+                                                    actorIcon = Game.Fishing;
+                                                    break;
+                                                case Actor.Job.MIN:
+                                                    actorIcon = Game.Mining;
+                                                    switch (nodeMatch.Rarity)
+                                                    {
+                                                        case GatheringRarity.Unspoiled:
+                                                        case GatheringRarity.Ephemeral:
+                                                        case GatheringRarity.Legendary:
+                                                            actorIcon = Game.MiningSuper;
+                                                            break;
+                                                    }
+                                                    break;
+                                            }
                                         }
                                     }
-                                }
-                                drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
-                                if (Settings.Default.GatheringShowName || Settings.Default.GatheringShowHPPercent)
-                                {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.GatheringFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.GatheringFontColor));
-                                    drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Logging.Log(Logger, new LogItem(ex, true));
-                            }
-                            drawingContext.Pop();
-                        }
+                                    DrawImage(drawingContext, actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
 
-                        #endregion
+                                    RenderDebugInformation(actorEntity, ref sb);
 
-                        break;
-                    default:
-
-                        #region Resolve Other
-
-                        if (Settings.Default.OtherShow)
-                        {
-                            sb.Clear();
-                            var fsModifier = 0;
-                            drawingContext.PushOpacity(1);
-                            try
-                            {
-                                if (!actorEntity.IsValid || user == null)
-                                {
-                                    continue;
-                                }
-                                if (actorEntity.ID == user.ID)
-                                {
-                                    continue;
-                                }
-                                Coordinate screen;
-                                if (Settings.Default.RadarCompassMode)
-                                {
-                                    var coord = user.Coordinate.Subtract(actorEntity.Coordinate)
-                                                    .Scale(scale);
-                                    screen = new Coordinate(-coord.X, 0, -coord.Y).Add(origin);
-                                }
-                                else
-                                {
-                                    screen = user.Coordinate.Subtract(actorEntity.Coordinate)
-                                                 .Rotate2D(user.Heading)
-                                                 .Scale(scale)
-                                                 .Add(origin);
-                                }
-                                screen = screen.Add(-8, -8, 0);
-                                ImageSource actorIcon;
-                                switch (actorEntity.Type)
-                                {
-                                    case Actor.Type.Aetheryte:
-                                        actorIcon = Game.Aetheryte;
-                                        break;
-                                    case Actor.Type.Minion:
-                                        actorIcon = Game.Avatar;
-                                        break;
-                                    default:
-                                        actorIcon = Game.Vendor;
-                                        break;
-                                }
-                                if (actorEntity.HPCurrent > 0 || actorEntity.Type == Actor.Type.Aetheryte)
-                                {
-                                    if (actorIcon != null)
+                                    if (Settings.Default.GatheringShowName || Settings.Default.GatheringShowHPPercent)
                                     {
-                                        drawingContext.DrawImage(actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                        var text = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, int.Parse(Settings.Default.GatheringFontSize) + fontSizeModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.GatheringFontColor));
+                                        DrawText(drawingContext, text, screen.X + 20, screen.Y);
                                     }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    drawingContext.DrawImage(Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    Logging.Log(Logger, new LogItem(ex, true));
                                 }
-                                if (Settings.Default.OtherShowName)
-                                {
-                                    sb.Append(actorEntity.Name);
-                                }
-                                if (Settings.Default.OtherShowHPPercent)
-                                {
-                                    sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
-                                }
-                                if (Settings.Default.OtherShowDistance)
-                                {
-                                    sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
-                                }
-                                if (Settings.Default.OtherShowName || Settings.Default.OtherShowHPPercent)
-                                {
-                                    var label = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, Int32.Parse(Settings.Default.OtherFontSize) + fsModifier, (SolidColorBrush) bc.ConvertFromString(Settings.Default.OtherFontColor));
-                                    drawingContext.DrawText(label, new Point(screen.X + 20, screen.Y));
-                                }
+                                drawingContext.Pop();
                             }
-                            catch (Exception ex)
+
+                            #endregion
+
+                            break;
+                        default:
+
+                            #region Resolve Other
+
+                            if (Settings.Default.OtherShow)
                             {
-                                Logging.Log(Logger, new LogItem(ex, true));
+                                try
+                                {
+                                    switch (actorEntity.Type)
+                                    {
+                                        case Actor.Type.Aetheryte:
+                                            actorIcon = Game.Aetheryte;
+                                            break;
+                                        case Actor.Type.Minion:
+                                            actorIcon = Game.Avatar;
+                                            break;
+                                        default:
+                                            actorIcon = Game.Vendor;
+                                            break;
+                                    }
+                                    if (actorEntity.HPCurrent > 0 || actorEntity.Type == Actor.Type.Aetheryte)
+                                    {
+                                        if (actorIcon != null)
+                                        {
+                                            DrawImage(drawingContext, actorIcon, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        DrawImage(drawingContext, Game.Unknown, new Rect(new Point(screen.X, screen.Y), new Size(16, 16)));
+                                    }
+                                    if (Settings.Default.OtherShowName)
+                                    {
+                                        sb.Append(actorEntity.Name);
+                                    }
+                                    if (Settings.Default.OtherShowHPPercent)
+                                    {
+                                        sb.AppendFormat(" {0:P0}", actorEntity.HPPercent);
+                                    }
+                                    if (Settings.Default.OtherShowDistance)
+                                    {
+                                        sb.AppendFormat(" {0:N2} {1}", user.GetDistanceTo(actorEntity), ResolveHeightVariance(user, actorEntity));
+                                    }
+
+                                    RenderDebugInformation(actorEntity, ref sb);
+
+                                    if (Settings.Default.OtherShowName || Settings.Default.OtherShowHPPercent)
+                                    {
+                                        var text = new FormattedText(sb.ToString(), _cultureInfo, _flowDirection, _typeface, int.Parse(Settings.Default.OtherFontSize) + fontSizeModifier, (SolidColorBrush)bc.ConvertFromString(Settings.Default.OtherFontColor));
+                                        DrawText(drawingContext, text, screen.X + 20, screen.Y);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Logging.Log(Logger, new LogItem(ex, true));
+                                }
+                                drawingContext.Pop();
                             }
-                            drawingContext.Pop();
-                        }
 
-                        #endregion
+                            #endregion
 
-                        break;
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
                 }
             }
 
             #endregion
+        }
+
+        private void RenderDebugInformation(ActorEntity actorEntity, ref StringBuilder sb)
+        {
+            if (Settings.Default.ShowEntityDebug)
+            {
+                #region DebugFlag
+
+                sb.Append($"{Environment.NewLine}NPCID1: {actorEntity.NPCID1:X}");
+                sb.Append($"{Environment.NewLine}NPCID2: {actorEntity.NPCID2:X}");
+                sb.Append($"{Environment.NewLine}ModelID: {actorEntity.ModelID:X}");
+
+                #endregion
+            }
+        }
+
+        private void DrawText(DrawingContext context, FormattedText text, double x, double y)
+        {
+            context.DrawText(text, new Point(x, y));
+        }
+
+        private void DrawImage(DrawingContext context, BitmapImage image, double x, double y, double width, double height)
+        {
+            context.DrawImage(image, new Rect(new Point(x, y), new Size(width, height)));
+        }
+
+        private void DrawImage(DrawingContext context, BitmapImage image, Rect rect)
+        {
+            context.DrawImage(image, rect);
+        }
+
+        private void DrawDrawing(DrawingContext context, DrawingGroup group)
+        {
+            context.DrawDrawing(group);
         }
 
         private string ResolveHeightVariance(ActorEntity user, ActorEntity actorEntity)

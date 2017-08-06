@@ -151,6 +151,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             Dictionary.Add("radar_SettingsRadarHeader", "Настройки:Радар");
             Dictionary.Add("radar_CompassModeLabel", "Модификация Компас");
             Dictionary.Add("radar_FilterRadarItemsLabel", "Фильтровать Вещи Радара");
+            Dictionary.Add("radar_ShowEntityDebugLabel", "Show Entity Debug Information");
             Dictionary.Add("radar_RadarUIScaleLabel", "Размер UI");
             Dictionary.Add("radar_SettingsRadarPCHeader", "Настройки:Радар:Игрок");
             Dictionary.Add("radar_SettingsRadarNPCHeader", "Настройки:Радар:NPC");
