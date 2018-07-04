@@ -55,16 +55,19 @@
                     <DockPanel Grid.Row="0"
                                Margin="3"
                                LastChildFill="True">
-                        <TextBlock Padding="5" Text="{Binding Locale[radar_KeyLabel], Source={StaticResource PluginViewModel}}" />
+                        <TextBlock Padding="5"
+                                   Text="{Binding Locale[radar_KeyLabel], Source={StaticResource PluginViewModel}}" />
                         <TextBox x:Name="TKey"
                                  Width="150"
                                  Text="Mandragora" />
-                        <TextBlock Padding="5" Text="{Binding Locale[radar_LevelLabel], Source={StaticResource PluginViewModel}}" />
+                        <TextBlock Padding="5"
+                                   Text="{Binding Locale[radar_LevelLabel], Source={StaticResource PluginViewModel}}" />
                         <TextBox x:Name="TLevel"
                                  Width="40"
                                  HorizontalContentAlignment="Center"
                                  Text="0" />
-                        <TextBlock Padding="5" Text="{Binding Locale[radar_TypeLabel], Source={StaticResource PluginViewModel}}" />
+                        <TextBlock Padding="5"
+                                   Text="{Binding Locale[radar_TypeLabel], Source={StaticResource PluginViewModel}}" />
                         <ComboBox x:Name="TType">
                             <ComboBoxItem>Unknown</ComboBoxItem>
                             <ComboBoxItem>PC</ComboBoxItem>

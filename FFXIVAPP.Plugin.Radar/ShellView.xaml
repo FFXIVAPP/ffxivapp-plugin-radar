@@ -28,7 +28,8 @@
                                 BorderBrush="#FF000000"
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="15">
-                            <iconPacks:PackIconFontAwesome Kind="Home" ToolTip="{Binding Locale[app_MainToolTip], Source={StaticResource PluginViewModel}}" />
+                            <iconPacks:PackIconFontAwesome Kind="Home"
+                                                           ToolTip="{Binding Locale[app_MainToolTip], Source={StaticResource PluginViewModel}}" />
                         </Border>
                         <TextBlock Padding="5"
                                    Text="{Binding Locale[app_MainToolTip], Source={StaticResource PluginViewModel}}"
@@ -45,7 +46,8 @@
                                 BorderBrush="#FF000000"
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="15">
-                            <iconPacks:PackIconFontAwesome Kind="Cog" ToolTip="{Binding Locale[app_SettingsToolTip], Source={StaticResource PluginViewModel}}" />
+                            <iconPacks:PackIconFontAwesome Kind="Cog"
+                                                           ToolTip="{Binding Locale[app_SettingsToolTip], Source={StaticResource PluginViewModel}}" />
                         </Border>
                         <TextBlock Padding="5"
                                    Text="{Binding Locale[app_SettingsToolTip], Source={StaticResource PluginViewModel}}"
@@ -62,7 +64,8 @@
                                 BorderBrush="#FF000000"
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="15">
-                            <iconPacks:PackIconFontAwesome Kind="Info" ToolTip="{Binding Locale[app_AboutToolTip], Source={StaticResource PluginViewModel}}" />
+                            <iconPacks:PackIconFontAwesome Kind="Info"
+                                                           ToolTip="{Binding Locale[app_AboutToolTip], Source={StaticResource PluginViewModel}}" />
                         </Border>
                         <TextBlock Padding="5"
                                    Text="{Binding Locale[app_AboutToolTip], Source={StaticResource PluginViewModel}}"

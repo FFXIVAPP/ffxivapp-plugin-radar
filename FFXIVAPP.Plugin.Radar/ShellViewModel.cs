@@ -1,33 +1,26 @@
-﻿// FFXIVAPP.Plugin.Radar ~ ShellViewModel.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ShellViewModel.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   ShellViewModel.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using FFXIVAPP.Plugin.Radar.Interop;
-using FFXIVAPP.Plugin.Radar.Properties;
+namespace FFXIVAPP.Plugin.Radar {
+    using System;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
 
-namespace FFXIVAPP.Plugin.Radar
-{
-    public sealed class ShellViewModel : INotifyPropertyChanged
-    {
-        public ShellViewModel()
-        {
+    using FFXIVAPP.Plugin.Radar.Interop;
+    using FFXIVAPP.Plugin.Radar.Properties;
+
+    public sealed class ShellViewModel : INotifyPropertyChanged {
+        private static Lazy<ShellViewModel> _instance = new Lazy<ShellViewModel>(() => new ShellViewModel());
+
+        public ShellViewModel() {
             Initializer.LoadSettings();
             Initializer.LoadFilters();
             Initializer.SetGatheringNodes();
@@ -35,70 +28,40 @@ namespace FFXIVAPP.Plugin.Radar
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }
 
-        internal static void Loaded(object sender, RoutedEventArgs e)
-        {
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public static ShellViewModel Instance {
+            get {
+                return _instance.Value;
+            }
+        }
+
+        internal static void Loaded(object sender, RoutedEventArgs e) {
             ShellView.View.Loaded -= Loaded;
         }
 
-        private static void DefaultOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
+        private static void DefaultOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs) {
             var propertyName = propertyChangedEventArgs.PropertyName;
-            switch (propertyName)
-            {
+            switch (propertyName) {
                 case "WidgetClickThroughEnabled":
                     WinAPI.ToggleClickThrough(Widgets.Instance.RadarWidget);
                     break;
                 case "RadarWidgetUIScale":
-                    try
-                    {
-                        Settings.Default.RadarWidgetWidth = (int) (600 * Double.Parse(Settings.Default.RadarWidgetUIScale));
-                        Settings.Default.RadarWidgetHeight = (int) (600 * Double.Parse(Settings.Default.RadarWidgetUIScale));
+                    try {
+                        Settings.Default.RadarWidgetWidth = (int) (600 * double.Parse(Settings.Default.RadarWidgetUIScale));
+                        Settings.Default.RadarWidgetHeight = (int) (600 * double.Parse(Settings.Default.RadarWidgetUIScale));
                     }
-                    catch (Exception)
-                    {
+                    catch (Exception) {
                         Settings.Default.RadarWidgetWidth = 600;
                         Settings.Default.RadarWidgetHeight = 600;
                     }
+
                     break;
             }
         }
 
-        #region Property Bindings
-
-        private static Lazy<ShellViewModel> _instance = new Lazy<ShellViewModel>(() => new ShellViewModel());
-
-        public static ShellViewModel Instance
-        {
-            get { return _instance.Value; }
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
-
-        #endregion
-
-        #region Declarations
-
-        #endregion
-
-        #region Loading Functions
-
-        #endregion
-
-        #region Utility Functions
-
-        #endregion
-
-        #region Command Bindings
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
     }
 }

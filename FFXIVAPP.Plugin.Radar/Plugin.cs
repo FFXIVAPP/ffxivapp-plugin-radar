@@ -1,188 +1,178 @@
-﻿// FFXIVAPP.Plugin.Radar ~ Plugin.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Plugin.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Plugin.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using FFXIVAPP.Common.Events;
-using FFXIVAPP.Common.Helpers;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.IPluginInterface;
-using FFXIVAPP.Plugin.Radar.Helpers;
-using FFXIVAPP.Plugin.Radar.Models;
-using FFXIVAPP.Plugin.Radar.Properties;
-using NLog;
+namespace FFXIVAPP.Plugin.Radar {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.Composition;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Controls;
 
-namespace FFXIVAPP.Plugin.Radar
-{
+    using FFXIVAPP.Common.Events;
+    using FFXIVAPP.Common.Helpers;
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.IPluginInterface;
+    using FFXIVAPP.Plugin.Radar.Helpers;
+    using FFXIVAPP.Plugin.Radar.Models;
+    using FFXIVAPP.Plugin.Radar.Properties;
+
+    using NLog;
+
     [Export(typeof(IPlugin))]
-    public class Plugin : IPlugin, INotifyPropertyChanged
-    {
-        #region Logger
-
+    public class Plugin : IPlugin, INotifyPropertyChanged {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
-
         private IPluginHost _host;
+
         private Dictionary<string, string> _locale;
+
         private string _name;
+
         private MessageBoxResult _popupResult;
 
-        public IPluginHost Host
-        {
-            get { return _host; }
-            set { PHost = _host = value; }
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public static IPluginHost PHost { get; private set; }
+
+        public static string PName { get; private set; }
+
+        public string Copyright { get; private set; }
+
+        public string Description { get; private set; }
+
+        public string FriendlyName { get; set; }
+
+        public IPluginHost Host {
+            get {
+                return this._host;
+            }
+
+            set {
+                PHost = this._host = value;
+            }
         }
 
-        public MessageBoxResult PopupResult
-        {
-            get { return _popupResult; }
-            set
-            {
-                _popupResult = value;
+        public string Icon { get; private set; }
+
+        public Dictionary<string, string> Locale {
+            get {
+                return this._locale ?? (this._locale = new Dictionary<string, string>());
+            }
+
+            set {
+                this._locale = value;
+                Dictionary<string, string> locale = LocaleHelper.Update(Constants.CultureInfo);
+                foreach (KeyValuePair<string, string> resource in locale) {
+                    try {
+                        if (this._locale.ContainsKey(resource.Key)) {
+                            this._locale[resource.Key] = resource.Value;
+                        }
+                        else {
+                            this._locale.Add(resource.Key, resource.Value);
+                        }
+                    }
+                    catch (Exception ex) {
+                        Logging.Log(Logger, new LogItem(ex, true));
+                    }
+                }
+
+                PluginViewModel.Instance.Locale = this._locale;
+                PluginViewModel.Instance.RankedFilters.Clear();
+                foreach (var rankedMonster in LocaleHelper.GetRankedMonsters()) {
+                    PluginViewModel.Instance.RankedFilters.Add(
+                        new RadarFilterItem(rankedMonster) {
+                            Level = 0,
+                            Type = "Monster"
+                        });
+                }
+
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string Name {
+            get {
+                return this._name;
+            }
+
+            private set {
+                PName = this._name = value;
+            }
+        }
+
+        public string Notice { get; private set; }
+
+        public MessageBoxResult PopupResult {
+            get {
+                return this._popupResult;
+            }
+
+            set {
+                this._popupResult = value;
                 PluginViewModel.Instance.OnPopupResultChanged(new PopupResultEvent(value));
             }
         }
 
-        public Dictionary<string, string> Locale
-        {
-            get { return _locale ?? (_locale = new Dictionary<string, string>()); }
-            set
-            {
-                _locale = value;
-                var locale = LocaleHelper.Update(Constants.CultureInfo);
-                foreach (var resource in locale)
-                {
-                    try
-                    {
-                        if (_locale.ContainsKey(resource.Key))
-                        {
-                            _locale[resource.Key] = resource.Value;
-                        }
-                        else
-                        {
-                            _locale.Add(resource.Key, resource.Value);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logging.Log(Logger, new LogItem(ex, true));
-                    }
-                }
-                PluginViewModel.Instance.Locale = _locale;
-                PluginViewModel.Instance.RankedFilters.Clear();
-                foreach (var rankedMonster in LocaleHelper.GetRankedMonsters())
-                {
-                    PluginViewModel.Instance.RankedFilters.Add(new RadarFilterItem(rankedMonster)
-                    {
-                        Level = 0,
-                        Type = "Monster"
-                    });
-                }
-                RaisePropertyChanged();
-            }
-        }
-
-        public string FriendlyName { get; set; }
-
-        public string Name
-        {
-            get { return _name; }
-            private set { PName = _name = value; }
-        }
-
-        public string Icon { get; private set; }
-        public string Description { get; private set; }
-        public string Copyright { get; private set; }
-        public string Version { get; private set; }
-        public string Notice { get; private set; }
         public Exception Trace { get; private set; }
 
-        public void Initialize(IPluginHost pluginHost)
-        {
-            Host = pluginHost;
-            FriendlyName = "Radar";
-            Name = AssemblyHelper.Name;
-            Icon = "Logo.png";
-            Description = AssemblyHelper.Description;
-            Copyright = AssemblyHelper.Copyright;
-            Version = AssemblyHelper.Version.ToString();
-            Notice = string.Empty;
-        }
+        public string Version { get; private set; }
 
-        public void Dispose(bool isUpdating = false)
-        {
-            EventSubscriber.UnSubscribe();
-            /*
-             * If the isUpdating is true it means the application will be force closing/killed.
-             * You wil have to choose what you want to do in this case.
-             * By default the settings class clears the settings object and recreates it; but if killed untimely it will not save.
-             * 
-             * Suggested use is to not save settings if updating. Other disposing events could happen based on your needs.
-             */
-            if (isUpdating)
-            {
-                return;
-            }
-            Settings.Default.Save();
-        }
-
-        public TabItem CreateTab()
-        {
-            Locale = LocaleHelper.Update(Constants.CultureInfo);
+        public TabItem CreateTab() {
+            this.Locale = LocaleHelper.Update(Constants.CultureInfo);
             var content = new ShellView();
             content.Loaded += ShellViewModel.Loaded;
-            var tabItem = new TabItem
-            {
-                Header = Name,
+            var tabItem = new TabItem {
+                Header = this.Name,
                 Content = content
             };
-            //do your gui stuff here
+
+            // do your gui stuff here
             EventSubscriber.Subscribe();
-            //content gives you access to the base xaml
+
+            // content gives you access to the base xaml
             return tabItem;
         }
 
-        #region Property Bindings
+        public void Dispose(bool isUpdating = false) {
+            EventSubscriber.UnSubscribe();
 
-        public static IPluginHost PHost { get; private set; }
-        public static string PName { get; private set; }
+            /*
+                         * If the isUpdating is true it means the application will be force closing/killed.
+                         * You wil have to choose what you want to do in this case.
+                         * By default the settings class clears the settings object and recreates it; but if killed untimely it will not save.
+                         * 
+                         * Suggested use is to not save settings if updating. Other disposing events could happen based on your needs.
+                         */
+            if (isUpdating) {
+                return;
+            }
 
-        #endregion
-
-        #region Declarations
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
+            Settings.Default.Save();
         }
 
-        #endregion
+        public void Initialize(IPluginHost pluginHost) {
+            this.Host = pluginHost;
+            this.FriendlyName = "Radar";
+            this.Name = AssemblyHelper.Name;
+            this.Icon = "Logo.png";
+            this.Description = AssemblyHelper.Description;
+            this.Copyright = AssemblyHelper.Copyright;
+            this.Version = AssemblyHelper.Version.ToString();
+            this.Notice = string.Empty;
+        }
+
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        }
     }
 }
