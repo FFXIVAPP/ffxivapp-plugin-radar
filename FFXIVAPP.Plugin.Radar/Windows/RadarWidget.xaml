@@ -48,9 +48,10 @@
 
     <Grid x:Name="LayoutRoot">
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding RadarWidgetUIScale,
+            <ScaleTransform
+                ScaleX="{Binding RadarWidgetUIScale,
                                              Source={StaticResource Settings}}"
-                            ScaleY="{Binding RadarWidgetUIScale,
+                ScaleY="{Binding RadarWidgetUIScale,
                                              Source={StaticResource Settings}}" />
         </Grid.LayoutTransform>
         <DockPanel LastChildFill="True">
@@ -86,76 +87,89 @@
                                                   IsChecked="{Binding RadarCompassMode,
                                                                       Source={StaticResource Settings}}" />
                                         <MenuItem Header="PC">
-                                            <MenuItem Header="{Binding Locale[radar_PCShowHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_PCShowHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding PCShow,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding PCShow,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_PCShowNameHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_PCShowNameHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding PCShowName,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding PCShowName,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_PCShowHPPercentHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_PCShowHPPercentHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding PCShowHPPercent,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding PCShowHPPercent,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_PCShowJobHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_PCShowJobHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding PCShowJob,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding PCShowJob,
                                                                           Source={StaticResource Settings}}" />
                                         </MenuItem>
                                         <MenuItem Header="NPC">
-                                            <MenuItem Header="{Binding Locale[radar_NPCShowHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_NPCShowHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding NPCShow,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding NPCShow,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_NPCShowNameHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_NPCShowNameHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding NPCShowName,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding NPCShowName,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_NPCShowHPPercentHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_NPCShowHPPercentHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding NPCShowHPPercent,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding NPCShowHPPercent,
                                                                           Source={StaticResource Settings}}" />
                                         </MenuItem>
                                         <MenuItem Header="Monster">
-                                            <MenuItem Header="{Binding Locale[radar_MonsterShowHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_MonsterShowHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding MonsterShow,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding MonsterShow,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_MonsterShowNameHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_MonsterShowNameHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding MonsterShowName,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding MonsterShowName,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_MonsterShowHPPercentHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_MonsterShowHPPercentHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding MonsterShowHPPercent,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding MonsterShowHPPercent,
                                                                           Source={StaticResource Settings}}" />
                                         </MenuItem>
                                         <MenuItem Header="Gathering">
-                                            <MenuItem Header="{Binding Locale[radar_GatheringShowHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_GatheringShowHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding GatheringShow,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding GatheringShow,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_GatheringShowNameHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_GatheringShowNameHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding GatheringShowName,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding GatheringShowName,
                                                                           Source={StaticResource Settings}}" />
-                                            <MenuItem Header="{Binding Locale[radar_GatheringShowHPPercentHeader],
+                                            <MenuItem
+                                                Header="{Binding Locale[radar_GatheringShowHPPercentHeader],
                                                                        Source={StaticResource PluginViewModel}}"
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding GatheringShowHPPercent,
+                                                IsCheckable="True"
+                                                IsChecked="{Binding GatheringShowHPPercent,
                                                                           Source={StaticResource Settings}}" />
                                         </MenuItem>
                                     </ContextMenu>

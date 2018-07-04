@@ -1,52 +1,21 @@
-﻿// FFXIVAPP.Plugin.Radar ~ Russian.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Russian.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Russian.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Windows;
+namespace FFXIVAPP.Plugin.Radar.Localization {
+    using System.Collections.Generic;
+    using System.Windows;
 
-namespace FFXIVAPP.Plugin.Radar.Localization
-{
-    public abstract class Russian
-    {
+    public abstract class Russian {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
 
-        private static readonly List<string> RankB = new List<string>
-        {
-            "Albin the Ashen",
-            "Barbastelle",
-            "Bloody Mary",
-            "Dark Helmet",
-            "Flame Sergeant Dalvag",
-            "Gatling",
-            "Leech King",
-            "Monarch Ogrefly",
-            "Myradrosh",
-            "Naul",
-            "Ovjang",
-            "Phecda",
-            "Sewer Syrup",
-            "Skogs Fru",
-            "Stinging Sophie",
-            "Vuokho",
-            "White Joker"
-        };
-
-        private static readonly List<string> RankA = new List<string>
-        {
+        private static readonly List<string> RankA = new List<string> {
             "Hellsclaw",
             "Unktehi",
             "Vogaal Ja",
@@ -66,8 +35,27 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Kurrea"
         };
 
-        private static readonly List<string> RankS = new List<string>
-        {
+        private static readonly List<string> RankB = new List<string> {
+            "Albin the Ashen",
+            "Barbastelle",
+            "Bloody Mary",
+            "Dark Helmet",
+            "Flame Sergeant Dalvag",
+            "Gatling",
+            "Leech King",
+            "Monarch Ogrefly",
+            "Myradrosh",
+            "Naul",
+            "Ovjang",
+            "Phecda",
+            "Sewer Syrup",
+            "Skogs Fru",
+            "Stinging Sophie",
+            "Vuokho",
+            "White Joker"
+        };
+
+        private static readonly List<string> RankS = new List<string> {
             "Garlok",
             "Croakadile",
             "Croque-Mitaine",
@@ -90,8 +78,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public static ResourceDictionary Context()
-        {
+        public static ResourceDictionary Context() {
             Dictionary.Clear();
             Dictionary.Add("radar_", "*PH*");
             Dictionary.Add("radar_RadarWidgetHeader", "Виждет Радара");
@@ -163,11 +150,9 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             return Dictionary;
         }
 
-        public static List<string> GetRankedMonster(string name)
-        {
+        public static List<string> GetRankedMonster(string name) {
             List<string> monsters;
-            switch (name)
-            {
+            switch (name) {
                 case "B":
                     monsters = RankB;
                     break;

@@ -1,58 +1,50 @@
-﻿// FFXIVAPP.Plugin.Radar ~ Widgets.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Widgets.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Widgets.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Plugin.Radar.Windows;
-using NLog;
+namespace FFXIVAPP.Plugin.Radar {
+    using System;
 
-namespace FFXIVAPP.Plugin.Radar
-{
-    public class Widgets
-    {
-        #region Logger
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Plugin.Radar.Windows;
 
+    using NLog;
+
+    public class Widgets {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
-
         private static Lazy<Widgets> _instance = new Lazy<Widgets>(() => new Widgets());
+
         private RadarWidget _radarWidget;
 
-        public static Widgets Instance
-        {
-            get { return _instance.Value; }
-        }
-
-        public RadarWidget RadarWidget
-        {
-            get { return _radarWidget ?? (_radarWidget = new RadarWidget()); }
-            set { _radarWidget = value; }
-        }
-
-        public void ShowRadarWidget()
-        {
-            try
-            {
-                RadarWidget.Show();
+        public static Widgets Instance {
+            get {
+                return _instance.Value;
             }
-            catch (Exception ex)
-            {
+        }
+
+        public RadarWidget RadarWidget {
+            get {
+                return this._radarWidget ?? (this._radarWidget = new RadarWidget());
+            }
+
+            set {
+                this._radarWidget = value;
+            }
+        }
+
+        public void ShowRadarWidget() {
+            try {
+                this.RadarWidget.Show();
+            }
+            catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
         }

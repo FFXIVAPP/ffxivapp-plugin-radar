@@ -1,55 +1,39 @@
-﻿// FFXIVAPP.Plugin.Radar ~ Map.xaml.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Map.xaml.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Map.xaml.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Windows.Media;
+namespace FFXIVAPP.Plugin.Radar.Controls {
+    using System.Windows.Media;
 
-namespace FFXIVAPP.Plugin.Radar.Controls
-{
     /// <summary>
     ///     Interaction logic for Radar.xaml
     /// </summary>
-    public partial class Map
-    {
+    public partial class Map {
         public Map View;
 
-        public Map()
-        {
-            View = this;
-            InitializeComponent();
-            if (IsRendered)
-            {
+        public Map() {
+            this.View = this;
+            this.InitializeComponent();
+            if (this.IsRendered) {
                 return;
             }
-            IsRendered = true;
-        }
 
-        #region Map Declarations
+            this.IsRendered = true;
+        }
 
         public bool IsRendered { get; set; }
 
-        #endregion
-
-        public void Refresh()
-        {
-            InvalidateVisual();
+        public void Refresh() {
+            this.InvalidateVisual();
         }
 
-        protected override void OnRender(DrawingContext drawingContext)
-        {
+        protected override void OnRender(DrawingContext drawingContext) {
             base.OnRender(drawingContext);
         }
     }

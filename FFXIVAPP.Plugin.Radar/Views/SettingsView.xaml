@@ -22,17 +22,22 @@
             <TabItem Header="{Binding Locale[app_MainSettingsTabHeader], Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <GroupBox Header="{Binding Locale[radar_EnableClickThroughHeader], Source={StaticResource PluginViewModel}}">
+                        <GroupBox
+                            Header="{Binding Locale[radar_EnableClickThroughHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <controls:ToggleSwitch IsChecked="{Binding WidgetClickThroughEnabled, Source={StaticResource Settings}}" />
+                                <controls:ToggleSwitch
+                                    IsChecked="{Binding WidgetClickThroughEnabled, Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="{Binding Locale[radar_ShowTitlesOnRadarHeader], Source={StaticResource PluginViewModel}}">
+                        <GroupBox
+                            Header="{Binding Locale[radar_ShowTitlesOnRadarHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <controls:ToggleSwitch IsChecked="{Binding ShowTitleOnWidgets, Source={StaticResource Settings}}" />
+                                <controls:ToggleSwitch
+                                    IsChecked="{Binding ShowTitleOnWidgets, Source={StaticResource Settings}}" />
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox Header="{Binding Locale[radar_WidgetOpacityHeader], Source={StaticResource PluginViewModel}}">
+                        <GroupBox
+                            Header="{Binding Locale[radar_WidgetOpacityHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <ComboBox Margin="5"
                                           IsReadOnly="False"
@@ -43,27 +48,36 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="SettingsRadarTI" Header="{Binding Locale[radar_RadarSettingsTabHeader], Source={StaticResource PluginViewModel}}">
+            <TabItem x:Name="SettingsRadarTI"
+                     Header="{Binding Locale[radar_RadarSettingsTabHeader], Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <Expander Header="{Binding Locale[radar_SettingsRadarHeader], Source={StaticResource PluginViewModel}}">
+                        <Expander
+                            Header="{Binding Locale[radar_SettingsRadarHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="{Binding Locale[radar_CompasModeLabel], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_CompasModeLabel], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding RadarCompassMode, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding RadarCompassMode, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_FilterRadarItemsLabel], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_FilterRadarItemsLabel], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding FilterRadarItems, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding FilterRadarItems, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_ShowEntityDebugLabel], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_ShowEntityDebugLabel], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding ShowEntityDebug, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding ShowEntityDebug, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_RadarUIScaleLabel], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_RadarUIScaleLabel], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -73,34 +87,46 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="{Binding Locale[radar_SettingsRadarPCHeader], Source={StaticResource PluginViewModel}}">
+                        <Expander
+                            Header="{Binding Locale[radar_SettingsRadarPCHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="{Binding Locale[radar_PCShowHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCShowHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding PCShow, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding PCShow, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_PCShowNameHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCShowNameHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding PCShowName, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding PCShowName, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_PCShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding PCShowHPPercent, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding PCShowHPPercent, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_PCShowJobHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCShowJobHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding PCShowJob, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding PCShowJob, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_PCShowDistanceHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCShowDistanceHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding PCShowDistance, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding PCShowDistance, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_PCFontSizeHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCFontSizeHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -108,7 +134,8 @@
                                                   SelectedValue="{Binding PCFontSize, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_PCFontColorHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_PCFontColorHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -133,29 +160,39 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="{Binding Locale[radar_SettingsRadarNPCHeader], Source={StaticResource PluginViewModel}}">
+                        <Expander
+                            Header="{Binding Locale[radar_SettingsRadarNPCHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="{Binding Locale[radar_NPCShowHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_NPCShowHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding NPCShow, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding NPCShow, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_NPCShowNameHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_NPCShowNameHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding NPCShowName, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding NPCShowName, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_NPCShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_NPCShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding NPCShowHPPercent, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding NPCShowHPPercent, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_NPCShowDistanceHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_NPCShowDistanceHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding NPCShowDistance, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding NPCShowDistance, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_NPCFontSizeHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_NPCFontSizeHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -163,7 +200,8 @@
                                                   SelectedValue="{Binding NPCFontSize, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_NPCFontColorHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_NPCFontColorHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -188,29 +226,39 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="{Binding Locale[radar_SettingsRadarMonsterHeader], Source={StaticResource PluginViewModel}}">
+                        <Expander
+                            Header="{Binding Locale[radar_SettingsRadarMonsterHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="{Binding Locale[radar_MonsterShowHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterShowHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding MonsterShow, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding MonsterShow, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterShowNameHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterShowNameHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding MonsterShowName, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding MonsterShowName, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding MonsterShowHPPercent, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding MonsterShowHPPercent, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterShowDistanceHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterShowDistanceHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding MonsterShowDistance, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding MonsterShowDistance, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterFontSizeHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterFontSizeHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -218,7 +266,8 @@
                                                   SelectedValue="{Binding MonsterFontSize, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterFontColorHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -241,12 +290,15 @@
                                         </ComboBox>
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterShowRankColorHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterShowRankColorHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding MonsterShowRankColor, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding MonsterShowRankColor, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorARankHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterFontColorARankHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -269,7 +321,8 @@
                                         </ComboBox>
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorBRankHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterFontColorBRankHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -292,7 +345,8 @@
                                         </ComboBox>
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_MonsterFontColorSRankHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_MonsterFontColorSRankHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -317,29 +371,39 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="{Binding Locale[radar_SettingsRadarGatheringHeader], Source={StaticResource PluginViewModel}}">
+                        <Expander
+                            Header="{Binding Locale[radar_SettingsRadarGatheringHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="{Binding Locale[radar_GatheringShowHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_GatheringShowHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding GatheringShow, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding GatheringShow, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_GatheringShowNameHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_GatheringShowNameHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding GatheringShowName, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding GatheringShowName, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_GatheringShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_GatheringShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding GatheringShowHPPercent, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding GatheringShowHPPercent, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_GatheringShowDistanceHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_GatheringShowDistanceHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding GatheringShowDistance, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding GatheringShowDistance, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_GatheringFontSizeHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_GatheringFontSizeHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -347,7 +411,8 @@
                                                   SelectedValue="{Binding GatheringFontSize, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_GatheringFontColorHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_GatheringFontColorHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -372,29 +437,39 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="{Binding Locale[radar_SettingsRadarOtherHeader], Source={StaticResource PluginViewModel}}">
+                        <Expander
+                            Header="{Binding Locale[radar_SettingsRadarOtherHeader], Source={StaticResource PluginViewModel}}">
                             <StackPanel>
-                                <GroupBox Header="{Binding Locale[radar_OtherShowHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_OtherShowHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding OtherShow, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding OtherShow, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_OtherShowNameHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_OtherShowNameHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding OtherShowName, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding OtherShowName, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_OtherShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_OtherShowHPPercentHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding OtherShowHPPercent, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding OtherShowHPPercent, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_OtherShowDistanceHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_OtherShowDistanceHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
-                                        <controls:ToggleSwitch IsChecked="{Binding OtherShowDistance, Source={StaticResource Settings}}" />
+                                        <controls:ToggleSwitch
+                                            IsChecked="{Binding OtherShowDistance, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_OtherFontSizeHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_OtherFontSizeHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"
@@ -402,7 +477,8 @@
                                                   SelectedValue="{Binding OtherFontSize, Source={StaticResource Settings}}" />
                                     </StackPanel>
                                 </GroupBox>
-                                <GroupBox Header="{Binding Locale[radar_OtherFontColorHeader], Source={StaticResource PluginViewModel}}">
+                                <GroupBox
+                                    Header="{Binding Locale[radar_OtherFontColorHeader], Source={StaticResource PluginViewModel}}">
                                     <StackPanel>
                                         <ComboBox Margin="5"
                                                   IsReadOnly="False"

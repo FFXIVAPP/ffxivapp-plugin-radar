@@ -1,78 +1,21 @@
-﻿// FFXIVAPP.Plugin.Radar ~ French.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="French.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   French.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Windows;
+namespace FFXIVAPP.Plugin.Radar.Localization {
+    using System.Collections.Generic;
+    using System.Windows;
 
-namespace FFXIVAPP.Plugin.Radar.Localization
-{
-    public abstract class French
-    {
+    public abstract class French {
         private static readonly ResourceDictionary Dictionary = new ResourceDictionary();
 
-        private static readonly List<string> RankB = new List<string>
-        {
-            "Albin Le Blafard",
-            "Barbastelle",
-            "Mary La Sanglante",
-            "Casque Noir",
-            "Sergent-major Dalvag",
-            "Acanthor",
-            "Roi Des Sangsues",
-            "Agrion Ogre Monarque",
-            "Myradrosh",
-            "Naul",
-            "Ovjang",
-            "Phecda",
-            "Syrop D'égout",
-            "Skogs Fru",
-            "Sophie La Dardante",
-            "Vuokho",
-            "Joker Blanc",
-            // Heavensward Rank B
-            "Altek",
-            "Gigantopithèque",
-            "Gnathe Myrmicomète",
-            "Kreutzet",
-            "Lycidas",
-            "Omni",
-            "Pterygotus",
-            "Sanu Vali",
-            "Scitalis",
-            "Squonk",
-            "Dracosaure Primus",
-            "Texta",
-            // Stormblood Rank B
-            "Aswang",
-            "Bucca-boo",
-            "Deidar",
-            "Gauka La Lame Forte",
-            "Guhuo Niao",
-            "Gwas-y-neidr",
-            "Gyorai Le Vif",
-            "Kiwa",
-            "Kurma",
-            "Manes",
-            "Ouzelum",
-            "Yamini La Nocturne"
-        };
-
-        private static readonly List<string> RankA = new List<string>
-        {
+        private static readonly List<string> RankA = new List<string> {
             "Griffe Des Enfers Magitek",
             "Unktehi",
             "Vogaal Ja",
@@ -90,6 +33,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Zanig'oh",
             "Alectryon",
             "Kurrea",
+
             // Heavensward Rank A
             "Mirka",
             "Lyuba",
@@ -103,6 +47,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Fleur Nauséabonde",
             "Enkélados",
             "Sisiutl",
+
             // Stormblood Rank A
             "Angada",
             "Aqrabuamelu",
@@ -118,8 +63,55 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Vochstein"
         };
 
-        private static readonly List<string> RankS = new List<string>
-        {
+        private static readonly List<string> RankB = new List<string> {
+            "Albin Le Blafard",
+            "Barbastelle",
+            "Mary La Sanglante",
+            "Casque Noir",
+            "Sergent-major Dalvag",
+            "Acanthor",
+            "Roi Des Sangsues",
+            "Agrion Ogre Monarque",
+            "Myradrosh",
+            "Naul",
+            "Ovjang",
+            "Phecda",
+            "Syrop D'égout",
+            "Skogs Fru",
+            "Sophie La Dardante",
+            "Vuokho",
+            "Joker Blanc",
+
+            // Heavensward Rank B
+            "Altek",
+            "Gigantopithèque",
+            "Gnathe Myrmicomète",
+            "Kreutzet",
+            "Lycidas",
+            "Omni",
+            "Pterygotus",
+            "Sanu Vali",
+            "Scitalis",
+            "Squonk",
+            "Dracosaure Primus",
+            "Texta",
+
+            // Stormblood Rank B
+            "Aswang",
+            "Bucca-boo",
+            "Deidar",
+            "Gauka La Lame Forte",
+            "Guhuo Niao",
+            "Gwas-y-neidr",
+            "Gyorai Le Vif",
+            "Kiwa",
+            "Kurma",
+            "Manes",
+            "Ouzelum",
+            "Yamini La Nocturne"
+        };
+
+        private static readonly List<string> RankS = new List<string> {
             "Garlok",
             "Croabéros",
             "Croque-Mitaine",
@@ -137,6 +129,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Nunyunuwi",
             "Zona Seeker",
             "Agrippa the Mighty",
+
             // Heavensward Rank S
             "Béhémoth Empereur",
             "Gandharva",
@@ -144,6 +137,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             "Cavalier Pâle",
             "Leucrotta",
             "Oiseau De Paradis",
+
             // Stormblood Rank S
             "Gamma",
             "Mangeur D'os",
@@ -156,8 +150,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public static ResourceDictionary Context()
-        {
+        public static ResourceDictionary Context() {
             Dictionary.Clear();
             Dictionary.Add("radar_", "*PH*");
             Dictionary.Add("radar_RadarWidgetHeader", "Radar Widget");
@@ -229,11 +222,9 @@ namespace FFXIVAPP.Plugin.Radar.Localization
             return Dictionary;
         }
 
-        public static List<string> GetRankedMonster(string name)
-        {
+        public static List<string> GetRankedMonster(string name) {
             List<string> monsters;
-            switch (name)
-            {
+            switch (name) {
                 case "B":
                     monsters = RankB;
                     break;
