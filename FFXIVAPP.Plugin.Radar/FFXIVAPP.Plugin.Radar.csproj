@@ -26,13 +26,13 @@
       <HintPath>..\packages\Costura.Fody.3.1.0\lib\net46\Costura.dll</HintPath>
     </Reference>
     <Reference Include="FFXIVAPP.Common, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FFXIVAPP.Common.5.0.0\lib\net462\FFXIVAPP.Common.dll</HintPath>
+      <HintPath>..\packages\FFXIVAPP.Common.5.0.1\lib\net462\FFXIVAPP.Common.dll</HintPath>
     </Reference>
     <Reference Include="FFXIVAPP.IPluginInterface, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FFXIVAPP.IPluginInterface.5.0.0\lib\net462\FFXIVAPP.IPluginInterface.dll</HintPath>
+      <HintPath>..\packages\FFXIVAPP.IPluginInterface.5.0.1\lib\net462\FFXIVAPP.IPluginInterface.dll</HintPath>
     </Reference>
     <Reference Include="FFXIVAPP.ResourceFiles, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FFXIVAPP.ResourceFiles.2.0.0\lib\net462\FFXIVAPP.ResourceFiles.dll</HintPath>
+      <HintPath>..\packages\FFXIVAPP.ResourceFiles.2.0.1\lib\net462\FFXIVAPP.ResourceFiles.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.8.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -56,7 +56,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Sharlayan, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sharlayan.5.0.0\lib\net462\Sharlayan.dll</HintPath>
+      <HintPath>..\packages\Sharlayan.5.0.1\lib\net462\Sharlayan.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
