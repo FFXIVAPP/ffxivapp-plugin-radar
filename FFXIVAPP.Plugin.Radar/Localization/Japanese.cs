@@ -44,7 +44,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "機兵のスリップキンクス",
             "ストラス",
             "キャムパクティ",
-            "センチブロッサム"
+            "センチブロッサム",
             "エンケドラス",
             "シシウトゥル",
 
@@ -135,7 +135,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "ガンダルヴァ",
             "セーンムルウ",
             "ペイルライダー",
-            "レウクロッタ"
+            "レウクロッタ",
             "極楽鳥",
 
             // Stormblood Rank S
