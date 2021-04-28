@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Radar.xaml.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -74,7 +74,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls {
 
             var origin = new Coordinate {
                 X = (float) (this.ActualWidth / 2),
-                Y = (float) (this.ActualHeight / 2)
+                Y = (float) (this.ActualHeight / 2),
             };
 
             var scale = (float) (this.ActualHeight / 2.0f) / 125.0f;
@@ -86,7 +86,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls {
                 drawingGroup.Transform = new RotateTransform {
                     Angle = angle,
                     CenterX = origin.X,
-                    CenterY = origin.Y
+                    CenterY = origin.Y,
                 };
             }
 
@@ -100,8 +100,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls {
             List<ActorItem> npcEntites = new List<ActorItem>(XIVInfoViewModel.Instance.CurrentNPCs.Select(kvp => kvp.Value).ToList());
             List<ActorItem> monsterEntites = new List<ActorItem>(XIVInfoViewModel.Instance.CurrentMonsters.Select(kvp => kvp.Value).ToList());
             List<ActorItem> pcEntites = new List<ActorItem>(XIVInfoViewModel.Instance.CurrentPCs.Select(kvp => kvp.Value).ToList());
-
-            
 
             if (Settings.Default.FilterRadarItems) {
                 List<RadarFilterItem> npcFilters = PluginViewModel.Instance.Filters.Where(filter => filter.Type != "PC" && filter.Type != "Monster").ToList();
@@ -125,8 +123,6 @@ namespace FFXIVAPP.Plugin.Radar.Controls {
 
                 monsterEntites = RadarFilterHelper.CleanupEntities(monsterEntites);
             }
-
-            
 
             #region Resolve PCs
 
@@ -575,13 +571,9 @@ namespace FFXIVAPP.Plugin.Radar.Controls {
 
         private void RenderDebugInformation(ActorItem actorEntity, ref StringBuilder sb) {
             if (Settings.Default.ShowEntityDebug) {
-                
-
                 sb.Append($"{Environment.NewLine}NPCID1: {actorEntity.NPCID1:X}");
                 sb.Append($"{Environment.NewLine}NPCID2: {actorEntity.NPCID2:X}");
                 sb.Append($"{Environment.NewLine}ModelID: {actorEntity.ModelID:X}");
-
-                
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Initializer.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -40,7 +40,7 @@ namespace FFXIVAPP.Plugin.Radar {
                     int level;
                     int.TryParse(xLevel, out level);
                     var radarFilterItem = new RadarFilterItem(xKey) {
-                        Level = level
+                        Level = level,
                     };
                     radarFilterItem.Type = xType;
                     PluginViewModel.Instance.Filters.Add(radarFilterItem);
@@ -71,8 +71,6 @@ namespace FFXIVAPP.Plugin.Radar {
         }
 
         public static void SetGatheringNodes() {
-            
-
             List<GatheringNode> botanyNodes = new List<GatheringNode>();
 
             #region Normal
@@ -81,15 +79,15 @@ namespace FFXIVAPP.Plugin.Radar {
                 new GatheringNode {
                     Type = GatheringType.MainHand,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Mature Tree"
-                    }
+                        English = "Mature Tree",
+                    },
                 });
             botanyNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Lush Vegetation Patch"
-                    }
+                        English = "Lush Vegetation Patch",
+                    },
                 });
 
             #endregion
@@ -101,16 +99,16 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Unspoiled,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Unspoiled Mature Tree"
-                    }
+                        English = "Unspoiled Mature Tree",
+                    },
                 });
             botanyNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Unspoiled,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Unspoiled Lush Vegetation"
-                    }
+                        English = "Unspoiled Lush Vegetation",
+                    },
                 });
 
             #endregion
@@ -122,16 +120,16 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Ephemeral,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Ephemeral Mature Tree"
-                    }
+                        English = "Ephemeral Mature Tree",
+                    },
                 });
             botanyNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Ephemeral,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Ephemeral Lush Vegetation"
-                    }
+                        English = "Ephemeral Lush Vegetation",
+                    },
                 });
 
             #endregion
@@ -143,21 +141,19 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Legendary,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Legendary Mature Tree"
-                    }
+                        English = "Legendary Mature Tree",
+                    },
                 });
             botanyNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Legendary,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Legendary Lush Vegetation"
-                    }
+                        English = "Legendary Lush Vegetation",
+                    },
                 });
 
             #endregion
-
-            
 
             Constants.GatheringNodes.Add("BTN", botanyNodes);
 
@@ -180,16 +176,16 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Legendary,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Legendary Mature Tree"
-                    }
+                        English = "Legendary Mature Tree",
+                    },
                 });
             fishingNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Legendary,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Legendary Lush Vegetation"
-                    }
+                        English = "Legendary Lush Vegetation",
+                    },
                 });
 
             #endregion
@@ -208,15 +204,15 @@ namespace FFXIVAPP.Plugin.Radar {
                 new GatheringNode {
                     Type = GatheringType.MainHand,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Mineral Deposit"
-                    }
+                        English = "Mineral Deposit",
+                    },
                 });
             miningNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Rocky Outcropping"
-                    }
+                        English = "Rocky Outcropping",
+                    },
                 });
 
             #endregion
@@ -228,16 +224,16 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Unspoiled,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Unspoiled Mineral Deposit"
-                    }
+                        English = "Unspoiled Mineral Deposit",
+                    },
                 });
             miningNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Unspoiled,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Unspoiled Rocky Outcropping"
-                    }
+                        English = "Unspoiled Rocky Outcropping",
+                    },
                 });
 
             #endregion
@@ -249,16 +245,16 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Ephemeral,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Ephemeral Mineral Deposit"
-                    }
+                        English = "Ephemeral Mineral Deposit",
+                    },
                 });
             miningNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Ephemeral,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Ephemeral Rocky Outcropping"
-                    }
+                        English = "Ephemeral Rocky Outcropping",
+                    },
                 });
 
             #endregion
@@ -270,16 +266,16 @@ namespace FFXIVAPP.Plugin.Radar {
                     Type = GatheringType.MainHand,
                     Rarity = GatheringRarity.Legendary,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Legendary Mineral Deposit"
-                    }
+                        English = "Legendary Mineral Deposit",
+                    },
                 });
             miningNodes.Add(
                 new GatheringNode {
                     Type = GatheringType.OffHand,
                     Rarity = GatheringRarity.Legendary,
                     Localization = new Sharlayan.Models.Localization {
-                        English = "Legendary Rocky Outcropping"
-                    }
+                        English = "Legendary Rocky Outcropping",
+                    },
                 });
 
             #endregion

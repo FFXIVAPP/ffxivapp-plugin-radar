@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Russian.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -32,7 +32,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "Dalvag's Final Flame",
             "Zanig'oh",
             "Alectyron",
-            "Kurrea"
+            "Kurrea",
         };
 
         private static readonly List<string> RankB = new List<string> {
@@ -52,7 +52,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "Skogs Fru",
             "Stinging Sophie",
             "Vuokho",
-            "White Joker"
+            "White Joker",
         };
 
         private static readonly List<string> RankS = new List<string> {
@@ -72,7 +72,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "Minhocao",
             "Nunyunuwi",
             "Zona Seeker",
-            "Agrippa the Mighty"
+            "Agrippa the Mighty",
         };
 
         /// <summary>

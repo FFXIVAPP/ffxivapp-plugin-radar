@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="English.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -60,7 +60,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "Oni Yumemi",
             "Orcus",
             "Sum",
-            "Vochstein"
+            "Vochstein",
         };
 
         private static readonly List<string> RankB = new List<string> {
@@ -108,7 +108,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "Kurma",
             "Manes",
             "Ouzelum",
-            "Shadow-dweller Yamini"
+            "Shadow-dweller Yamini",
         };
 
         private static readonly List<string> RankS = new List<string> {
@@ -144,7 +144,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "Okina",
             "Orghana",
             "Salt and Light",
-            "Udumbara"
+            "Udumbara",
         };
 
         /// <summary>

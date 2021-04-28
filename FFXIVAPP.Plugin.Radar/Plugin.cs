@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Plugin.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -92,7 +92,7 @@ namespace FFXIVAPP.Plugin.Radar {
                     PluginViewModel.Instance.RankedFilters.Add(
                         new RadarFilterItem(rankedMonster) {
                             Level = 0,
-                            Type = "Monster"
+                            Type = "Monster",
                         });
                 }
 
@@ -133,7 +133,7 @@ namespace FFXIVAPP.Plugin.Radar {
             content.Loaded += ShellViewModel.Loaded;
             var tabItem = new TabItem {
                 Header = this.Name,
-                Content = content
+                Content = content,
             };
 
             // do your gui stuff here

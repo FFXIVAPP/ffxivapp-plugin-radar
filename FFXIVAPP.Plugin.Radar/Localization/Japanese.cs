@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Japanese.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -60,7 +60,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "オニユメミ",
             "オルクス",
             "ソム",
-            "バックスタイン"
+            "バックスタイン",
         };
 
         private static readonly List<string> RankB = new List<string> {
@@ -108,7 +108,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "クールマ",
             "マネス",
             "オゼルム",
-            "宵闇のヤミニ"
+            "宵闇のヤミニ",
         };
 
         private static readonly List<string> RankS = new List<string> {
@@ -129,7 +129,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "ヌニュヌウィ",
             "ゾーナ・シーカー",
             "アグリッパ",
-            
+
             // Heavensward Rank S
             "カイザーベヒーモス",
             "ガンダルヴァ",
@@ -144,7 +144,7 @@ namespace FFXIVAPP.Plugin.Radar.Localization {
             "オキナ",
             "オルガナ",
             "ソルト・アンド・ライト",
-            "ウドンゲ"
+            "ウドンゲ",
         };
 
         /// <summary>
