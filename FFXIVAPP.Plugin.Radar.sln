@@ -11,47 +11,35 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVAPP.IPluginInterface",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVAPP.ResourceFiles", "..\ffxivapp-resourcefiles\FFXIVAPP.ResourceFiles\FFXIVAPP.ResourceFiles.csproj", "{4F8437FC-EE41-4A15-80FC-93BF579A2E28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharlayan", "..\sharlayan\Sharlayan\Sharlayan.csproj", "{49C85043-6646-46FD-A262-E2EA0ED1DF82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharlayan", "..\sharlayan\Sharlayan\Sharlayan.csproj", "{49C85043-6646-46FD-A262-E2EA0ED1DF82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
-		ReleaseDeploy|x86 = ReleaseDeploy|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{28499E59-B9C5-44FE-AEE6-447720262A7C}.Debug|x86.ActiveCfg = Debug|x86
 		{28499E59-B9C5-44FE-AEE6-447720262A7C}.Debug|x86.Build.0 = Debug|x86
 		{28499E59-B9C5-44FE-AEE6-447720262A7C}.Release|x86.ActiveCfg = Release|x86
 		{28499E59-B9C5-44FE-AEE6-447720262A7C}.Release|x86.Build.0 = Release|x86
-		{28499E59-B9C5-44FE-AEE6-447720262A7C}.ReleaseDeploy|x86.ActiveCfg = ReleaseDeploy|x86
-		{28499E59-B9C5-44FE-AEE6-447720262A7C}.ReleaseDeploy|x86.Build.0 = ReleaseDeploy|x86
 		{06DF4BAD-D35B-4D0F-9AF6-2BC28EA3C1CD}.Debug|x86.ActiveCfg = Debug|x86
 		{06DF4BAD-D35B-4D0F-9AF6-2BC28EA3C1CD}.Debug|x86.Build.0 = Debug|x86
 		{06DF4BAD-D35B-4D0F-9AF6-2BC28EA3C1CD}.Release|x86.ActiveCfg = Release|x86
-		{06DF4BAD-D35B-4D0F-9AF6-2BC28EA3C1CD}.Release|x86.Build.0 = Release|x86
-		{06DF4BAD-D35B-4D0F-9AF6-2BC28EA3C1CD}.ReleaseDeploy|x86.ActiveCfg = ReleaseDeploy|x86
-		{06DF4BAD-D35B-4D0F-9AF6-2BC28EA3C1CD}.ReleaseDeploy|x86.Build.0 = ReleaseDeploy|x86
 		{391BC459-5E0D-4CC5-8CC6-E01F899E732F}.Debug|x86.ActiveCfg = Debug|x86
 		{391BC459-5E0D-4CC5-8CC6-E01F899E732F}.Debug|x86.Build.0 = Debug|x86
 		{391BC459-5E0D-4CC5-8CC6-E01F899E732F}.Release|x86.ActiveCfg = Release|x86
-		{391BC459-5E0D-4CC5-8CC6-E01F899E732F}.Release|x86.Build.0 = Release|x86
-		{391BC459-5E0D-4CC5-8CC6-E01F899E732F}.ReleaseDeploy|x86.ActiveCfg = ReleaseDeploy|x86
-		{391BC459-5E0D-4CC5-8CC6-E01F899E732F}.ReleaseDeploy|x86.Build.0 = ReleaseDeploy|x86
 		{4F8437FC-EE41-4A15-80FC-93BF579A2E28}.Debug|x86.ActiveCfg = Debug|x86
 		{4F8437FC-EE41-4A15-80FC-93BF579A2E28}.Debug|x86.Build.0 = Debug|x86
 		{4F8437FC-EE41-4A15-80FC-93BF579A2E28}.Release|x86.ActiveCfg = Release|x86
-		{4F8437FC-EE41-4A15-80FC-93BF579A2E28}.Release|x86.Build.0 = Release|x86
-		{4F8437FC-EE41-4A15-80FC-93BF579A2E28}.ReleaseDeploy|x86.ActiveCfg = ReleaseDeploy|x86
-		{4F8437FC-EE41-4A15-80FC-93BF579A2E28}.ReleaseDeploy|x86.Build.0 = ReleaseDeploy|x86
-		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Debug|x86.ActiveCfg = Debug|x86
-		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Debug|x86.Build.0 = Debug|x86
-		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Release|x86.ActiveCfg = Release|x86
-		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Release|x86.Build.0 = Release|x86
-		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.ReleaseDeploy|x86.ActiveCfg = ReleaseDeploy|x86
-		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.ReleaseDeploy|x86.Build.0 = ReleaseDeploy|x86
+		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Debug|x86.Build.0 = Debug|Any CPU
+		{49C85043-6646-46FD-A262-E2EA0ED1DF82}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC1C5F53-F712-46D2-8A58-1838D908DA98}
 	EndGlobalSection
 EndGlobal

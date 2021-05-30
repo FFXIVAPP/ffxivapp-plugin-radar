@@ -12,6 +12,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels {
     using System;
     using System.Collections.Concurrent;
     using System.ComponentModel;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Timers;
 
@@ -75,7 +76,7 @@ namespace FFXIVAPP.Plugin.Radar.ViewModels {
             }
         }
 
-        public ActorItem CurrentUser => ActorItem.CurrentUser;
+        public ActorItem CurrentUser { get; set; }
 
         public bool IsProcessing { get; set; }
 

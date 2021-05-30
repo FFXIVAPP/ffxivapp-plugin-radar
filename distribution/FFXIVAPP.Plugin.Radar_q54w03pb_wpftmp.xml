@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FFXIVAPP.Plugin.Radar</name>
+    </assembly>
+    <members>
+        <member name="T:FFXIVAPP.Plugin.Radar.Controls.Map">
+            <summary>
+                Interaction logic for Radar.xaml
+            </summary>
+            <summary>
+            Map
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Controls.Map.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:FFXIVAPP.Plugin.Radar.Controls.Radar">
+            <summary>
+                Interaction logic for Radar.xaml
+            </summary>
+            <summary>
+            Radar
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Controls.Radar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Helpers.LocaleHelper.Update(System.Globalization.CultureInfo)">
+            <summary>
+            </summary>
+            <param name="cultureInfo"> </param>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Helpers.WidgetTopMostHelper.ToggleTopMost(System.Windows.Window,System.Boolean,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="window"></param>
+            <param name="stayOnTop"></param>
+            <param name="force"></param>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Initializer.LoadFilters">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Initializer.LoadSettings">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Localization.Chinese.Context">
+            <summary>
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Localization.English.Context">
+            <summary>
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Localization.French.Context">
+            <summary>
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Localization.German.Context">
+            <summary>
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Localization.Japanese.Context">
+            <summary>
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Localization.Russian.Context">
+            <summary>
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="T:FFXIVAPP.Plugin.Radar.ShellView">
+            <summary>
+                Interaction logic for ShellView.xaml
+            </summary>
+            <summary>
+            ShellView
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.ShellView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.ViewModels.MainViewModel.AddOrUpdateFilter">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.ViewModels.MainViewModel.DeleteFilter">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.ViewModels.MainViewModel.FilterSelection">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.ViewModels.MainViewModel.GetValueBySelectedItem(System.Windows.Controls.Primitives.Selector,System.String)">
+            <summary>
+            </summary>
+            <param name="listView"> </param>
+            <param name="key"> </param>
+        </member>
+        <member name="T:FFXIVAPP.Plugin.Radar.Views.AboutView">
+            <summary>
+                Interaction logic for AboutView.xaml
+            </summary>
+            <summary>
+            AboutView
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Views.AboutView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:FFXIVAPP.Plugin.Radar.Views.SettingsView">
+            <summary>
+                Interaction logic for SettingsView.xaml
+            </summary>
+            <summary>
+            SettingsView
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Views.SettingsView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:FFXIVAPP.Plugin.Radar.Views.MainView">
+            <summary>
+                Interaction logic for MainView.xaml
+            </summary>
+            <summary>
+            MainView
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Views.MainView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:FFXIVAPP.Plugin.Radar.Windows.RadarWidget">
+            <summary>
+                Interaction logic for RadarWidget.xaml
+            </summary>
+            <summary>
+            RadarWidget
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Radar.Windows.RadarWidget.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

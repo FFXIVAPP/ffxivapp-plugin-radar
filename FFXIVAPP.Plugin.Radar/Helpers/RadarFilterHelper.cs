@@ -10,6 +10,7 @@
 
 namespace FFXIVAPP.Plugin.Radar.Helpers {
     using System.Collections.Generic;
+    using System.Linq;
 
     using FFXIVAPP.Plugin.Radar.Models;
     using FFXIVAPP.Plugin.Radar.ViewModels;
@@ -21,7 +22,7 @@ namespace FFXIVAPP.Plugin.Radar.Helpers {
         public static List<ActorItem> CleanupEntities(IEnumerable<ActorItem> entities) {
             List<ActorItem> filtered = new List<ActorItem>();
             foreach (ActorItem actorEntity in entities) {
-                var correctMap = XIVInfoViewModel.Instance.CurrentUser.MapIndex == actorEntity.MapIndex;
+                var correctMap = XIVInfoViewModel.Instance.CurrentPCs.FirstOrDefault().Value.MapIndex == actorEntity.MapIndex;
                 var isDead = actorEntity.ActionStatus != Actor.ActionStatus.Dead;
 
                 if (isDead && correctMap) {

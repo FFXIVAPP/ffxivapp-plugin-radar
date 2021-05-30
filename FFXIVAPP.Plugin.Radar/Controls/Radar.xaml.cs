@@ -67,7 +67,7 @@ namespace FFXIVAPP.Plugin.Radar.Controls {
 
             var bc = new BrushConverter();
 
-            ActorItem user = XIVInfoViewModel.Instance.CurrentUser;
+            ActorItem user = XIVInfoViewModel.Instance.CurrentPCs.FirstOrDefault().Value;
             if (user == null) {
                 return;
             }
